@@ -254,3 +254,32 @@ object-fit:contain;
 transform:translateY(-5px) scale(1.08);
 background:rgba(255,0,0,0.15);
 }
+.contact-container{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:120px 20px;
+}
+
+.contact-card{
+width:100%;
+max-width:850px;
+padding:40px;
+border-radius:30px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
+text-align:center;
+}
+
+.contact-title{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.contact-text{
+opacity:0.75;
+margin-bottom:35px;
+line-height:1.8;
+}
