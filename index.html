@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -18,24 +19,22 @@
 
 <body>
 
-<!-- VIDEO BACKGROUND -->
-
 <video autoplay muted loop playsinline class="video-bg">
 <source src="https://cdn.coverr.co/videos/coverr-stars-in-space-1570/1080p.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
 
-<!-- NAVBAR -->
-
 <nav>
 
 <div class="logo">
-<img src="Logo.gif" alt="Logo">
+<img src="logo.gif" alt="Logo">
 </div>
 
 <div class="menu-toggle" id="menu-toggle">
-☰
+<span></span>
+<span></span>
+<span></span>
 </div>
 
 <ul id="nav-links">
@@ -50,14 +49,12 @@
 
 </nav>
 
-<!-- HERO SECTION -->
-
 <section class="hero">
 
 <div class="hero-content">
 
 <p class="mini-text">
-LET'S ROLL 
+LET'S ROLL
 </p>
 
 <h1>
@@ -76,8 +73,6 @@ cinematic aesthetics and futuristic creativity.
 
 </section>
 
-<!-- TYPING EFFECT -->
-
 <script>
 
 const texts = [
@@ -86,8 +81,7 @@ const texts = [
 "Dreamer",
 "Explorer",
 "Digital Creator",
-"Tech Enthusiast",
-"Storyteller Through Design"
+"Tech Enthusiast"
 
 ];
 
@@ -128,6 +122,7 @@ setTimeout(type,90);
 })();
 
 </script>
+
 <script>
 
 const menuToggle = document.getElementById('menu-toggle');
@@ -138,5 +133,6 @@ navLinks.classList.toggle('show');
 }
 
 </script>
+
 </body>
 </html>
