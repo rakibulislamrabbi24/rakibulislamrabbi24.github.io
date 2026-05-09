@@ -110,19 +110,59 @@ border-radius:30px;
 border:1px solid rgba(255,255,255,0.08);
 }
 
-.socials{
+.social-icons{
 display:flex;
-gap:15px;
-margin-top:25px;
+justify-content:center;
 flex-wrap:wrap;
+gap:22px;
+margin-top:35px;
 }
 
-.socials a{
-text-decoration:none;
-color:white;
-padding:12px 20px;
+.icon-card{
+width:72px;
+height:72px;
+display:flex;
+align-items:center;
+justify-content:center;
 background:rgba(255,255,255,0.08);
-border-radius:14px;
+border-radius:22px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+transition:0.35s ease;
+transform-style:preserve-3d;
+}
+
+.icon-card img{
+width:34px;
+height:34px;
+object-fit:contain;
+}
+
+.icon-card:hover{
+transform:translateY(-8px) scale(1.08) rotateX(8deg);
+box-shadow:0 15px 35px rgba(255,0,0,0.35);
+background:rgba(255,0,0,0.15);
+}
+
+.facebook:hover{
+box-shadow:0 15px 35px rgba(24,119,242,0.45);
+}
+
+.instagram:hover{
+box-shadow:0 15px 35px rgba(225,48,108,0.45);
+}
+
+.twitter:hover{
+box-shadow:0 15px 35px rgba(255,255,255,0.25);
+}
+
+.whatsapp:hover{
+box-shadow:0 15px 35px rgba(37,211,102,0.45);
+}
+
+.email:hover{
+box-shadow:0 15px 35px rgba(255,69,58,0.45);
 }
 
 @media(max-width:768px){
