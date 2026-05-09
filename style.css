@@ -19,10 +19,9 @@ background:rgba(0,0,0,0.3);
 backdrop-filter:blur(10px);
 }
 
-.logo{
-font-size:20px;
-font-weight:700;
-letter-spacing:3px;
+.logo img{
+height:50px;
+object-fit:contain;
 }
 
 nav ul{
