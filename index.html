@@ -1,4 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAKIBUL ISLAM RABBI</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
 <body>
+
+<!-- VIDEO BACKGROUND -->
 
 <video autoplay muted loop playsinline class="video-bg">
 <source src="https://cdn.coverr.co/videos/coverr-stars-in-space-1570/1080p.mp4" type="video/mp4">
@@ -6,29 +26,53 @@
 
 <div class="overlay"></div>
 
+<!-- NAVBAR -->
+
 <nav>
-<div class="logo">RABBI</div>
+
+<div class="logo">
+RABBI
+</div>
 
 <ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="skills.html">Skills</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="contact.html">Contact</a></li>
+
+<li>
+<a href="index.html">Home</a>
+</li>
+
+<li>
+<a href="about.html">About</a>
+</li>
+
+<li>
+<a href="skills.html">Skills</a>
+</li>
+
+<li>
+<a href="projects.html">Projects</a>
+</li>
+
+<li>
+<a href="contact.html">Contact</a>
+</li>
+
 </ul>
+
 </nav>
+
+<!-- HERO SECTION -->
 
 <section class="hero">
 
 <div class="hero-content">
 
 <p class="mini-text">
-A CINEMATIC DIGITAL EXPERIENCE
+LET'S ROLL 
 </p>
 
 <h1>
-RAKIBUL<br>
-ISLAM RABBI
+RAKIBUL ISLAM<br>
+RABBI
 </h1>
 
 <div class="typing" id="typing"></div>
@@ -54,15 +98,19 @@ View Projects
 
 </section>
 
+<!-- TYPING EFFECT -->
+
 <script>
 
 const texts = [
+
 "Movie Lover",
 "Dreamer",
 "Explorer",
 "Digital Creator",
 "Tech Enthusiast",
 "Storyteller Through Design"
+
 ];
 
 let count = 0;
@@ -77,6 +125,7 @@ count = 0;
 }
 
 currentText = texts[count];
+
 letter = currentText.slice(0, ++index);
 
 document.getElementById('typing').textContent = letter;
@@ -84,9 +133,12 @@ document.getElementById('typing').textContent = letter;
 if(letter.length === currentText.length){
 
 setTimeout(() => {
+
 index = 0;
 count++;
+
 type();
+
 },1500);
 
 }else{
@@ -100,3 +152,4 @@ setTimeout(type,90);
 </script>
 
 </body>
+</html>
