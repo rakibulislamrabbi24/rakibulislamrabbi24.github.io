@@ -1,24 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My First Website</title>
-  <style>
-    body{
-      background:#111;
-      color:white;
-      font-family:sans-serif;
-      text-align:center;
-      padding-top:100px;
-    }
-    h1{
-      font-size:40px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAKIBUL ISLAM RABBI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#000;
+overflow:hidden;
+color:white;
+}
+
+/* Animated Background */
+
+.bg{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(45deg,#ff0000,#000000,#1a0000,#ff1a1a);
+background-size:400% 400%;
+animation:bgAnimation 10s ease infinite;
+z-index:-2;
+}
+
+@keyframes bgAnimation{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Floating Blur */
+
+.blur{
+position:absolute;
+width:300px;
+height:300px;
+background:red;
+border-radius:50%;
+filter:blur(150px);
+opacity:0.3;
+animation:move 10s infinite alternate;
+z-index:-1;
+}
+
+@keyframes move{
+from{
+transform:translate(-100px,-100px);
+}
+to{
+transform:translate(100px,100px);
+}
+}
+
+/* Glass Card */
+
+.card{
+width:90%;
+max-width:400px;
+padding:40px 30px;
+border-radius:25px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+text-align:center;
+box-shadow:0 8px 32px rgba(255,0,0,0.3);
+}
+
+/* Name */
+
+h1{
+font-size:32px;
+font-weight:600;
+margin-bottom:10px;
+}
+
+/* Typing Text */
+
+.typing{
+font-size:18px;
+color:#ff4d4d;
+height:30px;
+margin-bottom:25px;
+}
+
+/* Social Buttons */
+
+.socials{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.socials a{
+text-decoration:none;
+color:white;
+padding:14px;
+border-radius:15px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.3s;
+font-size:16px;
+}
+
+.socials a:hover{
+background:red;
+transform:scale(1.05);
+}
+
+/* Footer */
+
+.footer{
+margin-top:25px;
+font-size:12px;
+opacity:0.7;
+}
+
+</style>
 </head>
+
 <body>
 
-<h1>Hello World 🌍</h1>
-<p>This website is hosted free on GitHub Pages.</p>
+<div class="bg"></div>
+<div class="blur"></div>
+
+<div class="card">
+
+<h1>RAKIBUL ISLAM RABBI</h1>
+
+<div class="typing" id="typing"></div>
+
+<div class="socials">
+
+<a href="https://www.facebook.com/RakibulRabbi24" target="_blank">
+Facebook
+</a>
+
+<a href="https://www.instagram.com/RakibulRabbi24" target="_blank">
+Instagram
+</a>
+
+<a href="https://x.com/RakibulRabbi24" target="_blank">
+X / Twitter
+</a>
+
+<a href="https://wa.me/+8550314932831" target="_blank">
+WhatsApp
+</a>
+
+</div>
+
+<div class="footer">
+Made with ❤️ using GitHub Pages
+</div>
+
+</div>
+
+<script>
+
+const text = [
+"Web Enthusiast",
+"Minimal Designer",
+"Tech Lover",
+"Creative Mind"
+];
+
+let count = 0;
+let index = 0;
+let currentText = '';
+let letter = '';
+
+(function type(){
+
+if(count === text.length){
+count = 0;
+}
+
+currentText = text[count];
+letter = currentText.slice(0, ++index);
+
+document.getElementById('typing').textContent = letter;
+
+if(letter.length === currentText.length){
+
+setTimeout(() => {
+index = 0;
+count++;
+type();
+},1500);
+
+}else{
+
+setTimeout(type,100);
+
+}
+
+})();
+
+</script>
 
 </body>
-</html>
+  </html>
