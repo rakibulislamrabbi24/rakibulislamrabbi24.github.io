@@ -1,34 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Projects</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div class="overlay"></div>
 
 <nav>
-<div class="logo">RABBI</div>
-<ul>
+
+<div class="logo">
+<img src="Logo.gif" alt="Logo">
+</div>
+
+<div class="menu-toggle" id="menu-toggle">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<ul id="nav-links">
+
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="skills.html">Skills</a></li>
 <li><a href="projects.html">Projects</a></li>
 <li><a href="contact.html">Contact</a></li>
+
 </ul>
+
 </nav>
 
 <section class="page-section">
+
 <div class="glass-card">
+
 <h1>Projects</h1>
+
 <p>
-Add your projects later.
+Add your project showcase here later.
 </p>
+
 </div>
+
 </section>
+
+<script>
+
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.onclick = () => {
+navLinks.classList.toggle('show');
+}
+
+</script>
 
 </body>
 </html>
