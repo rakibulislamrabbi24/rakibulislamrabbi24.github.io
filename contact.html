@@ -11,16 +11,26 @@
 <div class="overlay"></div>
 
 <nav>
-<div class="logo">RABBI</div>
-<ul>
+
+<div class="logo">
+<img src="logo.gif" alt="Logo">
+</div>
+
+<div class="menu-toggle" id="menu-toggle">
+☰
+</div>
+
+<ul id="nav-links">
+
 <li><a href="index.html">Home</a></li>
 <li><a href="about.html">About</a></li>
 <li><a href="skills.html">Skills</a></li>
 <li><a href="projects.html">Projects</a></li>
 <li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
 
+</ul>
+
+</nav>
 <section class="page-section">
 <div class="glass-card">
 <h1>Contact</h1>
@@ -72,6 +82,15 @@ Leave a mail 📬
 
 </div>
 </section>
+<script>
 
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.onclick = () => {
+navLinks.classList.toggle('show');
+}
+
+</script>
 </body>
 </html>
