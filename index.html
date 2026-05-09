@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAKIBUL ISLAM RABBI</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
 <body>
 
 <video autoplay muted loop playsinline class="video-bg">
-<source src="https://cdn.coverr.co/videos/coverr-man-watching-a-movie-1561196317830?download=1080p" type="video/mp4">
+<source src="https://cdn.coverr.co/videos/coverr-stars-in-space-1570/1080p.mp4" type="video/mp4">
 </video>
 
 <div class="overlay"></div>
@@ -28,28 +19,50 @@
 </nav>
 
 <section class="hero">
+
 <div class="hero-content">
 
-<h1>RAKIBUL ISLAM RABBI</h1>
-<div class="typing" id="typing"></div>
-
-<p>
-A cinematic portfolio inspired by movies and immersive storytelling.
+<p class="mini-text">
+A CINEMATIC DIGITAL EXPERIENCE
 </p>
 
-<a href="about.html" class="btn">Enter Portfolio</a>
+<h1>
+RAKIBUL<br>
+ISLAM RABBI
+</h1>
+
+<div class="typing" id="typing"></div>
+
+<p class="description">
+Exploring stories through design, technology,
+cinematic aesthetics and futuristic creativity.
+</p>
+
+<div class="hero-buttons">
+
+<a href="about.html" class="btn primary-btn">
+Enter Universe
+</a>
+
+<a href="projects.html" class="btn secondary-btn">
+View Projects
+</a>
 
 </div>
+
+</div>
+
 </section>
 
 <script>
+
 const texts = [
 "Movie Lover",
-"Digital Creator",
-"Creative Enthusiast",
-"Tech Enthusiast",
 "Dreamer",
-"Explorer"
+"Explorer",
+"Digital Creator",
+"Tech Enthusiast",
+"Storyteller Through Design"
 ];
 
 let count = 0;
@@ -58,6 +71,7 @@ let currentText = '';
 let letter = '';
 
 (function type(){
+
 if(count === texts.length){
 count = 0;
 }
@@ -68,16 +82,21 @@ letter = currentText.slice(0, ++index);
 document.getElementById('typing').textContent = letter;
 
 if(letter.length === currentText.length){
+
 setTimeout(() => {
 index = 0;
 count++;
 type();
 },1500);
+
 }else{
+
 setTimeout(type,90);
+
 }
+
 })();
+
 </script>
 
 </body>
-</html>
