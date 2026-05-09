@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>RAKIBUL ISLAM RABBI</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,121 +15,256 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
+font-family:'Poppins',sans-serif;
+background:#000;
+color:white;
+overflow-x:hidden;
+}
+
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+filter:brightness(0.28);
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.92));
+z-index:-2;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.25);
+backdrop-filter:blur(10px);
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+font-size:18px;
+font-weight:700;
+letter-spacing:3px;
+}
+
+nav ul{
+display:flex;
+gap:20px;
+list-style:none;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-size:14px;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#ff3b3b;
+}
+
+.hero{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#000;
-overflow:hidden;
-color:white;
-}
-
-/* Animated Background */
-
-.bg{
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(45deg,#ff0000,#000000,#1a0000,#ff1a1a);
-background-size:400% 400%;
-animation:bgAnimation 10s ease infinite;
-z-index:-2;
-}
-
-@keyframes bgAnimation{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-/* Floating Blur */
-
-.blur{
-position:absolute;
-width:300px;
-height:300px;
-background:red;
-border-radius:50%;
-filter:blur(150px);
-opacity:0.3;
-animation:move 10s infinite alternate;
-z-index:-1;
-}
-
-@keyframes move{
-from{
-transform:translate(-100px,-100px);
-}
-to{
-transform:translate(100px,100px);
-}
-}
-
-/* Glass Card */
-
-.card{
-width:90%;
-max-width:400px;
-padding:40px 30px;
-border-radius:25px;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,255,255,0.1);
 text-align:center;
-box-shadow:0 8px 32px rgba(255,0,0,0.3);
+padding:20px;
 }
 
-/* Name */
-
-h1{
-font-size:32px;
-font-weight:600;
-margin-bottom:10px;
+.hero-content{
+max-width:850px;
 }
 
-/* Typing Text */
+.hero h1{
+font-size:62px;
+font-weight:700;
+line-height:1.1;
+margin-bottom:18px;
+text-shadow:0 0 30px rgba(255,0,0,0.35);
+}
 
 .typing{
-font-size:18px;
+font-size:24px;
 color:#ff4d4d;
-height:30px;
-margin-bottom:25px;
+height:40px;
+margin-bottom:28px;
+font-weight:500;
 }
 
-/* Social Buttons */
+.hero p{
+font-size:16px;
+line-height:1.9;
+opacity:0.82;
+margin-bottom:35px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 34px;
+background:#ff1f1f;
+color:white;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
+transition:0.3s;
+box-shadow:0 0 20px rgba(255,0,0,0.4);
+}
+
+.btn:hover{
+transform:translateY(-4px);
+background:#ff3939;
+}
+
+section{
+padding:110px 25px;
+}
+
+.section-title{
+font-size:42px;
+text-align:center;
+margin-bottom:60px;
+font-weight:700;
+}
+
+.glass-card{
+max-width:1100px;
+margin:auto;
+padding:40px;
+border-radius:30px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+
+.placeholder{
+font-size:16px;
+line-height:2;
+opacity:0.75;
+}
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-top:25px;
+}
+
+.skill-box{
+padding:22px;
+text-align:center;
+border-radius:22px;
+background:rgba(255,255,255,0.05);
+transition:0.3s;
+}
+
+.skill-box:hover{
+transform:translateY(-5px);
+background:rgba(255,0,0,0.15);
+}
+
+.projects-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.project-card{
+padding:28px;
+border-radius:25px;
+background:rgba(255,255,255,0.05);
+transition:0.3s;
+}
+
+.project-card:hover{
+transform:scale(1.03);
+background:rgba(255,0,0,0.12);
+}
+
+.project-card h3{
+margin-bottom:15px;
+}
 
 .socials{
 display:flex;
-flex-direction:column;
-gap:15px;
+justify-content:center;
+flex-wrap:wrap;
+gap:18px;
+margin-top:35px;
 }
 
 .socials a{
 text-decoration:none;
 color:white;
-padding:14px;
-border-radius:15px;
+padding:14px 24px;
+border-radius:16px;
 background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.1);
 transition:0.3s;
-font-size:16px;
 }
 
 .socials a:hover{
-background:red;
-transform:scale(1.05);
+background:#ff1f1f;
+transform:translateY(-4px);
 }
 
-/* Footer */
-
-.footer{
-margin-top:25px;
-font-size:12px;
+footer{
+padding:30px;
+text-align:center;
+font-size:13px;
 opacity:0.7;
+}
+
+@media(max-width:768px){
+
+nav{
+padding:18px 15px;
+}
+
+nav ul{
+gap:12px;
+}
+
+nav ul li a{
+font-size:12px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.typing{
+font-size:18px;
+}
+
+.section-title{
+font-size:32px;
+}
+
+.glass-card{
+padding:28px;
+}
+
 }
 
 </style>
@@ -136,48 +272,137 @@ opacity:0.7;
 
 <body>
 
-<div class="bg"></div>
-<div class="blur"></div>
+<video autoplay muted loop playsinline class="video-bg">
+<source src="https://cdn.coverr.co/videos/coverr-man-watching-a-movie-1561196317830?download=1080p" type="video/mp4">
+</video>
 
-<div class="card">
+<div class="overlay"></div>
+
+<nav>
+<div class="logo">RABBI</div>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<div class="hero-content">
 
 <h1>RAKIBUL ISLAM RABBI</h1>
 
 <div class="typing" id="typing"></div>
 
+<p>
+A cinematic portfolio inspired by movies, storytelling, creativity, modern digital experiences, and immersive visual design.
+</p>
+
+<a href="#about" class="btn">Explore Portfolio</a>
+
+</div>
+</section>
+
+<section id="about">
+<h2 class="section-title">About Me</h2>
+
+<div class="glass-card">
+<p class="placeholder">
+Write your personal introduction here later.
+<br><br>
+You can talk about yourself, your interests, your passion for movies, technology, creativity, or anything you want visitors to know about you.
+</p>
+</div>
+</section>
+
+<section id="skills">
+<h2 class="section-title">Skills</h2>
+
+<div class="glass-card">
+<div class="skills-grid">
+
+<div class="skill-box">Editing</div>
+<div class="skill-box">Creative Design</div>
+<div class="skill-box">Photography</div>
+<div class="skill-box">Movie Analysis</div>
+<div class="skill-box">Content Creation</div>
+
+</div>
+</div>
+</section>
+
+<section id="projects">
+<h2 class="section-title">Projects</h2>
+
+<div class="glass-card">
+<div class="projects-grid">
+
+<div class="project-card">
+<h3>Project One</h3>
+<p class="placeholder">
+Add your first project details here.
+</p>
+</div>
+
+<div class="project-card">
+<h3>Project Two</h3>
+<p class="placeholder">
+Add your second project details here.
+</p>
+</div>
+
+<div class="project-card">
+<h3>Project Three</h3>
+<p class="placeholder">
+Add your third project details here.
+</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2 class="section-title">Contact</h2>
+
+<div class="glass-card">
+
+<div class="placeholder" style="text-align:center;">
+You can later add your email, WhatsApp, Telegram, business inquiries, or any contact information here.
+</div>
+
 <div class="socials">
 
-<a href="https://www.facebook.com/RakibulRabbi24" target="_blank">
-Facebook
-</a>
+<a href="https://www.facebook.com/RakibulRabbi24" target="_blank">Facebook</a>
 
-<a href="https://www.instagram.com/RakibulRabbi24" target="_blank">
-Instagram
-</a>
+<a href="https://www.instagram.com/RakibulRabbi24" target="_blank">Instagram</a>
 
-<a href="https://x.com/RakibulRabbi24" target="_blank">
-X / Twitter
-</a>
+<a href="https://x.com/RakibulRabbi24" target="_blank">X / Twitter</a>
 
-<a href="https://wa.me/+8550314932831" target="_blank">
-WhatsApp
-</a>
+<a href="https://wa.me/+8550314932831" target="_blank">WhatsApp</a>
 
 </div>
 
-<div class="footer">
+</div>
+</section>
+
+<footer>
 Made with ❤️ using GitHub Pages
-</div>
-
-</div>
+</footer>
 
 <script>
 
-const text = [
-"Web Enthusiast",
-"Minimal Designer",
-"Tech Lover",
-"Creative Mind"
+const texts = [
+"Movie Lover",
+"Digital Creator",
+"Creative Enthusiast",
+"Tech Enthusiast",
+"Dreamer",
+"Explorer",
+"Storyteller Through Design",
+"Movie Enthusiast"
 ];
 
 let count = 0;
@@ -187,11 +412,11 @@ let letter = '';
 
 (function type(){
 
-if(count === text.length){
+if(count === texts.length){
 count = 0;
 }
 
-currentText = text[count];
+currentText = texts[count];
 letter = currentText.slice(0, ++index);
 
 document.getElementById('typing').textContent = letter;
@@ -205,9 +430,7 @@ type();
 },1500);
 
 }else{
-
-setTimeout(type,100);
-
+setTimeout(type,90);
 }
 
 })();
@@ -215,4 +438,4 @@ setTimeout(type,100);
 </script>
 
 </body>
-  </html>
+</html>
