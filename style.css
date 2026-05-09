@@ -159,10 +159,19 @@ color:white;
 
 .menu-toggle{
 display:block;
+font-size:34px;
+position:absolute;
+right:20px;
+top:22px;
+z-index:1001;
 }
 
 nav{
 padding:18px 20px;
+height:90px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 nav ul{
@@ -170,19 +179,21 @@ position:absolute;
 top:90px;
 right:20px;
 width:220px;
-background:rgba(0,0,0,0.92);
-backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.95);
+backdrop-filter:blur(20px);
 border:1px solid rgba(255,255,255,0.08);
-border-radius:20px;
-padding:20px;
+border-radius:22px;
+padding:22px;
 display:none;
 flex-direction:column;
 gap:18px;
 z-index:999;
+box-shadow:0 10px 40px rgba(0,0,0,0.45);
 }
 
 nav ul.show{
 display:flex;
+animation:menuFade 0.35s ease;
 }
 
 nav ul li{
@@ -191,6 +202,40 @@ list-style:none;
 
 nav ul li a{
 font-size:15px;
+color:white;
+text-decoration:none;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.typing{
+font-size:18px;
+}
+
+.description{
+font-size:14px;
+line-height:1.8;
+padding:0 10px;
+}
+
+.logo img{
+height:48px;
 }
 
 }
+
+@keyframes menuFade{
+
+from{
+opacity:0;
+transform:translateY(-10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+  }
