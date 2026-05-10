@@ -13,22 +13,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-
-<video autoplay muted loop playsinline class="video-bg">
-<source src="https://cdn.coverr.co/videos/coverr-stars-in-space-1570/1080p.mp4" type="video/mp4">
-</video>
 
 <div class="overlay"></div>
 
 <nav>
 
 <div class="logo">
-<img src="Logo.gif" alt="Logo">
+<img src="logo.gif" alt="Logo">
 </div>
 
 <div class="menu-toggle" id="menu-toggle">
@@ -49,12 +45,18 @@
 
 </nav>
 
-<section class="hero">
+<section class="hero-layout">
 
-<div class="hero-content">
+<div class="hero-left">
 
-<p class="mini-text">
-LET'S ROLL
+<img src="profile.png" class="profile-image">
+
+</div>
+
+<div class="hero-right">
+
+<p class="intro-text">
+👋 Hi There! I'm
 </p>
 
 <h1>
@@ -64,11 +66,69 @@ RABBI
 
 <div class="typing" id="typing"></div>
 
-<p class="description">
-Exploring stories through design, technology,
-cinematic aesthetics and futuristic creativity.
+<p class="hero-description">
+
+Exploring stories through design,
+technology, cinematic aesthetics and futuristic creativity.
+
 </p>
 
+<div class="hero-buttons">
+
+<a href="contact.html" class="primary-btn">
+Let's Talk
+</a>
+
+<a href="projects.html" class="secondary-btn">
+Portfolio
+</a>
+
+</div>
+
+<div class="social-row">
+
+<a href="https://facebook.com/RakibulRabbi24">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</a>
+
+<a href="https://instagram.com/RakibulRabbi24">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+<a href="https://x.com/RakibulRabbi24">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png">
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="skills-preview">
+
+<div class="skill-card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968267.png">
+<h3>HTML</h3>
+<p>95%</p>
+</div>
+
+<div class="skill-card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968242.png">
+<h3>CSS</h3>
+<p>90%</p>
+</div>
+
+<div class="skill-card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
+<h3>JS</h3>
+<p>70%</p>
+</div>
+
+<div class="skill-card">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png">
+<h3>Photoshop</h3>
+<p>85%</p>
 </div>
 
 </section>
@@ -78,10 +138,9 @@ cinematic aesthetics and futuristic creativity.
 const texts = [
 
 "Movie Lover",
-"Dreamer",
-"Explorer",
 "Digital Creator",
-"Tech Enthusiast"
+"Creative Enthusiast",
+"Explorer"
 
 ];
 
@@ -135,4 +194,4 @@ navLinks.classList.toggle('show');
 </script>
 
 </body>
-</html>
+  </html>
