@@ -430,3 +430,36 @@ transform:translateY(0);
 }
 
   }
+/* CONTACT PAGE FIX */
+
+.social-icons{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:22px;
+margin-top:35px;
+}
+
+.icon-card{
+width:72px;
+height:72px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.06);
+border-radius:22px;
+overflow:hidden;
+backdrop-filter:blur(12px);
+transition:0.35s;
+}
+
+.icon-card img{
+width:34px !important;
+height:34px !important;
+object-fit:contain;
+}
+
+.icon-card:hover{
+transform:translateY(-6px) scale(1.08);
+background:rgba(255,0,0,0.12);
+  }
