@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
@@ -54,36 +54,25 @@
 
 </nav>
 
-<section class="contact-section">
+<section class="contact-hero">
 
-<div class="contact-container">
+<div class="contact-left">
 
-<h1>
-CONTACT ME
-</h1>
-
-<p>
-
-For collaborations, or creative discussions,
-send me a direct message.
-
+<p class="contact-mini">
+LET'S TALK
 </p>
 
-<form id="whatsapp-form">
+<h1>
+CONNECT<br>
+WITH ME
+</h1>
 
-<input type="text" id="name" placeholder="Your Name" required>
+<p class="contact-description">
 
-<input type="email" id="email" placeholder="Your Email" required>
+Open for conversations, collaborations,
+creative ideas and futuristic projects.
 
-<textarea id="message" placeholder="Write Your Message..." required></textarea>
-
-<button type="submit">
-
-Send Message
-
-</button>
-
-</form>
+</p>
 
 <div class="warning-box">
 
@@ -91,6 +80,70 @@ Send Message
 Some information and sections may be incomplete or partially accurate.
 
 </div>
+
+</div>
+
+<div class="contact-right">
+
+<a href="https://www.facebook.com/RakibulRabbi24" target="_blank" class="social-card facebook-card">
+
+<div class="social-icon">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</div>
+
+<div class="social-info">
+
+<h3>Facebook</h3>
+<p>Connect socially</p>
+
+</div>
+
+</a>
+
+<a href="https://www.instagram.com/RakibulRabbi24" target="_blank" class="social-card instagram-card">
+
+<div class="social-icon">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</div>
+
+<div class="social-info">
+
+<h3>Instagram</h3>
+<p>Creative moments</p>
+
+</div>
+
+</a>
+
+<a href="https://x.com/RakibulRabbi24" target="_blank" class="social-card twitter-card">
+
+<div class="social-icon">
+<img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png">
+</div>
+
+<div class="social-info">
+
+<h3>Twitter / X</h3>
+<p>Thoughts & updates</p>
+
+</div>
+
+</a>
+
+<a href="https://wa.me/8550314932831" target="_blank" class="social-card whatsapp-card">
+
+<div class="social-icon">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</div>
+
+<div class="social-info">
+
+<h3>WhatsApp</h3>
+<p>Direct messaging</p>
+
+</div>
+
+</a>
 
 </div>
 
@@ -128,24 +181,6 @@ if(localStorage.getItem('theme') === 'light'){
 document.body.classList.add('light-mode');
 
 }
-
-document.getElementById('whatsapp-form').addEventListener('submit', function(e){
-
-e.preventDefault();
-
-const name = document.getElementById('name').value;
-const email = document.getElementById('email').value;
-const message = document.getElementById('message').value;
-
-const whatsappMessage =
-`Hello, I contacted you from your portfolio website.%0A%0AName: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
-
-window.open(
-`https://wa.me/8550314932831?text=${whatsappMessage}`,
-'_blank'
-);
-
-});
 
 </script>
 
