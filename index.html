@@ -26,7 +26,12 @@
 <div class="logo">
 <img src="Logo.png" alt="Logo">
 </div>
+<div class="theme-toggle" id="theme-toggle">
 
+<span class="sun">☀️</span>
+<span class="moon">🌙</span>
+
+</div>
 <div class="menu-toggle" id="menu-toggle">
 <span></span>
 <span></span>
@@ -192,6 +197,32 @@ navLinks.classList.toggle('show');
 }
 
 </script>
+<script>
 
+const themeToggle = document.getElementById('theme-toggle');
+
+themeToggle.onclick = () => {
+
+document.body.classList.toggle('light-mode');
+
+if(document.body.classList.contains('light-mode')){
+
+localStorage.setItem('theme','light');
+
+}else{
+
+localStorage.setItem('theme','dark');
+
+}
+
+}
+
+if(localStorage.getItem('theme') === 'light'){
+
+document.body.classList.add('light-mode');
+
+}
+
+</script>
 </body>
   </html>
