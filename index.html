@@ -223,6 +223,7 @@ setTimeout(type,100);
 })();
 
 /* LOKI TITLE EFFECT */
+<script>
 
 const letters =
 document.querySelectorAll("#loki-title span");
@@ -230,20 +231,20 @@ document.querySelectorAll("#loki-title span");
 const fonts = [
 
 "'Poppins',sans-serif",
-"'Courier New',monospace",
 "'Georgia',serif",
+"'Courier New',monospace",
 "'Impact',sans-serif",
 "'Trebuchet MS',sans-serif",
 "'Times New Roman',serif",
 "'Verdana',sans-serif",
 "'Tahoma',sans-serif",
-"'Lucida Console',monospace",
-"'Palatino Linotype',serif",
-"'Gill Sans',sans-serif",
-"'Comic Sans MS',cursive",
 "'Arial Black',sans-serif",
 "'Garamond',serif",
-"'Brush Script MT',cursive"
+"'Palatino Linotype',serif",
+"'Gill Sans',sans-serif",
+"'Lucida Console',monospace",
+"'Brush Script MT',cursive",
+"'Franklin Gothic Medium',sans-serif"
 
 ];
 
@@ -251,29 +252,22 @@ function randomizeLetters(){
 
 letters.forEach(letter=>{
 
-if(letter.innerHTML !== "&nbsp;"){
+if(
+letter.innerHTML !== "&nbsp;"
+&&
+Math.random() > 0.72
+){
 
 const randomFont =
 fonts[
 Math.floor(Math.random()*fonts.length)
 ];
 
-const shadows = [
+letter.style.fontFamily =
+randomFont;
 
-"0 0 10px rgba(255,0,0,0.4)",
-"0 0 20px rgba(255,255,255,0.2)",
-"0 0 30px rgba(255,0,0,0.45)"
-
-];
-
-const randomShadow =
-shadows[
-Math.floor(Math.random()*shadows.length)
-];
-
-letter.style.fontFamily = randomFont;
-
-letter.style.textShadow = randomShadow;
+letter.style.textShadow =
+"0 0 18px rgba(255,0,0,0.35)";
 
 letter.classList.add("glitch-letter");
 
@@ -281,7 +275,7 @@ setTimeout(()=>{
 
 letter.classList.remove("glitch-letter");
 
-},250);
+},220);
 
 }
 
@@ -289,8 +283,9 @@ letter.classList.remove("glitch-letter");
 
 }
 
-setInterval(randomizeLetters,700);
+setInterval(randomizeLetters,550);
 
+</script>
 </script>
 
 </body>
