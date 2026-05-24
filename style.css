@@ -467,5 +467,10 @@ font-size:36px;
 .logo img{
 height:50px;
 }
-
-  }
+  
+.skill-card img{
+width:60px;
+height:60px;
+object-fit:contain;
+margin-bottom:20px;
+}
