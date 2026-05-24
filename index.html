@@ -26,16 +26,24 @@
 <div class="logo">
 <img src="Logo.png" alt="Logo">
 </div>
+
+<div class="nav-right">
+
 <div class="theme-toggle" id="theme-toggle">
 
-<span class="sun">☀️</span>
-<span class="moon">🌙</span>
+<span>☀️</span>
+<span>🌙</span>
 
 </div>
+
 <div class="menu-toggle" id="menu-toggle">
+
 <span></span>
 <span></span>
 <span></span>
+
+</div>
+
 </div>
 
 <ul id="nav-links">
@@ -54,7 +62,7 @@
 
 <div class="hero-left">
 
-<img src="profile.png" class="profile-image">
+<img src="profile.jpg" class="profile-image">
 
 </div>
 
@@ -64,17 +72,45 @@
 👋 Hi There! I'm
 </p>
 
-<h1>
-RAKIBUL ISLAM<br>
-RABBI
+<h1 id="loki-title">
+
+<span>R</span>
+<span>A</span>
+<span>K</span>
+<span>I</span>
+<span>B</span>
+<span>U</span>
+<span>L</span>
+
+<span>&nbsp;</span>
+
+<span>I</span>
+<span>S</span>
+<span>L</span>
+<span>A</span>
+<span>M</span>
+
+<span>&nbsp;</span>
+
+<span>R</span>
+<span>A</span>
+<span>B</span>
+<span>B</span>
+<span>I</span>
+
 </h1>
 
-<div class="typing" id="typing"></div>
+<div class="typing">
+
+<span id="typing-text"></span>
+
+</div>
 
 <p class="hero-description">
 
 Exploring stories through design,
-technology, cinematic aesthetics and futuristic creativity.
+technology, cinematic aesthetics
+and futuristic creativity.
 
 </p>
 
@@ -90,116 +126,30 @@ Portfolio
 
 </div>
 
-<div class="social-row">
-
-<a href="https://facebook.com/RakibulRabbi24">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-</a>
-
-<a href="https://instagram.com/RakibulRabbi24">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-</a>
-
-<a href="https://x.com/RakibulRabbi24">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png">
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="skills-preview">
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968267.png">
-<h3>HTML</h3>
-<p>95%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968242.png">
-<h3>CSS</h3>
-<p>90%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png">
-<h3>JS</h3>
-<p>70%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png">
-<h3>Photoshop</h3>
-<p>85%</p>
 </div>
 
 </section>
 
 <script>
 
-const texts = [
+/* MOBILE MENU */
 
-"Movie Lover",
-"Digital Creator",
-"Creative Enthusiast",
-"Explorer"
+const menuToggle =
+document.getElementById('menu-toggle');
 
-];
-
-let count = 0;
-let index = 0;
-let currentText = '';
-let letter = '';
-
-(function type(){
-
-if(count === texts.length){
-count = 0;
-}
-
-currentText = texts[count];
-
-letter = currentText.slice(0, ++index);
-
-document.getElementById('typing').textContent = letter;
-
-if(letter.length === currentText.length){
-
-setTimeout(() => {
-
-index = 0;
-count++;
-
-type();
-
-},1500);
-
-}else{
-
-setTimeout(type,90);
-
-}
-
-})();
-
-</script>
-
-<script>
-
-const menuToggle = document.getElementById('menu-toggle');
-const navLinks = document.getElementById('nav-links');
+const navLinks =
+document.getElementById('nav-links');
 
 menuToggle.onclick = () => {
+
 navLinks.classList.toggle('show');
+
 }
 
-</script>
-<script>
+/* DARK LIGHT MODE */
 
-const themeToggle = document.getElementById('theme-toggle');
+const themeToggle =
+document.getElementById('theme-toggle');
 
 themeToggle.onclick = () => {
 
@@ -223,6 +173,125 @@ document.body.classList.add('light-mode');
 
 }
 
+/* TYPING TEXT */
+
+const texts = [
+
+"Movie Lover",
+"Creative Enthusiast",
+"Digital Creator",
+"Dreamer",
+"Explorer",
+"Storyteller",
+"Tech Enthusiast"
+
+];
+
+let count = 0;
+let index = 0;
+let currentText = '';
+let letter = '';
+
+(function type(){
+
+if(count === texts.length){
+
+count = 0;
+
+}
+
+currentText = texts[count];
+
+letter = currentText.slice(0, ++index);
+
+document.getElementById('typing-text').textContent = letter;
+
+if(letter.length === currentText.length){
+
+count++;
+
+index = 0;
+
+setTimeout(type,1500);
+
+}else{
+
+setTimeout(type,100);
+
+}
+
+})();
+
+/* LOKI TITLE EFFECT */
+
+const letters =
+document.querySelectorAll("#loki-title span");
+
+const fonts = [
+
+"'Poppins',sans-serif",
+"'Courier New',monospace",
+"'Georgia',serif",
+"'Impact',sans-serif",
+"'Trebuchet MS',sans-serif",
+"'Times New Roman',serif",
+"'Verdana',sans-serif",
+"'Tahoma',sans-serif",
+"'Lucida Console',monospace",
+"'Palatino Linotype',serif",
+"'Gill Sans',sans-serif",
+"'Comic Sans MS',cursive",
+"'Arial Black',sans-serif",
+"'Garamond',serif",
+"'Brush Script MT',cursive"
+
+];
+
+function randomizeLetters(){
+
+letters.forEach(letter=>{
+
+if(letter.innerHTML !== "&nbsp;"){
+
+const randomFont =
+fonts[
+Math.floor(Math.random()*fonts.length)
+];
+
+const shadows = [
+
+"0 0 10px rgba(255,0,0,0.4)",
+"0 0 20px rgba(255,255,255,0.2)",
+"0 0 30px rgba(255,0,0,0.45)"
+
+];
+
+const randomShadow =
+shadows[
+Math.floor(Math.random()*shadows.length)
+];
+
+letter.style.fontFamily = randomFont;
+
+letter.style.textShadow = randomShadow;
+
+letter.classList.add("glitch-letter");
+
+setTimeout(()=>{
+
+letter.classList.remove("glitch-letter");
+
+},250);
+
+}
+
+});
+
+}
+
+setInterval(randomizeLetters,700);
+
 </script>
+
 </body>
-  </html>
+</html>
