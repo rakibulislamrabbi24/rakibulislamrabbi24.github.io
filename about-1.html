@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me — Rakibul Islam Rabbi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Variables ─── */
+    :root {
+      --bg:      #080b10;
+      --surface: #0e1420;
+      --surface2:#131926;
+      --border:  rgba(255,255,255,0.06);
+      --text:    #e8eaf0;
+      --muted:   #7a8299;
+      --accent:  #00e5ff;
+      --accent2: #ff6b35;
+      --gold:    #ffc857;
+      --nav-h:   72px;
+    }
+    [data-theme="light"] {
+      --bg:      #f0f2f8;
+      --surface: #ffffff;
+      --surface2:#f5f7fc;
+      --border:  rgba(0,0,0,0.08);
+      --text:    #0e1420;
+      --muted:   #5a6278;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* Noise */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* Blobs */
+    .glow-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(130px); pointer-events: none; z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite alternate;
+    }
+    .glow-blob.one {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,107,53,0.09) 0%, transparent 70%);
+      top: 0; left: -120px;
+    }
+    .glow-blob.two {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(0,229,255,0.09) 0%, transparent 70%);
+      bottom: 60px; right: -80px; animation-delay: -6s;
+    }
+    @keyframes blobFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(35px,28px) scale(1.07); }
+    }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: rgba(8,11,16,0.6);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100; transition: background 0.4s;
+    }
+    [data-theme="light"] nav { background: rgba(240,242,248,0.7); }
+    .nav-logo img { height: 38px; object-fit: contain; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      position: relative; transition: color 0.25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -4px; left: 0; width: 0; height: 1.5px;
+      background: var(--accent); transition: width 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); width: 36px; height: 36px;
+      border-radius: 50%; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .theme-btn:hover { transform: rotate(20deg); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobile-nav {
+      display: none; flex-direction: column;
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      z-index: 99; list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .mobile-nav.open { max-height: 300px; }
+    .mobile-nav a {
+      display: block; padding: 16px 28px;
+      font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid var(--border); transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--accent); padding-left: 36px; }
+
+    /* ─── Page Header ─── */
+    .page-header {
+      position: relative; z-index: 1;
+      padding: calc(var(--nav-h) + 64px) clamp(20px, 6vw, 80px) 56px;
+      max-width: 1200px; margin: 0 auto;
+      animation: fadeUp 0.8s ease both;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); display: flex; align-items: center;
+      gap: 12px; margin-bottom: 14px;
+    }
+    .section-label::before { content: ''; width: 28px; height: 1.5px; background: var(--accent); }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.04em; line-height: 0.9;
+      background: linear-gradient(135deg, var(--text) 40%, var(--muted));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-title span {
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* ─── Main layout ─── */
+    .main-wrap {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(20px, 6vw, 80px) 80px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ─── LEFT: Photo + quick info ─── */
+    .left-col { display: flex; flex-direction: column; gap: 20px; }
+
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .photo-frame {
+      position: relative;
+      width: 100%; aspect-ratio: 1;
+      overflow: hidden;
+    }
+    .photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .photo-card:hover .photo-frame img { transform: scale(1.04); }
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,11,16,0.9) 0%, transparent 55%);
+    }
+    .photo-name-badge {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+    }
+    .photo-name-badge h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: 0.06em; color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .photo-name-badge p {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+      margin-top: 3px;
+    }
+
+    .quick-info {
+      display: flex; flex-direction: column; gap: 0;
+      padding: 0 24px 8px;
+    }
+    .info-row {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+    }
+    .info-val {
+      font-size: 0.85rem; color: var(--text);
+      text-align: right;
+    }
+    .info-val.accent { color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.72rem; }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 10px; border-radius: 20px;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      font-family: 'Space Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #22c55e;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 4px #22c55e} 50%{box-shadow:0 0 12px #22c55e} }
+
+    /* Download CV button */
+    .cv-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin: 4px 0 20px;
+      padding: 14px 24px;
+      background: var(--accent); color: #080b10;
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      font-weight: 700; text-decoration: none; border-radius: 8px;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .cv-btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.18);
+      transform: translateX(-100%); transition: transform 0.3s;
+    }
+    .cv-btn:hover::after { transform: translateX(0); }
+    .cv-btn:hover { box-shadow: 0 0 28px rgba(0,229,255,0.4); transform: translateY(-2px); }
+
+    /* ─── RIGHT: Bio & timeline ─── */
+    .right-col { display: flex; flex-direction: column; gap: 32px; }
+
+    /* Bio card */
+    .bio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+    .card-section-label {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .card-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .bio-text {
+      font-size: 0.97rem; line-height: 1.85; color: var(--muted);
+    }
+    .bio-text strong { color: var(--text); font-weight: 500; }
+
+    /* Vision + what i do */
+    .two-col-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+    .mini-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .mini-card:hover { border-color: rgba(0,229,255,0.22); transform: translateY(-4px); }
+    .mini-icon { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+    .mini-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem; letter-spacing: 0.07em;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .mini-body { font-size: 0.83rem; line-height: 1.65; color: var(--muted); }
+
+    /* Timeline */
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+    .timeline { position: relative; padding-left: 24px; margin-top: 8px; }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 0; top: 6px; bottom: 6px;
+      width: 1.5px; background: var(--border);
+    }
+    .tl-item {
+      position: relative; padding-bottom: 28px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--surface2);
+      border: 2px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .tl-item:hover .tl-dot { border-color: var(--accent); background: var(--accent); }
+    .tl-item.active .tl-dot { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 10px rgba(0,229,255,0.5); }
+    .tl-year {
+      font-family: 'Space Mono', monospace; font-size: 0.62rem;
+      letter-spacing: 0.15em; color: var(--accent);
+      text-transform: uppercase; margin-bottom: 5px;
+    }
+    .tl-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem; letter-spacing: 0.06em;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .tl-place {
+      font-size: 0.8rem; color: var(--muted);
+    }
+    .tl-tag {
+      display: inline-block; margin-top: 8px;
+      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 3px;
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.18);
+      color: var(--accent);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 28px clamp(20px, 6vw, 80px);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .main-wrap { grid-template-columns: 1fr; }
+      .left-col { max-width: 400px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .two-col-cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-blob one"></div>
+  <div class="glow-blob two"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav>
+    <div class="nav-logo">
+      <img src="https://rakibulislamrabbi24.github.io/Logo.png" alt="Logo" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="about.html" class="active">About Me</a></li>
+      <li><a href="contact.html">Contact Me</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+  <ul class="mobile-nav" id="mobileNav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+  </ul>
+
+  <!-- ═══ PAGE HEADER ═══ -->
+  <div class="page-header">
+    <p class="section-label">The Person Behind the Work</p>
+    <h1 class="page-title">ABOUT <span>ME</span></h1>
+  </div>
+
+  <!-- ═══ MAIN ═══ -->
+  <div class="main-wrap">
+
+    <!-- LEFT: Photo + info -->
+    <div class="left-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="https://rakibulislamrabbi24.github.io/profile.png" alt="Rakibul Islam Rabbi" />
+          <div class="photo-overlay"></div>
+          <div class="photo-name-badge">
+            <h2>RAKIBUL ISLAM RABBI</h2>
+            <p>Graphic Designer · Video Editor</p>
+          </div>
+        </div>
+        <div class="quick-info">
+          <div class="info-row">
+            <span class="info-key">Status</span>
+            <span class="info-val">
+              <span class="status-badge"><span class="status-dot"></span>Open to Work</span>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Based In</span>
+            <span class="info-val">Bangladesh 🇧🇩</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Focus</span>
+            <span class="info-val accent">Design · Film · Tech</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Languages</span>
+            <span class="info-val">Bengali, English</span>
+          </div>
+        </div>
+        <a class="cv-btn" href="https://rakibulislamrabbi24.github.io/resume.pdf" target="_blank">
+          ↓ &nbsp; Download CV
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Bio + cards + timeline -->
+    <div class="right-col">
+
+      <!-- Bio -->
+      <div class="bio-card">
+        <p class="card-section-label">Introduction</p>
+        <p class="bio-text">
+          Hi, I'm <strong>Rakibul Islam Rabbi</strong> — a creative technologist from Bangladesh
+          with a passion for telling stories through visual design and cinematic media.
+          I specialize in <strong>graphic design, video editing,</strong> and building
+          immersive digital experiences that sit at the intersection of art and technology.
+          <br /><br />
+          With a sharp eye for visual detail and a love for modern layout concepts,
+          I transform ideas into <strong>unique, impactful work</strong> — whether it's
+          a brand identity, a cinematic edit, or a digital experience that leaves
+          a lasting impression.
+        </p>
+      </div>
+
+      <!-- What I Do + Vision -->
+      <div class="two-col-cards">
+        <div class="mini-card">
+          <span class="mini-icon">🎨</span>
+          <div class="mini-title">What I Do</div>
+          <p class="mini-body">Graphic design, cinematic video editing, visual asset strategy and tech infrastructure management.</p>
+        </div>
+        <div class="mini-card">
+          <span class="mini-icon">🔭</span>
+          <div class="mini-title">My Vision</div>
+          <p class="mini-body">Blend art with functional technology — clean, efficient, and deeply immersive digital landscapes.</p>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline-card">
+        <p class="card-section-label">Journey</p>
+        <div class="timeline">
+
+          <div class="tl-item active">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2024 — Present</div>
+            <div class="tl-role">Freelance Designer & Video Editor</div>
+            <div class="tl-place">Self-employed · Remote</div>
+            <span class="tl-tag">Graphic Design · Video</span>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2023</div>
+            <div class="tl-role">Exploring Creative Tools</div>
+            <div class="tl-place">Self-learning · Adobe Suite & Filmora</div>
+            <span class="tl-tag">Learning Phase</span>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2022</div>
+            <div class="tl-role">Started Digital Design Journey</div>
+            <div class="tl-place">Personal Projects · Concept Work</div>
+            <span class="tl-tag">Foundations</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p class="footer-copy">© 2025 Rakibul Islam Rabbi — All rights reserved.</p>
+    <nav class="footer-links">
+      <a href="https://www.facebook.com/RakibulRabbi24" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/RakibulRabbi24" target="_blank">Instagram</a>
+      <a href="https://x.com/RakibulRabbi24" target="_blank">Twitter / X</a>
+      <a href="https://wa.me/8550314932831" target="_blank">WhatsApp</a>
+    </nav>
+  </footer>
+
+  <script>
+    /* Theme */
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      themeBtn.textContent = isLight ? '☀️' : '🌙';
+    });
+
+    /* Hamburger */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.toggle('open');
+    });
+
+    /* Timeline hover glow */
+    document.querySelectorAll('.tl-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.querySelector('.tl-dot').style.borderColor = 'var(--accent)';
+        item.querySelector('.tl-dot').style.background = 'var(--accent)';
+      });
+      item.addEventListener('mouseleave', () => {
+        if (!item.classList.contains('active')) {
+          item.querySelector('.tl-dot').style.borderColor = '';
+          item.querySelector('.tl-dot').style.background = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
