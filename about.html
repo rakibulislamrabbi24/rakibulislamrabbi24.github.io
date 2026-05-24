@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<nav>
+    <div class="logo">
+        <img src="Logo.png" alt="Logo">
+    </div>
+    <div class="nav-right">
+        <div class="top-widgets">
+            <div class="theme-toggle" id="themeToggle">☀️ 🌙</div>
+            <div class="live-time">
+                <div id="clock"></div>
+                <div id="date"></div>
+            </div>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="contact.html">Contact Me</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="page">
+    <div class="about-container">
+        <h1>ABOUT ME</h1>
+        <p class="description">
+            Hi, I'm Alex. I specialize in exploring stories through design, technology, cinematic aesthetics, and futuristic creativity. 
+            With a strong eye for visual details and modern layout concepts, I focus on transforming ideas into unique and impactful digital experiences.
+        </p>
+        
+        <div class="about-info-grid">
+            <div class="info-item">
+                <h3>What I Do</h3>
+                <p>Graphic Design, Cinematic Video Editing, Visual Assets Strategy, and Tech Infrastructure Management.</p>
+            </div>
+            <div class="info-item">
+                <h3>My Vision</h3>
+                <p>To blend art with functional technology, ensuring clean, efficient, and deeply immersive digital landscapes.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <a href="resume.pdf" class="btn primary-btn" download>Download CV</a>
+        </div>
+    </div>
+</section>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navMenu").classList.toggle("show");
+}
+
+document.getElementById("themeToggle").onclick=()=>{
+    document.body.classList.toggle("light-mode");
+}
+
+function updateClock(){
+    const now = new Date();
+    document.getElementById("clock").innerHTML = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
+    document.getElementById("date").innerHTML = now.toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'short'});
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>
