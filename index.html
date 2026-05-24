@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+
+<nav>
+
+<div class="logo">
+<img src="Logo.png">
+</div>
+
+<div class="nav-right">
+
+<div class="top-widgets">
+
+<div class="theme-toggle" id="themeToggle">
+☀️ 🌙
+</div>
+
+<div class="live-time">
+<div id="clock"></div>
+<div id="date"></div>
+</div>
+
+</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+☰
+</div>
+
+<ul id="navMenu">
+
+<li><a href="index.html">Home</a></li>
+<li><a href="skills.html">Skills</a></li>
+<li><a href="about.html">About Me</a></li>
+<li><a href="contact.html">Contact Me</a></li>
+
+</ul>
+
+</div>
+
+</nav>
+
+
+<section class="hero">
+
+<div class="hero-image">
+<img src="profile.png">
+</div>
+
+<p class="mini-text">👋 Hi There! I'm</p>
+
+<h1 id="loki-title">
+<span>R</span><span>A</span><span>K</span><span>I</span><span>B</span><span>U</span><span>L</span>
+<span>&nbsp;</span>
+<span>I</span><span>S</span><span>L</span><span>A</span><span>M</span>
+<span>&nbsp;</span>
+<span>R</span><span>A</span><span>B</span><span>B</span><span>I</span>
+</h1>
+
+<p class="description">
+Exploring stories through design, technology, cinematic aesthetics and futuristic creativity.
+</p>
+
+<div class="hero-buttons">
+
+<a href="contact.html" class="btn primary-btn">Let's Talk</a>
+
+<a href="skills.html" class="btn secondary-btn">Portfolio</a>
+
+</div>
+
+</section>
+
+<script>
+const letters=document.querySelectorAll("#loki-title span");
+
+const fonts=[
+"'Poppins',sans-serif",
+"'Georgia',serif",
+"'Courier New',monospace",
+"'Impact',sans-serif",
+"'Trebuchet MS',sans-serif",
+"'Verdana',sans-serif",
+"'Arial Black',sans-serif"
+];
+
+function randomizeLetters(){
+letters.forEach(letter=>{
+
+if(letter.innerHTML!=="&nbsp;"&&Math.random()>0.72){
+
+letter.style.fontFamily=fonts[Math.floor(Math.random()*fonts.length)];
+
+letter.classList.add("glitch-letter");
+
+setTimeout(()=>{
+letter.classList.remove("glitch-letter");
+},220);
+
+}
+
+});
+}
+
+setInterval(randomizeLetters,550);
+</script>
+
+
+<script>
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("show");
+}
+
+document.getElementById("themeToggle").onclick=()=>{
+document.body.classList.toggle("light-mode");
+}
+
+function updateClock(){
+const now = new Date();
+
+document.getElementById("clock").innerHTML =
+now.toLocaleTimeString('en-US',{
+hour:'2-digit',
+minute:'2-digit',
+hour12:true
+});
+
+document.getElementById("date").innerHTML =
+now.toLocaleDateString('en-US',{
+weekday:'short',
+day:'numeric',
+month:'short'
+});
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+
+</body>
+</html>
