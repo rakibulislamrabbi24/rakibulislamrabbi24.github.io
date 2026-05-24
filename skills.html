@@ -1,138 +1,574 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skills</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — Rakibul Islam Rabbi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Variables ─── */
+    :root {
+      --bg:      #080b10;
+      --surface: #0e1420;
+      --surface2:#131926;
+      --border:  rgba(255,255,255,0.06);
+      --text:    #e8eaf0;
+      --muted:   #7a8299;
+      --accent:  #00e5ff;
+      --accent2: #ff6b35;
+      --gold:    #ffc857;
+      --nav-h:   72px;
+    }
+    [data-theme="light"] {
+      --bg:      #f0f2f8;
+      --surface: #ffffff;
+      --surface2:#f5f7fc;
+      --border:  rgba(0,0,0,0.08);
+      --text:    #0e1420;
+      --muted:   #5a6278;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* Noise */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    /* Blobs */
+    .glow-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(130px); pointer-events: none; z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite alternate;
+    }
+    .glow-blob.one {
+      width: 460px; height: 460px;
+      background: radial-gradient(circle, rgba(0,229,255,0.10) 0%, transparent 70%);
+      top: 80px; right: -80px; animation-delay: -3s;
+    }
+    .glow-blob.two {
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(255,200,87,0.08) 0%, transparent 70%);
+      bottom: 100px; left: -60px;
+    }
+    @keyframes blobFloat {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,25px) scale(1.06); }
+    }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: rgba(8,11,16,0.6);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100; transition: background 0.4s;
+    }
+    [data-theme="light"] nav { background: rgba(240,242,248,0.7); }
+    .nav-logo img { height: 38px; object-fit: contain; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace; font-size: 0.75rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      position: relative; transition: color 0.25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: -4px; left: 0; width: 0; height: 1.5px;
+      background: var(--accent); transition: width 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); width: 36px; height: 36px;
+      border-radius: 50%; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .theme-btn:hover { transform: rotate(20deg); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-nav {
+      display: none; flex-direction: column; gap: 0;
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      z-index: 99; list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .mobile-nav.open { max-height: 300px; }
+    .mobile-nav a {
+      display: block; padding: 16px 28px;
+      font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid var(--border); transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--accent); padding-left: 36px; }
+
+    /* ─── Page header ─── */
+    .page-header {
+      position: relative; z-index: 1;
+      padding: calc(var(--nav-h) + 64px) clamp(20px, 6vw, 80px) 56px;
+      max-width: 1200px; margin: 0 auto;
+      animation: fadeUp 0.8s ease both;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); display: flex; align-items: center;
+      gap: 12px; margin-bottom: 14px;
+    }
+    .section-label::before {
+      content: ''; width: 28px; height: 1.5px; background: var(--accent);
+    }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: 0.04em; line-height: 0.9;
+      background: linear-gradient(135deg, var(--text) 40%, var(--muted));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-title span {
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-subtitle {
+      font-size: 1rem; line-height: 1.75; color: var(--muted);
+      margin-top: 16px; max-width: 500px;
+    }
+
+    /* ─── Main content layout ─── */
+    .content-wrap {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 clamp(20px, 6vw, 80px) 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    /* ─── Skill bars block ─── */
+    .skills-block h3 {
+      font-family: 'Space Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .skills-block h3::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .skill-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+      transition: border-color 0.3s, transform 0.3s;
+      animation: fadeUp 0.6s ease both;
+    }
+    .skill-item:hover {
+      border-color: rgba(0,229,255,0.25);
+      transform: translateX(4px);
+    }
+    .skill-top {
+      display: flex; align-items: center;
+      gap: 14px; margin-bottom: 14px;
+    }
+    .skill-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .skill-icon img { width: 26px; height: 26px; object-fit: contain; }
+    .skill-info { flex: 1; }
+    .skill-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem; letter-spacing: 0.06em; color: var(--text);
+    }
+    .skill-desc {
+      font-size: 0.78rem; color: var(--muted); margin-top: 2px;
+    }
+    .skill-pct {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem; color: var(--accent); font-weight: 700;
+      flex-shrink: 0;
+    }
+    .bar-track {
+      height: 5px; border-radius: 99px;
+      background: var(--border); overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 99px;
+      width: 0;
+      transition: width 1.1s cubic-bezier(0.25,1,0.5,1);
+    }
+
+    /* Each skill gets its own accent color */
+    .bar-photoshop  { background: linear-gradient(90deg, #31a8ff, #00e5ff); }
+    .bar-illustrator{ background: linear-gradient(90deg, #ff9a00, #ffc857); }
+    .bar-premiere   { background: linear-gradient(90deg, #9999ff, #c8a0ff); }
+    .bar-filmora    { background: linear-gradient(90deg, #ff6b35, #ffb347); }
+    .bar-word       { background: linear-gradient(90deg, #2b7cd3, #00e5ff); }
+    .bar-excel      { background: linear-gradient(90deg, #21a366, #57d992); }
+
+    /* ─── Tools / Tags block ─── */
+    .tools-block { display: flex; flex-direction: column; gap: 24px; }
+
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+      animation: fadeUp 0.7s ease both;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .tool-card:hover {
+      border-color: rgba(0,229,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .tool-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem; letter-spacing: 0.06em;
+      margin-bottom: 14px; color: var(--text);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .tool-card-title span { font-size: 1.4rem; }
+    .tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all 0.25s; cursor: default;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.06); }
+    .tag.highlight { border-color: rgba(0,229,255,0.3); color: var(--accent); background: rgba(0,229,255,0.07); }
+
+    /* Currently learning card */
+    .learning-card {
+      background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(255,200,87,0.04));
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 12px; padding: 24px;
+    }
+    .learning-pulse {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+      animation: pulseDot 1.5s ease-in-out infinite;
+    }
+    @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+    .learning-items {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 28px clamp(20px, 6vw, 80px);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ─── Custom scrollbar ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 860px) {
+      .content-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
+  <div class="glow-blob one"></div>
+  <div class="glow-blob two"></div>
 
+  <!-- ═══ NAVBAR ═══ -->
+  <nav>
+    <div class="nav-logo">
+      <img src="https://rakibulislamrabbi24.github.io/Logo.png" alt="Logo" />
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="skills.html" class="active">Skills</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="contact.html">Contact Me</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </nav>
+  <ul class="mobile-nav" id="mobileNav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+  </ul>
 
-<nav>
+  <!-- ═══ PAGE HEADER ═══ -->
+  <div class="page-header">
+    <p class="section-label">Capabilities</p>
+    <h1 class="page-title">MY <span>SKILLS</span></h1>
+    <p class="page-subtitle">A curated set of tools and techniques I use to craft compelling visual stories and digital experiences.</p>
+  </div>
 
-<div class="logo">
-<img src="Logo.png">
-</div>
+  <!-- ═══ CONTENT ═══ -->
+  <div class="content-wrap">
 
-<div class="nav-right">
+    <!-- LEFT: Skill bars -->
+    <div class="skills-block">
+      <h3>Proficiency</h3>
 
-<div class="top-widgets">
+      <!-- Photoshop -->
+      <div class="skill-item" style="animation-delay:0.05s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png" alt="Photoshop" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Adobe Photoshop</div>
+            <div class="skill-desc">Photo retouching, poster design, compositing</div>
+          </div>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-photoshop" data-width="80"></div>
+        </div>
+      </div>
 
-<div class="theme-toggle" id="themeToggle">
-☀️ 🌙
-</div>
+      <!-- Illustrator -->
+      <div class="skill-item" style="animation-delay:0.12s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968472.png" alt="Illustrator" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Adobe Illustrator</div>
+            <div class="skill-desc">Vector art, logo design, brand identity</div>
+          </div>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-illustrator" data-width="90"></div>
+        </div>
+      </div>
 
-<div class="live-time">
-<div id="clock"></div>
-<div id="date"></div>
-</div>
+      <!-- Premiere Pro -->
+      <div class="skill-item" style="animation-delay:0.19s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968525.png" alt="Premiere" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Adobe Premiere Pro</div>
+            <div class="skill-desc">Video cuts, color grading, timeline editing</div>
+          </div>
+          <span class="skill-pct">40%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-premiere" data-width="40"></div>
+        </div>
+      </div>
 
-</div>
+      <!-- Filmora -->
+      <div class="skill-item" style="animation-delay:0.26s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://img.icons8.com/color/96/filmora.png" alt="Filmora" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Filmora</div>
+            <div class="skill-desc">Cinematic edits, effects, social content</div>
+          </div>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-filmora" data-width="60"></div>
+        </div>
+      </div>
 
-<div class="menu-toggle" onclick="toggleMenu()">
-☰
-</div>
+      <!-- Microsoft Word -->
+      <div class="skill-item" style="animation-delay:0.33s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732220.png" alt="Word" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Microsoft Word</div>
+            <div class="skill-desc">Documents, reports, professional formatting</div>
+          </div>
+          <span class="skill-pct">95%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-word" data-width="95"></div>
+        </div>
+      </div>
 
-<ul id="navMenu">
+      <!-- Microsoft Excel -->
+      <div class="skill-item" style="animation-delay:0.40s">
+        <div class="skill-top">
+          <div class="skill-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/732/732224.png" alt="Excel" />
+          </div>
+          <div class="skill-info">
+            <div class="skill-name">Microsoft Excel</div>
+            <div class="skill-desc">Data tables, formulas, basic spreadsheets</div>
+          </div>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill bar-excel" data-width="60"></div>
+        </div>
+      </div>
+    </div>
 
-<li><a href="index.html">Home</a></li>
-<li><a href="skills.html">Skills</a></li>
-<li><a href="about.html">About Me</a></li>
-<li><a href="contact.html">Contact Me</a></li>
+    <!-- RIGHT: Tags & cards -->
+    <div class="tools-block">
 
-</ul>
+      <!-- Design -->
+      <div class="tool-card" style="animation-delay:0.1s">
+        <div class="tool-card-title"><span>🎨</span> Graphic Design</div>
+        <div class="tags">
+          <span class="tag highlight">Photo Retouching</span>
+          <span class="tag highlight">Vector Illustration</span>
+          <span class="tag highlight">Poster Design</span>
+          <span class="tag">Brand Identity</span>
+          <span class="tag">Typography</span>
+          <span class="tag">Compositing</span>
+          <span class="tag">Color Theory</span>
+          <span class="tag">Layout Design</span>
+        </div>
+      </div>
 
-</div>
+      <!-- Video -->
+      <div class="tool-card" style="animation-delay:0.2s">
+        <div class="tool-card-title"><span>🎬</span> Video Editing</div>
+        <div class="tags">
+          <span class="tag highlight">Cinematic Cuts</span>
+          <span class="tag highlight">Color Grading</span>
+          <span class="tag highlight">Storytelling</span>
+          <span class="tag">Motion Effects</span>
+          <span class="tag">Audio Sync</span>
+          <span class="tag">Social Reels</span>
+          <span class="tag">Transitions</span>
+        </div>
+      </div>
 
-</nav>
+      <!-- Soft skills -->
+      <div class="tool-card" style="animation-delay:0.3s">
+        <div class="tool-card-title"><span>💡</span> Creative & Strategy</div>
+        <div class="tags">
+          <span class="tag highlight">Visual Storytelling</span>
+          <span class="tag highlight">Creative Direction</span>
+          <span class="tag">Tech Infrastructure</span>
+          <span class="tag">Client Communication</span>
+          <span class="tag">Asset Management</span>
+          <span class="tag">Trend Research</span>
+        </div>
+      </div>
 
+      <!-- Currently learning -->
+      <div class="tool-card learning-card" style="animation-delay:0.4s">
+        <div class="learning-pulse">
+          <span class="pulse-dot"></span>
+          Currently Learning
+        </div>
+        <div class="tool-card-title" style="margin-bottom:10px;"><span>📚</span> Expanding Horizons</div>
+        <div class="learning-items">
+          <span class="tag highlight">After Effects</span>
+          <span class="tag highlight">UI/UX Design</span>
+          <span class="tag highlight">Web Development</span>
+          <span class="tag">3D Motion</span>
+        </div>
+      </div>
 
-<section class="page">
+    </div>
+  </div>
 
-<h1>MY SKILLS</h1>
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p class="footer-copy">© 2025 Rakibul Islam Rabbi — All rights reserved.</p>
+    <nav class="footer-links">
+      <a href="https://www.facebook.com/RakibulRabbi24" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/RakibulRabbi24" target="_blank">Instagram</a>
+      <a href="https://x.com/RakibulRabbi24" target="_blank">Twitter / X</a>
+      <a href="https://wa.me/8550314932831" target="_blank">WhatsApp</a>
+    </nav>
+  </footer>
 
-<div class="skills-grid">
+  <script>
+    /* Theme */
+    const themeBtn = document.getElementById('themeBtn');
+    themeBtn.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      themeBtn.textContent = isLight ? '☀️' : '🌙';
+    });
 
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968520.png">
-<h3>Adobe Photoshop</h3>
-<p>80%</p>
-</div>
+    /* Hamburger */
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileNav').classList.toggle('open');
+    });
 
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968472.png">
-<h3>Adobe Illustrator</h3>
-<p>90%</p>
-</div>
+    /* Skill bar animation on scroll */
+    const bars = document.querySelectorAll('.bar-fill[data-width]');
+    const barObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.style.width = e.target.dataset.width + '%';
+        barObserver.unobserve(e.target);
+      });
+    }, { threshold: 0.4 });
+    bars.forEach(b => barObserver.observe(b));
 
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/5968/5968525.png">
-<h3>Adobe Premiere Pro</h3>
-<p>40%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://img.icons8.com/color/96/filmora.png">
-<h3>Filmora</h3>
-<p>60%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/732/732220.png">
-<h3>Microsoft Word</h3>
-<p>95%</p>
-</div>
-
-<div class="skill-card">
-<img src="https://cdn-icons-png.flaticon.com/512/732/732224.png">
-<h3>Microsoft Excel</h3>
-<p>60%</p>
-</div>
-
-</div>
-
-<p class="warning">
-⚠️ Website still under development.
-</p>
-
-</section>
-
-
-<script>
-function toggleMenu(){
-document.getElementById("navMenu").classList.toggle("show");
-}
-
-document.getElementById("themeToggle").onclick=()=>{
-document.body.classList.toggle("light-mode");
-}
-
-function updateClock(){
-const now = new Date();
-
-document.getElementById("clock").innerHTML =
-now.toLocaleTimeString('en-US',{
-hour:'2-digit',
-minute:'2-digit',
-hour12:true
-});
-
-document.getElementById("date").innerHTML =
-now.toLocaleDateString('en-US',{
-weekday:'short',
-day:'numeric',
-month:'short'
-});
-}
-
-setInterval(updateClock,1000);
-updateClock();
-</script>
-
-
+    /* Stagger skill items */
+    document.querySelectorAll('.skill-item, .tool-card').forEach((el, i) => {
+      el.style.animationDelay = (0.05 + i * 0.07) + 's';
+    });
+  </script>
 </body>
 </html>
