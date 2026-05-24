@@ -154,14 +154,18 @@ margin-bottom:20px;
 /* LOKI TITLE */
 
 #loki-title{
-font-size:72px;
+font-size:68px;
 font-weight:800;
-line-height:1.05;
-display:flex;
-flex-wrap:wrap;
-gap:2px;
+line-height:1.1;
 margin-bottom:25px;
 text-transform:uppercase;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:nowrap;
+gap:0;
+white-space:nowrap;
+overflow:hidden;
 }
 
 #loki-title span{
@@ -170,7 +174,7 @@ transition:all 0.35s ease;
 }
 
 .glitch-letter{
-animation:letterGlitch 0.25s linear;
+animation:letterGlitch 0.22s linear;
 }
 
 @keyframes letterGlitch{
@@ -181,18 +185,18 @@ opacity:1;
 }
 
 25%{
-transform:translate(-2px,2px);
-opacity:0.75;
+transform:translate(-1px,1px);
+opacity:0.8;
 }
 
 50%{
-transform:translate(2px,-2px);
+transform:translate(1px,-1px);
 opacity:1;
 }
 
 75%{
-transform:translate(-1px,1px);
-opacity:0.8;
+transform:translate(-1px,0);
+opacity:0.85;
 }
 
 100%{
@@ -202,7 +206,14 @@ opacity:1;
 
 }
 
-/* TYPING */
+@media(max-width:768px){
+
+#loki-title{
+font-size:34px;
+letter-spacing:-1px;
+}
+
+}/* TYPING */
 
 .typing{
 height:40px;
