@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Rakibul Islam Rabbi | Home</title>
+
+<meta name="description" content="Official portfolio website of Rakibul Islam Rabbi">
+<meta name="keywords" content="Rakibul Islam Rabbi, Portfolio, Graphic Designer, Video Editor">
+<meta name="author" content="Rakibul Islam Rabbi">
+
+<meta property="og:title" content="Rakibul Islam Rabbi">
+<meta property="og:description" content="Official portfolio website of Rakibul Islam Rabbi">
+<meta property="og:image" content="preview.png">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --bg:#080b10;
+  --surface:#0e1420;
+  --border:rgba(255,255,255,0.06);
+  --text:#e8eaf0;
+  --muted:#7a8299;
+  --accent:#00e5ff;
+  --accent2:#ff6b35;
+  --gold:#ffc857;
+  --nav-h:72px;
+
+  --bg2:#0b111b;
+  --glass:rgba(255,255,255,0.03);
+  --trans:0.3s ease;
+  --accent1:#00e5ff;
+  --font-head:'Space Mono', monospace;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+}
+
+.hero h1{
+  font-size:clamp(3rem,8vw,6rem);
+  margin-bottom:10px;
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:3px;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:700px;
+  margin:auto;
+  line-height:1.7;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 30px;
+  background:var(--accent);
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 20px rgba(0,229,255,0.4);
+}
+
+/* Popup */
+.custom-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  padding:15px;
+}
+
+.custom-popup-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.custom-popup-content{
+  background:#121212;
+  border:2px solid #ff0033;
+  border-radius:16px;
+  max-width:480px;
+  width:100%;
+  padding:25px;
+  text-align:center;
+  position:relative;
+  box-shadow:0 0 15px rgba(255,0,51,0.4);
+}
+
+.custom-popup-close{
+  position:absolute;
+  right:16px;
+  top:10px;
+  color:#fff;
+  font-size:30px;
+  cursor:pointer;
+}
+
+.popup-img{
+  width:100%;
+  border-radius:12px;
+}
+
+.popup-title{
+  font-size:28px;
+  margin:20px 0 10px;
+}
+
+.popup-text{
+  color:#ccc;
+  line-height:1.7;
+}
+
+.popup-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 25px;
+  background:#ff0033;
+  color:#fff;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+  <div>
+    <h1>RAKIBUL ISLAM RABBI</h1>
+
+    <p>
+      Exploring stories through design, technology, cinematic aesthetics
+      and futuristic creativity — turning ideas into unforgettable digital experiences.
+    </p>
+
+    <a href="contact.html" class="btn">Let's Talk</a>
+  </div>
+</section>
+
+<!-- Popup -->
+<div class="custom-popup-overlay" id="popupOverlay">
+  <div class="custom-popup-content">
+
+    <span class="custom-popup-close" id="popupClose">&times;</span>
+
+    <img src="popup.jpg" class="popup-img" alt="Popup">
+
+    <h2 class="popup-title">Welcome To My Website</h2>
+
+    <p class="popup-text">
+      Thanks for visiting my portfolio website.
+      Explore my creative projects, cinematic edits and creative works.
+    </p>
+
+    <a href="contact.html" class="popup-btn">Contact Me</a>
+
+  </div>
+</div>
+
+<footer>
+© 2026 Rakibul Islam Rabbi — All rights reserved.
+</footer>
+
+<script>
+const popupOverlay = document.getElementById('popupOverlay');
+const popupClose = document.getElementById('popupClose');
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    popupOverlay.classList.add('show');
+  }, 700);
+});
+
+popupClose.addEventListener('click', () => {
+  popupOverlay.classList.remove('show');
+});
+
+popupOverlay.addEventListener('click', (e) => {
+  if(e.target === popupOverlay){
+    popupOverlay.classList.remove('show');
+  }
+});
+</script>
+
+</body>
+</html>
