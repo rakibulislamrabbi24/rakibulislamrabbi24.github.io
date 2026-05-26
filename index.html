@@ -1005,7 +1005,7 @@ window.addEventListener("load", () => {
   fetch("popup.html")
     .then(res => res.text())
     .then(data => {
-
+data = data.replace(/status:\s*(on|off)/i, '').trim();
       const popup = document.createElement("div");
       popup.id = "dynamicPopup";
 
