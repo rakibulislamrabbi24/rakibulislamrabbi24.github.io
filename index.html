@@ -839,23 +839,33 @@
     }, { threshold: 0.5 });
     counters.forEach(c => observer.observe(c));
   </script>
-  <!-- Popup CSS Styles -->
+
+<!-- Font Awesome Icons & Google Fonts (পপআপের ফন্ট ও আইকনের জন্য লিংক) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
+  /* আপনার পছন্দের ফন্ট এখানে সেট করুন */
+  /* ইংরেজি লেখার জন্য 'Poppins' এবং বাংলা লেখার জন্য 'Hind Siliguri' দেওয়া হয়েছে */
+  .custom-popup-content, .popup-wrapper {
+    font-family: 'Poppins', 'Hind Siliguri', sans-serif !important;
+  }
+
   .custom-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75); /* ব্যাকগ্রাউন্ড একটু ডার্ক করা হয়েছে স্পষ্ট দেখার জন্য */
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999999; /* যেন সবকিছুর উপরে থাকে */
+    z-index: 999999;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    padding: 15px; /* মোবাইল স্ক্রিনের বর্ডারের সাথে যেন লেগে না যায় */
+    padding: 15px;
     box-sizing: border-box;
   }
   .custom-popup-overlay.show {
@@ -865,16 +875,16 @@
   .custom-popup-content {
     background: #fff;
     padding: 25px;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 100%; /* মোবাইলে পুরো স্ক্রিন চওড়া হবে */
-    max-height: 85vh; /* মোবাইলে স্ক্রিনের বাইরে চলে গেলে স্ক্রোল করা যাবে */
-    overflow-y: auto; /* কন্টেন্ট বেশি হলে পপআপের ভেতরেই স্ক্রোল হবে */
+    border-radius: 16px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     text-align: center;
     box-sizing: border-box;
-    animation: popupScale 0.3s ease;
+    animation: popupScale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   @keyframes popupScale {
     from { transform: scale(0.8); opacity: 0; }
@@ -882,31 +892,83 @@
   }
   .custom-popup-close {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 32px; /* মোবাইলে যেন সহজে টাচ করা যায় */
+    top: 12px;
+    right: 18px;
+    font-size: 30px;
     cursor: pointer;
-    color: #333;
+    color: #444;
     font-weight: bold;
     z-index: 99;
     line-height: 1;
+    transition: color 0.2s;
   }
   .custom-popup-close:hover { color: #ff0000; }
 
-  /* পপআপের ভেতরের ইমেজ ও কন্টেন্ট রেসপনসিভ করার জন্য */
-  #popup-body {
-    font-family: Arial, sans-serif;
-    word-wrap: break-word; /* লম্বা টেক্সট যেন স্ক্রিন ভেঙে বাইরে না যায় */
+  /* পপআপের ভেতরের কন্টেন্ট স্টাইল */
+  .popup-title {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
   }
-  #popup-body img {
+  .popup-img {
     max-width: 100% !important;
     height: auto !important;
     display: block;
-    margin: 0 auto;
-    border-radius: 6px;
+    margin: 0 auto 15px auto;
+    border-radius: 8px;
   }
+  .popup-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .popup-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #e74c3c;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: background 0.2s;
+  }
+  .popup-btn:hover { background: #c0392b; }
+
+  /* সোশ্যাল মিডিয়া আইকন স্টাইল */
+  .popup-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff !important;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.2s, filter 0.2s;
+  }
+  .social-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(0.9);
+  }
+  .fb { background: #1877F2; }
+  .insta { background: #E1306C; }
+  .x-twitter { background: #000000; }
+  .whatsapp { background: #25D366; }
 </style>
 
+<!-- Popup HTML Structure -->
 <div class="custom-popup-overlay" id="customPopup">
   <div class="custom-popup-content">
     <span class="custom-popup-close" onclick="closePopup()">&times;</span>
@@ -914,6 +976,7 @@
   </div>
 </div>
 
+<!-- Popup JavaScript Logic -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     fetch('./popup.html?t=' + new Date().getTime())
@@ -921,9 +984,19 @@
         if (!response.ok) return '';
         return response.text();
       })
-      .then(htmlContent => {
-        htmlContent = htmlContent.trim();
-        if (!htmlContent) return; 
+      .then(rawContent => {
+        rawContent = rawContent.trim();
+        if (!rawContent) return;
+
+        // প্রথম লাইনে status চেক করা হচ্ছে
+        const firstLine = rawContent.split('\n')[0].toLowerCase().trim();
+        
+        if (firstLine === 'status: off') {
+          return; // পপআপ বন্ধ থাকলে এখানেই কোড এক্সিকিউশন থেমে যাবে
+        }
+
+        // 'status: on' বাদ দিয়ে বাকি আসল HTML টুকু নেওয়া হচ্ছে
+        const htmlContent = rawContent.replace(/status:\s*(on|off)/i, '').trim();
 
         const popupOverlay = document.getElementById('customPopup');
         const popupBody = document.getElementById('popup-body');
@@ -943,6 +1016,8 @@
     document.getElementById('customPopup').classList.remove('show');
     sessionStorage.setItem('popupShown', 'true');
   }
+</script>
+
 </script>
 </body>
 </html>
