@@ -1,133 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eid Mubarak Pop-up</title>
-    <style>
-        /* Website Background Blur Overlay */
-        .eid-popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabbi – Eid ul Adha Mubarak</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0a0a0a; display:flex; justify-content:center; align-items:center; min-height:100vh; }
 
-        /* 1:1 Square Premium Container */
-        .eid-popup-content {
-            position: relative;
-            width: 90%;
-            max-width: 550px; /* Perfect square size for desktop/mobile screens */
-            aspect-ratio: 1 / 1;
-            background: #0d0d0d;
-            border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15); /* Soft golden glow shadow */
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            overflow: hidden;
-            animation: popupScaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+.poster-wrap { width:min(92vw,92vh); aspect-ratio:1/1; position:relative; }
+.poster { width:100%; height:100%; background:#060504; position:relative; overflow:hidden; border-radius:3px; }
 
-        /* The Premium Eid Poster Image */
-        .eid-popup-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+/* === BG === */
+.bg-base {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 10%, #1f1000 0%, transparent 65%),
+    radial-gradient(ellipse 60% 60% at 10% 80%, #160a00 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 90% 80%, #160a00 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, #2a1400 0%, transparent 60%),
+    #060504;
+}
 
-        /* Luxury Close Button */
-        .eid-popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            color: #d4af37; /* Gold color */
-            font-size: 24px;
-            font-weight: 300;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
-            z-index: 10;
-            line-height: 1;
-        }
+/* === GEOMETRIC ARABIC PATTERN BG === */
+.pattern-bg {
+  position:absolute; inset:0;
+  opacity:0.035;
+  background-image:
+    repeating-linear-gradient(60deg, rgba(212,175,55,1) 0, rgba(212,175,55,1) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-60deg, rgba(212,175,55,1) 0, rgba(212,175,55,1) 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(0deg, rgba(212,175,55,1) 0, rgba(212,175,55,1) 1px, transparent 0, transparent 50%);
+  background-size:40px 40px;
+}
 
-        .eid-popup-close:hover {
-            background: #d4af37;
-            color: #000;
-            box-shadow: 0 0 15px #d4af37;
-            transform: rotate(90deg);
-        }
+/* === STARS === */
+.stars { position:absolute; inset:0; }
+.star {
+  position:absolute; background:#fff; border-radius:50%;
+  animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);
+}
+@keyframes twinkle {
+  0%,100% { opacity:var(--min-op,0.2); transform:scale(1); }
+  50%      { opacity:var(--max-op,1);  transform:scale(1.5); }
+}
 
-        /* Smooth Entry Animation */
-        @keyframes popupScaleUp {
-            from {
-                transform: scale(0.85);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+/* === FLOATING PARTICLES (golden dust) === */
+.particle {
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,215,0,0.9), rgba(212,175,55,0));
+  animation:floatUp var(--fp-dur,6s) ease-in-out infinite var(--fp-delay,0s);
+  opacity:0;
+}
+@keyframes floatUp {
+  0%   { transform:translateY(0) scale(0.5); opacity:0; }
+  20%  { opacity:var(--fp-op,0.7); }
+  80%  { opacity:var(--fp-op,0.4); }
+  100% { transform:translateY(var(--fp-rise,-120px)) scale(1.2) translateX(var(--fp-drift,15px)); opacity:0; }
+}
 
-        /* Hide class when closed */
-        .eid-popup-hidden {
-            display: none !important;
-        }
-    </style>
+/* === GLOWING EMBERS (fire sparks for qurbani theme) === */
+.ember {
+  position:absolute;
+  width:3px; height:3px;
+  border-radius:50%;
+  background:radial-gradient(circle, #ff6a00, #ff4500, transparent);
+  animation:emberFloat var(--em-dur,5s) ease-out infinite var(--em-delay,0s);
+  opacity:0;
+  box-shadow:0 0 4px #ff4500, 0 0 8px rgba(255,100,0,0.5);
+}
+@keyframes emberFloat {
+  0%   { transform:translateY(0) translateX(0) scale(1); opacity:0; }
+  15%  { opacity:0.9; }
+  60%  { opacity:0.5; }
+  100% { transform:translateY(var(--em-rise,-100px)) translateX(var(--em-drift,20px)) scale(0.2); opacity:0; }
+}
+
+/* === TOP GLOW === */
+.glow-top {
+  position:absolute; top:-8%; left:15%; right:15%; height:55%;
+  background:radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.2) 0%, transparent 70%);
+  pointer-events:none;
+}
+.glow-bottom {
+  position:absolute; bottom:0; left:0; right:0; height:40%;
+  background:radial-gradient(ellipse at 50% 100%, rgba(180,80,0,0.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+/* === FRAME === */
+.frame-border {
+  position:absolute; inset:2.2%;
+  border:1px solid rgba(212,175,55,0.4);
+  border-radius:2px; pointer-events:none;
+}
+.frame-inner {
+  position:absolute; inset:2.8%;
+  border:0.5px solid rgba(212,175,55,0.12);
+  border-radius:1px; pointer-events:none;
+}
+.corner { position:absolute; width:22px; height:22px; border-color:rgba(212,175,55,0.8); border-style:solid; }
+.c-tl { top:-1px; left:-1px; border-width:2px 0 0 2px; }
+.c-tr { top:-1px; right:-1px; border-width:2px 2px 0 0; }
+.c-bl { bottom:-1px; left:-1px; border-width:0 0 2px 2px; }
+.c-br { bottom:-1px; right:-1px; border-width:0 2px 2px 0; }
+
+/* === MOSQUE === */
+.mosque-layer {
+  position:absolute; bottom:0; left:0; right:0; height:36%;
+  display:flex; align-items:flex-end; justify-content:center;
+}
+.mosque-layer svg { width:100%; height:100%; }
+
+/* === LANTERNS === */
+.lantern { position:absolute; z-index:8; transform-origin:top center; animation:sway 4s ease-in-out infinite; }
+@keyframes sway { 0%,100% { transform:rotate(-4deg); } 50% { transform:rotate(4deg); } }
+.lan-l1 { top:7%; left:3%; animation-delay:-1s; }
+.lan-r1 { top:7%; right:3%; animation-delay:-2.5s; }
+.lan-l2 { top:11%; left:8.5%; animation-delay:-0.5s; transform:scale(0.65); }
+.lan-r2 { top:11%; right:8.5%; animation-delay:-3s; transform:scale(0.65); }
+
+/* === CRESCENT === */
+.crescent-wrap {
+  position:absolute; top:5.5%; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:1%; z-index:10;
+}
+
+/* === CONTENT === */
+.content {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:20; padding:0 6%; gap:0; margin-top:-4%;
+}
+.bismillah {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(10px,1.6vw,20px);
+  letter-spacing:0.3em; color:rgba(212,175,55,0.6);
+  text-transform:uppercase; margin-bottom:1.8%;
+}
+.eid-title {
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(18px,4.5vw,60px); font-weight:900;
+  background:linear-gradient(135deg,#b8872a 0%,#f5d77e 30%,#fffbe0 50%,#f5d77e 70%,#b8872a 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  text-align:center; line-height:1.1; letter-spacing:0.08em;
+  filter:drop-shadow(0 0 16px rgba(212,175,55,0.55));
+  animation:gPulse 3s ease-in-out infinite;
+}
+.mubarak {
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(26px,6.2vw,84px); font-weight:900;
+  background:linear-gradient(135deg,#c9922a 0%,#fde68a 25%,#fffbe8 50%,#fde68a 75%,#c9922a 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  text-align:center; letter-spacing:0.12em; line-height:1;
+  filter:drop-shadow(0 0 22px rgba(255,200,0,0.65));
+  animation:gPulse2 3.5s ease-in-out infinite;
+}
+@keyframes gPulse {
+  0%,100% { filter:drop-shadow(0 0 12px rgba(212,175,55,0.4)); }
+  50%      { filter:drop-shadow(0 0 26px rgba(255,215,0,0.8)); }
+}
+@keyframes gPulse2 {
+  0%,100% { filter:drop-shadow(0 0 18px rgba(212,175,55,0.5)); }
+  50%      { filter:drop-shadow(0 0 35px rgba(255,215,0,0.9)); }
+}
+.divider {
+  width:52%; height:1px;
+  background:linear-gradient(to right, transparent, rgba(212,175,55,0.8), rgba(255,255,255,0.5), rgba(212,175,55,0.8), transparent);
+  margin:2% 0 1.8%; position:relative;
+}
+.div-diamond {
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:clamp(7px,1vw,14px); height:clamp(7px,1vw,14px);
+  background:#d4af37; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
+  box-shadow:0 0 10px #d4af37;
+}
+.greeting {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(8px,1.45vw,19px); font-style:italic;
+  color:rgba(255,235,180,0.85); text-align:center;
+  line-height:1.75; letter-spacing:0.03em; max-width:68%;
+}
+.date-badge {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(7px,1.1vw,15px);
+  letter-spacing:0.28em; color:rgba(212,175,55,0.5);
+  text-transform:uppercase; margin-top:1.8%;
+}
+
+/* === LOGO === */
+.logo-wrap {
+  position:absolute; top:3.5%; left:3.5%; z-index:30;
+  width:clamp(65px,13%,155px);
+  filter:drop-shadow(0 0 8px rgba(255,40,40,0.9)) drop-shadow(0 0 20px rgba(255,0,0,0.6)) drop-shadow(0 0 38px rgba(255,0,0,0.3));
+  animation:logoGlow 2.5s ease-in-out infinite;
+}
+@keyframes logoGlow {
+  0%,100% { filter:drop-shadow(0 0 8px rgba(255,40,40,0.9)) drop-shadow(0 0 18px rgba(255,0,0,0.55)) drop-shadow(0 0 32px rgba(255,0,0,0.28)); }
+  50%      { filter:drop-shadow(0 0 14px rgba(255,60,60,1)) drop-shadow(0 0 30px rgba(255,10,10,0.8)) drop-shadow(0 0 55px rgba(255,0,0,0.5)); }
+}
+.logo-wrap img { width:100%; display:block; }
+
+/* === SOCIAL BAR (icons only) === */
+.social-bar {
+  position:absolute; bottom:2.5%; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:clamp(6px,1.8%,18px);
+  z-index:30;
+}
+.social-icon {
+  width:clamp(22px,3.8vw,44px); height:clamp(22px,3.8vw,44px);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(212,175,55,0.35);
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(4px);
+  transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  text-decoration:none;
+  cursor:pointer;
+}
+.social-icon:hover { transform:scale(1.18); border-color:rgba(212,175,55,0.9); box-shadow:0 0 14px rgba(212,175,55,0.5); }
+.social-icon svg { width:48%; height:48%; display:block; }
+
+/* === VIGNETTE === */
+.vignette {
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(0,0,0,0.72) 100%);
+  pointer-events:none;
+}
+
+/* === QURBANI KNIFE decoration (subtle) === */
+.knife-deco {
+  position:absolute; bottom:13%; right:5%; z-index:12; opacity:0.22;
+  animation:knifeGlow 3s ease-in-out infinite;
+}
+@keyframes knifeGlow {
+  0%,100% { opacity:0.18; }
+  50% { opacity:0.3; }
+}
+</style>
 </head>
 <body>
+<div class="poster-wrap">
+<div class="poster">
 
-    <!-- Eid ul Adha Popup Layout -->
-    <div class="eid-popup-overlay" id="eidModalOverlay">
-        <div class="eid-popup-content">
-            <!-- Close Button -->
-            <button class="eid-popup-close" id="closeEidPopup" aria-label="Close Popup">&times;</button>
-            
-            <!-- Poster Display -->
-            <img src="watermarked_img_13101712174402516039.png" alt="Eid ul Adha Mubarak - Rabbi">
-        </div>
-    </div>
+<div class="bg-base"></div>
+<div class="pattern-bg"></div>
+<div class="stars" id="stars"></div>
+<div class="glow-top"></div>
+<div class="glow-bottom"></div>
 
-    <script>
-        // JavaScript for Popup Functionality
-        const popupOverlay = document.getElementById('eidModalOverlay');
-        const closeBtn = document.getElementById('closeEidPopup');
+<!-- Frame -->
+<div class="frame-border">
+  <div class="corner c-tl"></div><div class="corner c-tr"></div>
+  <div class="corner c-bl"></div><div class="corner c-br"></div>
+</div>
+<div class="frame-inner"></div>
 
-        // Close when clicking the 'X' button
-        closeBtn.addEventListener('click', () => {
-            popupOverlay.style.opacity = '0';
-            setTimeout(() => {
-                popupOverlay.classList.add('eid-popup-hidden');
-            }, 400); // smooth fadeout time matches transition
-        });
+<!-- Lanterns -->
+<div class="lantern lan-l1">
+  <svg width="34" height="66" viewBox="0 0 38 72" fill="none">
+    <line x1="19" y1="0" x2="19" y2="10" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="12" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <path d="M11 12 Q6 30 8 48 Q13 58 19 60 Q25 58 30 48 Q32 30 27 12Z" fill="rgba(212,120,20,0.2)" stroke="#d4af37" stroke-width="1.5"/>
+    <line x1="8" y1="36" x2="30" y2="36" stroke="rgba(212,175,55,0.35)" stroke-width="0.8"/>
+    <ellipse cx="19" cy="58" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="36" rx="5" ry="9" fill="rgba(255,165,40,0.4)"/>
+    <path d="M15 60 L13 68 M19 61 L19 70 M23 60 L25 68" stroke="#d4af37" stroke-width="1"/>
+  </svg>
+</div>
+<div class="lantern lan-r1">
+  <svg width="34" height="66" viewBox="0 0 38 72" fill="none">
+    <line x1="19" y1="0" x2="19" y2="10" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="12" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <path d="M11 12 Q6 30 8 48 Q13 58 19 60 Q25 58 30 48 Q32 30 27 12Z" fill="rgba(212,120,20,0.2)" stroke="#d4af37" stroke-width="1.5"/>
+    <line x1="8" y1="36" x2="30" y2="36" stroke="rgba(212,175,55,0.35)" stroke-width="0.8"/>
+    <ellipse cx="19" cy="58" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="36" rx="5" ry="9" fill="rgba(255,165,40,0.4)"/>
+    <path d="M15 60 L13 68 M19 61 L19 70 M23 60 L25 68" stroke="#d4af37" stroke-width="1"/>
+  </svg>
+</div>
+<div class="lantern lan-l2">
+  <svg width="26" height="50" viewBox="0 0 38 72" fill="none">
+    <line x1="19" y1="0" x2="19" y2="10" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="12" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <path d="M11 12 Q6 30 8 48 Q13 58 19 60 Q25 58 30 48 Q32 30 27 12Z" fill="rgba(212,120,20,0.15)" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="58" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="36" rx="5" ry="9" fill="rgba(255,165,40,0.3)"/>
+    <path d="M15 60 L13 68 M19 61 L19 70 M23 60 L25 68" stroke="#d4af37" stroke-width="1"/>
+  </svg>
+</div>
+<div class="lantern lan-r2">
+  <svg width="26" height="50" viewBox="0 0 38 72" fill="none">
+    <line x1="19" y1="0" x2="19" y2="10" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="12" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <path d="M11 12 Q6 30 8 48 Q13 58 19 60 Q25 58 30 48 Q32 30 27 12Z" fill="rgba(212,120,20,0.15)" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="58" rx="8" ry="3" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+    <ellipse cx="19" cy="36" rx="5" ry="9" fill="rgba(255,165,40,0.3)"/>
+    <path d="M15 60 L13 68 M19 61 L19 70 M23 60 L25 68" stroke="#d4af37" stroke-width="1"/>
+  </svg>
+</div>
 
-        // Optional: Close when clicking outside the square poster
-        popupOverlay.addEventListener('click', (e) => {
-            if (e.target === popupOverlay) {
-                popupOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    popupOverlay.classList.add('eid-popup-hidden');
-                }, 400);
-            }
-        });
-    </script>
+<!-- Crescent Moon -->
+<div class="crescent-wrap">
+  <svg style="width:clamp(14px,2.2vw,32px);height:clamp(14px,2.2vw,32px)" viewBox="0 0 44 44" fill="none">
+    <path d="M22 5 C10 5 4 15 4 22 C4 31 12 40 22 40 C30 40 37 35 39 28 C35 30 31 30 27 28 C20 24 17 16 20 9 C21 7 21.5 6 22 5Z" fill="url(#mg)"/>
+    <defs><linearGradient id="mg" x1="4" y1="5" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#fffbe8"/><stop offset="50%" stop-color="#f5d77e"/><stop offset="100%" stop-color="#b8872a"/></linearGradient></defs>
+  </svg>
+  <svg style="width:clamp(8px,1.3vw,18px);height:clamp(8px,1.3vw,18px)" viewBox="0 0 22 22"><polygon points="11,2 13,8 19,8 14,12 16,18 11,14 6,18 8,12 3,8 9,8" fill="#f5d77e" opacity="0.9"/></svg>
+  <svg style="width:clamp(6px,0.9vw,12px);height:clamp(6px,0.9vw,12px)" viewBox="0 0 22 22"><polygon points="11,2 13,8 19,8 14,12 16,18 11,14 6,18 8,12 3,8 9,8" fill="#f5d77e" opacity="0.65"/></svg>
+  <svg style="width:clamp(8px,1.3vw,18px);height:clamp(8px,1.3vw,18px)" viewBox="0 0 22 22"><polygon points="11,2 13,8 19,8 14,12 16,18 11,14 6,18 8,12 3,8 9,8" fill="#f5d77e" opacity="0.8"/></svg>
+</div>
 
-</body>
-</html>
+<!-- Mosque silhouette -->
+<div class="mosque-layer">
+  <svg viewBox="0 0 1000 380" preserveAspectRatio="xMidYMax meet">
+    <defs>
+      <linearGradient id="mgrd" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3a2800" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#120b00" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="500" cy="200" rx="92" ry="88" fill="url(#mgrd)"/>
+    <rect x="408" y="195" width="184" height="185" fill="url(#mgrd)"/>
+    <line x1="500" y1="112" x2="500" y2="132" stroke="#d4af37" stroke-width="2"/>
+    <polygon points="500,107 504,120 500,118 496,120" fill="#d4af37"/>
+    <ellipse cx="338" cy="238" rx="62" ry="56" fill="url(#mgrd)"/>
+    <rect x="276" y="233" width="124" height="147" fill="url(#mgrd)"/>
+    <ellipse cx="662" cy="238" rx="62" ry="56" fill="url(#mgrd)"/>
+    <rect x="600" y="233" width="124" height="147" fill="url(#mgrd)"/>
+    <rect x="172" y="125" width="32" height="255" fill="url(#mgrd)"/>
+    <ellipse cx="188" cy="125" rx="22" ry="38" fill="url(#mgrd)"/>
+    <line x1="188" y1="87" x2="188" y2="108" stroke="#d4af37" stroke-width="1.5"/>
+    <polygon points="188,82 192,96 188,93 184,96" fill="#d4af37"/>
+    <rect x="796" y="125" width="32" height="255" fill="url(#mgrd)"/>
+    <ellipse cx="812" cy="125" rx="22" ry="38" fill="url(#mgrd)"/>
+    <line x1="812" y1="87" x2="812" y2="108" stroke="#d4af37" stroke-width="1.5"/>
+    <polygon points="812,82 816,96 812,93 808,96" fill="#d4af37"/>
+    <path d="M440 380 Q440 308 500 308 Q560 308 560 380" fill="rgba(0,0,0,0.5)"/>
+    <path d="M293 380 Q293 328 338 328 Q383 328 383 380" fill="rgba(0,0,0,0.4)"/>
+    <path d="M617 380 Q617 328 662 328 Q707 328 707 380" fill="rgba(0,0,0,0.4)"/>
+    <rect x="0" y="372" width="1000" height="8" fill="url(#mgrd)"/>
+    <rect x="0" y="376" width="1000" height="4" fill="rgba(212,175,55,0.08)"/>
+  </svg>
+</div>
+
+<!-- QURBANI GOAT – large, prominent, left side -->
+<svg style="position:absolute;bottom:9%;left:3%;width:clamp(120px,22%,260px);z-index:16;opacity:0.92" viewBox="0 0 260 200" fill="none">
+  <defs>
+    <linearGradient id="goat1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6b4d1a"/><stop offset="100%" stop-color="#2e1e05"/></linearGradient>
+    <radialGradient id="goatGlow" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="rgba(212,140,20,0.25)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    <filter id="gf"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <!-- Glow halo -->
+  <ellipse cx="110" cy="120" rx="90" ry="60" fill="url(#goatGlow)"/>
+  <!-- Body -->
+  <ellipse cx="130" cy="130" rx="75" ry="48" fill="url(#goat1)" filter="url(#gf)"/>
+  <!-- Woolly texture dots -->
+  <circle cx="100" cy="115" r="6" fill="rgba(255,220,150,0.08)"/>
+  <circle cx="115" cy="108" r="5" fill="rgba(255,220,150,0.07)"/>
+  <circle cx="130" cy="113" r="6" fill="rgba(255,220,150,0.08)"/>
+  <circle cx="145" cy="108" r="5" fill="rgba(255,220,150,0.07)"/>
+  <circle cx="158" cy="116" r="6" fill="rgba(255,220,150,0.08)"/>
+  <circle cx="90" cy="125" r="5" fill="rgba(255,220,150,0.06)"/>
+  <!-- Neck -->
+  <path d="M88 106 Q74 82 80 62 Q88 50 100 55 Q108 68 98 98Z" fill="url(#goat1)"/>
+  <!-- Head -->
+  <ellipse cx="88" cy="56" rx="26" ry="20" fill="url(#goat1)" transform="rotate(-12,88,56)"/>
+  <!-- Snout -->
+  <ellipse cx="72" cy="62" rx="12" ry="8" fill="#4a3010" transform="rotate(-12,72,62)"/>
+  <ellipse cx="70" cy="63" rx="4" ry="3" fill="#2a1608" transform="rotate(-12,70,63)"/>
+  <!-- Eye -->
+  <ellipse cx="84" cy="50" rx="4" ry="3.5" fill="#1a0e03" transform="rotate(-12,84,50)"/>
+  <ellipse cx="83" cy="49" rx="1.2" ry="1" fill="rgba(255,255,255,0.5)" transform="rotate(-12,83,49)"/>
+  <!-- Horns - curved -->
+  <path d="M82 38 Q70 18 76 6 Q82 14 84 28Z" fill="#3a2500"/>
+  <path d="M96 34 Q94 12 104 4 Q106 14 100 28Z" fill="#3a2500"/>
+  <!-- Ear -->
+  <ellipse cx="103" cy="50" rx="11" ry="6" fill="#5a3a12" transform="rotate(25,103,50)"/>
+  <!-- Beard -->
+  <path d="M74 70 Q70 80 72 90" stroke="#5a3d10" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="90" y="172" width="16" height="28" rx="5" fill="#3d2808"/>
+  <rect x="112" y="174" width="16" height="26" rx="5" fill="#3d2808"/>
+  <rect x="138" y="172" width="16" height="28" rx="5" fill="#3d2808"/>
+  <rect x="160" y="174" width="16" height="26" rx="5" fill="#3d2808"/>
+  <!-- Hooves -->
+  <rect x="90" y="196" width="16" height="6" rx="3" fill="#1a0e02"/>
+  <rect x="112" y="196" width="16" height="6" rx="3" fill="#1a0e02"/>
+  <rect x="138" y="196" width="16" height="6" rx="3" fill="#1a0e02"/>
+  <rect x="160" y="196" width="16" height="6" rx="3" fill="#1a0e02"/>
+  <!-- Tail -->
+  <path d="M202 118 Q218 110 215 124 Q212 134 202 130" fill="url(#goat1)"/>
+  <!-- Decorative garland / flowers (Qurbani decoration) -->
+  <circle cx="90" cy="76" r="5" fill="rgba(212,175,55,0.75)"/>
+  <circle cx="100" cy="80" r="4" fill="rgba(255,80,80,0.65)"/>
+  <circle cx="82" cy="80" r="3.5" fill="rgba(80,200,80,0.55)"/>
+  <circle cx="108" cy="76" r="4" fill="rgba(212,175,55,0.6)"/>
+  <!-- Rope/string for decoration -->
+  <path d="M82 78 Q95 83 110 78" stroke="rgba(212,175,55,0.5)" stroke-width="1.5" fill="none"/>
+</svg>
+
+<!-- Qurbani knife (subtle, artistic) -->
+<div class="knife-deco">
+  <svg width="clamp(30px,6%,70px)" viewBox="0 0 70 200" fill="none">
+    <defs><linearGradient id="blade" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#c0c0c0"/><stop offset="40%" stop-color="#f0f0f0"/><stop offset="100%" stop-color="#888"/></linearGradient></defs>
+    <!-- Blade -->
+    <path d="M35 10 Q50 30 48 130 Q40 145 35 150 Q30 145 22 130 Q20 30 35 10Z" fill="url(#blade)"/>
+    <!-- Blade edge glint -->
+    <path d="M35 15 Q44 40 43 120" stroke="rgba(255,255,255,0.6)" stroke-width="1" fill="none"/>
+    <!-- Guard -->
+    <rect x="22" y="148" width="26" height="8" rx="2" fill="#8B6914"/>
+    <!-- Handle -->
+    <rect x="26" y="156" width="18" height="44" rx="4" fill="#5a3a
