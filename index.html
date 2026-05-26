@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakibul Islam Rabbi | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── CSS Variables ─── */
+    :root {
+      --bg:       #080b10;
+      --surface:  #0e1420;
+      --border:   rgba(255,255,255,0.06);
+      --text:     #e8eaf0;
+      --muted:    #7a8299;
+      --accent:   #00e5ff;
+      --accent2:  #ff6b35;
+      --gold:     #ffc857;
+      --nav-h:    72px;
+    }
+    [data-theme="light"] {
+      --bg:      #f0f2f8;
+      --surface: #ffffff;
+      --border:  rgba(0,0,0,0.08);
+      --text:    #0e1420;
+      --muted:   #5a6278;
+    }
+
+    /* ─── Reset ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    /* ─── Noise grain overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ─── Ambient glow blobs ─── */
+    .glow-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      animation: blobFloat 12s ease-in-out infinite alternate;
+    }
+    .glow-blob.one {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+      top: -100px; left: -100px;
+    }
+    .glow-blob.two {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,107,53,0.10) 0%, transparent 70%);
+      bottom: 0; right: -50px;
+      animation-delay: -5s;
+    }
+    @keyframes blobFloat {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: rgba(8,11,16,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      transition: background 0.4s;
+    }
+    [data-theme="light"] nav { background: rgba(240,242,248,0.7); }
+
+    .nav-logo img { height: 38px; object-fit: contain; }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.25s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .theme-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .theme-btn:hover { transform: rotate(20deg); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      list-style: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .mobile-nav.open { max-height: 300px; }
+    .mobile-nav a {
+      display: block;
+      padding: 16px 28px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--accent); padding-left: 36px; }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 40px) clamp(20px, 6vw, 80px) 60px;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* Left: Text */
+    .hero-text { animation: fadeUp 0.9s ease both; }
+    .hero-greeting {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-greeting::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1.5px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text) 40%, var(--muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+    .hero-name span {
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Typing animation */
+    .hero-typed {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      color: var(--muted);
+      margin-bottom: 20px;
+      min-height: 1.5em;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+    .typed-text { color: var(--accent2); }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.9s 0.4s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s 0.55s ease both;
+    }
+    .btn {
+      padding: 14px 30px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #080b10;
+      font-weight: 700;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-primary:hover { box-shadow: 0 0 28px rgba(0,229,255,0.45); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 18px rgba(0,229,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    /* Right: Profile photo */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .profile-ring {
+      position: relative;
+      width: clamp(240px, 32vw, 360px);
+      height: clamp(240px, 32vw, 360px);
+    }
+    .profile-ring::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--gold), var(--accent2), var(--accent));
+      animation: spin 6s linear infinite;
+      z-index: 0;
+    }
+    .profile-ring::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--accent), transparent 50%);
+      filter: blur(20px);
+      animation: spin 6s linear infinite;
+      opacity: 0.5;
+      z-index: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .profile-img-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--surface);
+      padding: 5px;
+    }
+    .profile-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    /* Floating badge */
+    .floating-badge {
+      position: absolute;
+      bottom: 10px;
+      right: -10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text);
+      animation: floatBadge 4s ease-in-out infinite;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 4px #22c55e} 50%{box-shadow:0 0 14px #22c55e} }
+    @keyframes floatBadge {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+    }
+
+    /* ─── Stats ─── */
+    .stats {
+      position: relative;
+      z-index: 1;
+      padding: 0 clamp(20px, 6vw, 80px) 80px;
+    }
+    .stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .stat-item {
+      background: var(--surface);
+      padding: 32px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    .stat-item:hover { background: rgba(0,229,255,0.04); }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── What I Do ─── */
+    .services {
+      position: relative;
+      z-index: 1;
+      padding: 60px clamp(20px, 6vw, 80px) 80px;
+    }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 80px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 48px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cards-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,229,255,0.25);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      background: rgba(0,229,255,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.18);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+  margin-top: 5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 2.5rem 2.5rem 2rem;
+  transition: background var(--trans), border-color var(--trans);
+}
+
+.footer-inner {
+  max-width: 1060px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-brand { display: flex; align-items: center; gap: 0.8rem; }
+.footer-brand img { height: 30px; }
+.footer-brand span {
+  font-family: var(--font-head); font-size: 0.82rem; font-weight: 700; color: var(--muted);
+}
+
+.footer-socials { display: flex; gap: 0.6rem; }
+.footer-socials a {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--glass); border: 1px solid var(--border);
+  color: var(--muted); font-size: 0.85rem;
+  transition: color var(--trans), border-color var(--trans), background var(--trans), box-shadow var(--trans);
+}
+.footer-socials a:hover {
+  color: var(--accent1); border-color: var(--accent1);
+  box-shadow: 0 0 12px rgba(0,212,255,0.25);
+}
+.footer-socials svg { width: 15px; height: 15px; fill: currentColor; }
+
+.footer-copy { font-size: 0.78rem; color: var(--muted); }
+
+    /* ─── Scroll indicator ─── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: fadeUp 1s 1s ease both;
+    }
+    .scroll-mouse {
+      width: 22px; height: 34px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+    }
+    .scroll-dot {
+      width: 4px; height: 6px;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: scrollDot 1.5s ease-in-out infinite;
+    }
+    .scroll-hint span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    @keyframes scrollDot {
+      0%   { transform: translateY(0); opacity: 1; }
+      80%  { transform: translateY(10px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+
+    /* ─── Custom scrollbar ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ─── Keyframes ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-text { order: 2; }
+      .hero-visual { order: 1; }
+      .hero-greeting { justify-content: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-cta { justify-content: center; }
+      .profile-ring { width: 220px; height: 220px; }
+      .stats-inner { grid-template-columns: repeat(3, 1fr); }
+      .scroll-hint { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient blobs -->
+  <div class="glow-blob one"></div>
+  <div class="glow-blob two"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav>
+    <div class="nav-logo">
+      <img src="Logo.png" alt="Logo" />
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="contact.html">Contact Me</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme">☀️</button>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <ul class="mobile-nav" id="mobileNav">
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact Me</a></li>
+  </ul>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- Text side -->
+      <div class="hero-text">
+        <p class="hero-greeting">👋 Hi There, I'm</p>
+        <h1 class="hero-name">
+          RAKIBUL<br>
+          ISLAM <span>RABBI</span>
+        </h1>
+        <p class="hero-typed">
+          <span class="typed-text" id="typed"></span><span class="cursor"></span>
+        </p>
+        <p class="hero-desc">
+          Exploring stories through design, technology, cinematic aesthetics
+          and futuristic creativity — turning ideas into unforgettable digital experiences.
+        </p>
+        <div class="hero-cta">
+          <a href="contact.html" class="btn btn-primary">Let's Talk</a>
+          <a href="skills.html" class="btn btn-outline">View Portfolio</a>
+        </div>
+      </div>
+
+      <!-- Photo side -->
+      <div class="hero-visual">
+        <div class="profile-ring">
+          <div class="profile-img-wrap">
+            <img src="profile.png" alt="Rakibul Islam Rabbi" />
+          </div>
+          <div class="floating-badge">
+            <span class="badge-dot"></span>
+            Available for Work
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint">
+      <div class="scroll-mouse"><span class="scroll-dot"></span></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num" data-target="20">0</div>
+        <div class="stat-label">Projects Done</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="15">0</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" data-target="6">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT I DO ═══ -->
+  <section class="services">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">WHAT I DO</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">🎨</span>
+        <div class="card-title">Graphic Design</div>
+        <p class="card-desc">Posters, branding, visual assets and creative layouts crafted with Photoshop & Illustrator.</p>
+        <span class="card-tag">Photoshop · Illustrator</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">🎬</span>
+        <div class="card-title">Video Editing</div>
+        <p class="card-desc">Cinematic edits, cuts, color grading and storytelling through motion with Premiere Pro & Filmora.</p>
+        <span class="card-tag">Premiere Pro · Filmora</span>
+      </div>
+      <div class="card">
+        <span class="card-icon">💡</span>
+        <div class="card-title">Creative Strategy</div>
+        <p class="card-desc">Blending art with functional tech — clean, efficient, and deeply immersive digital experiences.</p>
+        <span class="card-tag">Visual · Tech · Story</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="https://rakibulislamrabbi24.github.io/Logo.png" alt="Logo" />
+        <span>Rakibul Islam Rabbi</span>
+      </div>
+
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/share/1K1ftH2RY5/" target="_blank" rel="noopener" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.272h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/rakibulislamrabbi24?igsh=Y2hlbG4xdGJjNWZ4" target="_blank" rel="noopener" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://x.com/RakibulRabbi24" target="_blank" rel="noopener" title="X / Twitter">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://wa.me/+8550314932831" target="_blank" rel="noopener" title="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+
+      <p class="footer-copy">© 2026 Rakibul Islam Rabbi — All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+    /* ── Theme toggle ── */
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    themeBtn.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      themeBtn.textContent = isLight ? '☀️' : '🌙';
+    });
+
+    /* ── Hamburger ── */
+    const ham = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    ham.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+
+    /* ── Typing animation ── */
+    const phrases = [
+      'Graphic Designer',
+      'Video Editor',
+      'Creative Technologist',
+      'Visual Storyteller',
+    ];
+    let pi = 0, ci = 0, deleting = false;
+    const typedEl = document.getElementById('typed');
+    function type() {
+      const word = phrases[pi];
+      if (!deleting) {
+        typedEl.textContent = word.slice(0, ++ci);
+        if (ci === word.length) { deleting = true; setTimeout(type, 1600); return; }
+      } else {
+        typedEl.textContent = word.slice(0, --ci);
+        if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+      }
+      setTimeout(type, deleting ? 55 : 100);
+    }
+    type();
+
+    /* ── Counter animation ── */
+    const counters = document.querySelectorAll('.stat-num[data-target]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = +el.dataset.target;
+        let cur = 0;
+        const step = Math.ceil(target / 40);
+        const interval = setInterval(() => {
+          cur = Math.min(cur + step, target);
+          el.textContent = cur + '+';
+          if (cur >= target) clearInterval(interval);
+        }, 40);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+  </script>
+
+<!-- Font Awesome Icons & Google Fonts (পপআপের ফন্ট ও আইকনের জন্য লিংক) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ফন্ট ফ্যামিলি */
+  .custom-popup-content, .popup-wrapper {
+    font-family: 'Poppins', 'Hind Siliguri', sans-serif !important;
+  }
+
+  /* পপআপের বাইরের অন্ধকার ব্যাকগ্রাউন্ড */
+  .custom-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* ব্যাকগ্রাউন্ড আরও ডার্ক করা হয়েছে */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    padding: 15px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .custom-popup-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* পপআপের ভেতরের মূল বক্স (ডার্ক মোড ও নিয়ন রেড বর্ডার) */
+  .custom-popup-content {
+    background: #121212; /* পিচ ব্ল্যাক ডার্ক ব্যাকগ্রাউন্ড */
+    padding: 25px;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
+    
+    /* নিয়ন রেড স্ট্রোক এবং গ্লো ইফেক্ট */
+    border: 2px solid #ff0033; 
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.5), inset 0 0 10px rgba(255, 0, 51, 0.2);
+    
+    text-align: center;
+    animation: popupScale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  @keyframes popupScale {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* ডান পাশের ক্রস (Close) বাটন */
+  .custom-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #bbb; /* ডার্ক মোডে স্পষ্ট দেখার জন্য গ্রে কালার */
+    font-weight: bold;
+    z-index: 99;
+    line-height: 1;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .custom-popup-close:hover { 
+    color: #ff0033; 
+    transform: scale(1.1);
+  }
+
+  /* পপআপের ভেতরের কন্টেন্ট ও টেক্সট কালার (সাদা) */
+  .popup-title {
+    font-size: 22px;
+    color: #ffffff !important; /* টাইটেল সাদা */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .popup-img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto 15px auto;
+    border-radius: 8px;
+    border: 1px solid #333; /* ইমেজের চারপাশে হালকা বর্ডার */
+  }
+  .popup-text {
+    font-size: 15px;
+    color: #e0e0e0 !important; /* ডেসক্রিপশন হালকা সাদা/গ্রে */
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .popup-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #ff0033; /* বাটনও নিয়ন রেড থিমের সাথে মিলিয়ে করা */
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .popup-btn:hover { 
+    background: #cc0029; 
+    box-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
+  }
+
+  /* সোশ্যাল মিডিয়া আইকন সেকশন */
+  .popup-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff !important;
+    font-size: 18px;
+    text-decoration: none;
+    transition: transform 0.2s, filter 0.2s;
+  }
+  .social-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+  }
+  
+  /* আইকনগুলোর ব্যাকগ্রাউন্ড কালার */
+  .fb { background: #1877F2; }
+  .insta { background: #E1306C; }
+  .whatsapp { background: #25D366; }
+  
+  /* Twitter/X আইকন ফিক্স: ব্যাকগ্রাউন্ড সাদা এবং ভেতরের লোগো কালো করা হয়েছে */
+  .x-twitter { 
+    background: #ffffff; 
+    color: #000000 !important; 
+    border: 1px solid #ffffff;
+  }
+</style>
+</script>
+
+<!-- Popup Container -->
+<div id="popupContainer"></div>
+
+<script>
+window.addEventListener("load", () => {
+
+  fetch("popup.html")
+    .then(res => res.text())
+    .then(data => {
+
+      const popup = document.createElement("div");
+      popup.id = "dynamicPopup";
+
+      popup.innerHTML = `
+        <div class="popup-overlay">
+          <div class="popup-box">
+
+            <button class="popup-close">&times;</button>
+
+            <div class="popup-content">
+              ${data}
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(popup);
+
+      document.querySelector(".popup-close")
+        .addEventListener("click", () => {
+          popup.remove();
+      });
+
+      document.querySelector(".popup-overlay")
+        .addEventListener("click", (e) => {
+          if (e.target.classList.contains("popup-overlay")) {
+            popup.remove();
+          }
+      });
+
+    });
+
+});
+</script>
+
+<style>
+.popup-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999999;
+  padding:15px;
+  animation:fadeIn .3s ease;
+}
+
+.popup-box{
+  position:relative;
+  width:100%;
+  max-width:500px;
+  background:#121212;
+  border:2px solid #ff0033;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 0 20px rgba(255,0,51,.35);
+  animation:popupScale .35s ease;
+}
+
+.popup-content{
+  color:#fff;
+}
+
+.popup-close{
+  position:absolute;
+  top:10px;
+  right:14px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:30px;
+  cursor:pointer;
+}
+
+.popup-close:hover{
+  color:#ff0033;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes popupScale{
+  from{
+    transform:scale(.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+</style>
+
+</body>
+</html>
