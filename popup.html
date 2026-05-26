@@ -1,4 +1,133 @@
-<h2 style="color: #2c3e50; margin-bottom: 10px;">ঈদ ধামাকা অফার! 🎉</h2>
-<img src="profile.png" alt="Offer" style="width:100%; border-radius:8px;">
-<p style="margin-times: 15px; color:#555;">আমাদের সকল সার্ভিসে পাচ্ছেন ২০% ফ্ল্যাট ডিসকাউন্ট।</p>
-<a href="/contact.html" style="display:inline-block; padding:10px 20px; background:#e74c3c; color:#fff; text-decoration:none; border-radius:5px; font-weight:bold; margin-top:10px;">ডিসকাউন্ট নিন</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak Pop-up</title>
+    <style>
+        /* Website Background Blur Overlay */
+        .eid-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        /* 1:1 Square Premium Container */
+        .eid-popup-content {
+            position: relative;
+            width: 90%;
+            max-width: 550px; /* Perfect square size for desktop/mobile screens */
+            aspect-ratio: 1 / 1;
+            background: #0d0d0d;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.15); /* Soft golden glow shadow */
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            overflow: hidden;
+            animation: popupScaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* The Premium Eid Poster Image */
+        .eid-popup-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Luxury Close Button */
+        .eid-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #d4af37; /* Gold color */
+            font-size: 24px;
+            font-weight: 300;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .eid-popup-close:hover {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 15px #d4af37;
+            transform: rotate(90deg);
+        }
+
+        /* Smooth Entry Animation */
+        @keyframes popupScaleUp {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Hide class when closed */
+        .eid-popup-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Eid ul Adha Popup Layout -->
+    <div class="eid-popup-overlay" id="eidModalOverlay">
+        <div class="eid-popup-content">
+            <!-- Close Button -->
+            <button class="eid-popup-close" id="closeEidPopup" aria-label="Close Popup">&times;</button>
+            
+            <!-- Poster Display -->
+            <img src="watermarked_img_13101712174402516039.png" alt="Eid ul Adha Mubarak - Rabbi">
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Popup Functionality
+        const popupOverlay = document.getElementById('eidModalOverlay');
+        const closeBtn = document.getElementById('closeEidPopup');
+
+        // Close when clicking the 'X' button
+        closeBtn.addEventListener('click', () => {
+            popupOverlay.style.opacity = '0';
+            setTimeout(() => {
+                popupOverlay.classList.add('eid-popup-hidden');
+            }, 400); // smooth fadeout time matches transition
+        });
+
+        // Optional: Close when clicking outside the square poster
+        popupOverlay.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    popupOverlay.classList.add('eid-popup-hidden');
+                }, 400);
+            }
+        });
+    </script>
+
+</body>
+</html>
