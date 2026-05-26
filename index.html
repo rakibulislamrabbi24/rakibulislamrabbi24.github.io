@@ -847,14 +847,16 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75); /* ব্যাকগ্রাউন্ড একটু ডার্ক করা হয়েছে স্পষ্ট দেখার জন্য */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
+    z-index: 999999; /* যেন সবকিছুর উপরে থাকে */
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    padding: 15px; /* মোবাইল স্ক্রিনের বর্ডারের সাথে যেন লেগে না যায় */
+    box-sizing: border-box;
   }
   .custom-popup-overlay.show {
     opacity: 1;
@@ -862,36 +864,49 @@
   }
   .custom-popup-content {
     background: #fff;
-    padding: 30px;
+    padding: 25px;
     border-radius: 12px;
-    max-width: 550px;
-    width: 90%;
+    max-width: 500px;
+    width: 100%; /* মোবাইলে পুরো স্ক্রিন চওড়া হবে */
+    max-height: 85vh; /* মোবাইলে স্ক্রিনের বাইরে চলে গেলে স্ক্রোল করা যাবে */
+    overflow-y: auto; /* কন্টেন্ট বেশি হলে পপআপের ভেতরেই স্ক্রোল হবে */
     position: relative;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     text-align: center;
+    box-sizing: border-box;
     animation: popupScale 0.3s ease;
   }
   @keyframes popupScale {
-    from { transform: scale(0.7); }
-    to { transform: scale(1); }
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
   }
   .custom-popup-close {
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 28px;
+    font-size: 32px; /* মোবাইলে যেন সহজে টাচ করা যায় */
     cursor: pointer;
     color: #333;
     font-weight: bold;
-    z-index: 10;
+    z-index: 99;
+    line-height: 1;
   }
   .custom-popup-close:hover { color: #ff0000; }
+
+  /* পপআপের ভেতরের ইমেজ ও কন্টেন্ট রেসপনসিভ করার জন্য */
   #popup-body {
     font-family: Arial, sans-serif;
+    word-wrap: break-word; /* লম্বা টেক্সট যেন স্ক্রিন ভেঙে বাইরে না যায় */
+  }
+  #popup-body img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
   }
 </style>
 
-<!-- Popup HTML Structure -->
 <div class="custom-popup-overlay" id="customPopup">
   <div class="custom-popup-content">
     <span class="custom-popup-close" onclick="closePopup()">&times;</span>
@@ -899,24 +914,20 @@
   </div>
 </div>
 
-<!-- Popup JavaScript Logic -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // popup.html ফাইল থেকে সরাসরি HTML কন্টেন্ট রিড করা হচ্ছে
-    fetch('./popup.html?t=' + new Date().getTime()) // ক্যাশ সমস্যা এড়াতে টাইমস্ট্যাম্প
+    fetch('./popup.html?t=' + new Date().getTime())
       .then(response => {
         if (!response.ok) return '';
         return response.text();
       })
       .then(htmlContent => {
         htmlContent = htmlContent.trim();
-        // ফাইল খালি থাকলে বা কোনো কোড না থাকলে পপআপ দেখাবে না
         if (!htmlContent) return; 
 
         const popupOverlay = document.getElementById('customPopup');
         const popupBody = document.getElementById('popup-body');
         
-        // HTML কোডটি পপআপের ভেতরে পুশ করা হচ্ছে
         popupBody.innerHTML = htmlContent;
         showPopup(popupOverlay);
       })
@@ -924,14 +935,13 @@
   });
 
   function showPopup(overlay) {
-    // ভিজিটর একবার কেটে দিলে কারেন্ট সেশনে আর দেখাবে না
     if (sessionStorage.getItem('popupShown') === 'true') return;
     overlay.classList.add('show');
   }
 
   function closePopup() {
     document.getElementById('customPopup').classList.remove('show');
-    sessionStorage.setItem('popupShown', 'true'); // ব্রাউজার ট্যাব বন্ধ করার আগ পর্যন্ত আর আসবে না
+    sessionStorage.setItem('popupShown', 'true');
   }
 </script>
 </body>
