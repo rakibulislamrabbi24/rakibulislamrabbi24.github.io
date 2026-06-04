@@ -1001,44 +1001,47 @@
 
 <script>
 window.addEventListener("load", () => {
-
-  fetch("popup.html")
+  // ক্যাশ সমস্যা এড়াতে ডাইনামিক র্যান্ডম ভার্সন (?v=) যোগ করা হয়েছে
+  fetch("popup.html?v=" + Math.random())
     .then(res => res.text())
     .then(data => {
-data = data.replace(/status:\s*(on|off)/i, '').trim();
+      // প্রথম লাইনে status: off আছে কি না চেক করার লজিক
+      const firstLine = data.split('\n')[0].toLowerCase().trim();
+      if (firstLine === 'status: off') {
+        return; // পপআপ অফ থাকলে কোড এখানেই থেমে যাবে, আর কিছুই দেখাবে না
+      }
+
+      // স্ট্যাটাস লেখাটি রিমুভ করে বাকি HTML টুকু নেওয়া হচ্ছে
+      data = data.replace(/status:\s*(on|off)/i, '').trim();
+      
       const popup = document.createElement("div");
       popup.id = "dynamicPopup";
-
+      
       popup.innerHTML = `
         <div class="popup-overlay">
           <div class="popup-box">
-
             <button class="popup-close">&times;</button>
-
             <div class="popup-content">
               ${data}
             </div>
-
           </div>
         </div>
       `;
-
+      
       document.body.appendChild(popup);
-
-      document.querySelector(".popup-close")
-        .addEventListener("click", () => {
+      
+      // ক্লোজ বাটন ফাংশন
+      document.querySelector(".popup-close").addEventListener("click", () => {
+        popup.remove();
+      });
+      
+      // বাইরে ক্লিক করলে বন্ধ হওয়ার ফাংশন
+      document.querySelector(".popup-overlay").addEventListener("click", (e) => {
+        if (e.target.classList.contains("popup-overlay")) {
           popup.remove();
+        }
       });
-
-      document.querySelector(".popup-overlay")
-        .addEventListener("click", (e) => {
-          if (e.target.classList.contains("popup-overlay")) {
-            popup.remove();
-          }
-      });
-
     });
-
 });
 </script>
 
