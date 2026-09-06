@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakibul Islam Rabbi — Graphic Designer & Video Editor</title>
+  <meta name="description" content="Portfolio of Rakibul Islam Rabbi — graphic design, video editing and creative direction." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════ Tokens ═══════════════════ */
+    :root {
+      --bg:        #080b10;
+      --surface:   #0e1420;
+      --surface-2: #121a29;
+      --border:    rgba(255,255,255,0.07);
+      --text:      #e8eaf0;
+      --muted:     #7a8299;
+      --accent:    #00e5ff;
+      --accent2:   #ff6b35;
+      --gold:      #ffc857;
+      --nav-h:     72px;
+      --maxw:      1180px;
+    }
+    [data-theme="light"] {
+      --bg:        #f2f3f8;
+      --surface:   #ffffff;
+      --surface-2: #eef0f6;
+      --border:    rgba(10,15,25,0.09);
+      --text:      #0e1420;
+      --muted:     #5c6478;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background 0.4s, color 0.4s;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    section { position: relative; z-index: 1; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: clamp(20px, 6vw, 64px); }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+    }
+    .glow-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-blob.one { width: 520px; height: 520px; background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%); top: -120px; left: -120px; }
+    .glow-blob.two { width: 420px; height: 420px; background: radial-gradient(circle, rgba(255,107,53,0.10) 0%, transparent 70%); top: 60vh; right: -80px; }
+
+    /* ═══════════════════ Nav ═══════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      background: rgba(8,11,16,0.65);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    [data-theme="light"] nav { background: rgba(242,243,248,0.75); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.03em; text-decoration: none; }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em;
+      color: var(--muted); text-decoration: none; position: relative; transition: color 0.25s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px;
+      background: var(--accent); transition: width 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .theme-btn {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      width: 36px; height: 36px; border-radius: 50%; font-size: 0.95rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.3s, transform 0.2s;
+    }
+    .theme-btn:hover { transform: rotate(20deg); }
+    .nav-cta {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em;
+      padding: 9px 18px; border-radius: 30px; background: var(--accent); color: #080b10;
+      font-weight: 700; text-decoration: none; white-space: nowrap;
+    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: var(--surface); border-bottom: 1px solid var(--border); z-index: 99;
+      list-style: none; max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .mobile-nav.open { max-height: 340px; }
+    .mobile-nav a {
+      display: block; padding: 16px 28px; font-family: 'Space Mono', monospace; font-size: 0.8rem;
+      letter-spacing: 0.08em; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:hover { color: var(--accent); }
+
+    /* ═══════════════════ Hero ═══════════════════ */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: calc(var(--nav-h) + 40px) 0 60px; }
+    .hero-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+    .hero-greeting {
+      font-family: 'Space Mono', monospace; font-size: 0.8rem; letter-spacing: 0.15em; color: var(--accent);
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp 0.7s 0.05s ease forwards;
+    }
+    .hero-greeting::before { content: ''; width: 28px; height: 1.5px; background: var(--accent); }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 5.6rem); line-height: 0.94;
+      letter-spacing: 0.02em; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 0.7s 0.15s ease forwards;
+    }
+    .hero-name .accent-line { color: var(--accent); }
+    .hero-desc {
+      font-size: 1.08rem; line-height: 1.75; color: var(--muted); max-width: 480px; margin-bottom: 34px;
+      opacity: 0; animation: fadeUp 0.7s 0.28s ease forwards;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards; }
+    .btn {
+      padding: 14px 28px; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em;
+      text-decoration: none; border-radius: 6px; cursor: pointer; border: none; transition: all 0.25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--accent); color: #080b10; font-weight: 700; }
+    .btn-primary:hover { box-shadow: 0 0 26px rgba(0,229,255,0.4); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-facts { display: flex; gap: 34px; opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards; }
+    .hero-fact-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.1rem; color: var(--text); line-height: 1; }
+    .hero-fact-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 4px; }
+
+    .hero-visual { display: flex; justify-content: center; opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards; }
+    .profile-ring { position: relative; width: clamp(230px, 28vw, 340px); height: clamp(230px, 28vw, 340px); }
+    .profile-ring::before {
+      content: ''; position: absolute; inset: -3px; border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--gold), var(--accent2), var(--accent));
+      animation: spin 7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .profile-img-wrap {
+      position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+      background: var(--surface); padding: 5px;
+    }
+    .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .floating-badge {
+      position: absolute; bottom: 6px; right: -6px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 50px; padding: 8px 16px; display: flex; align-items: center; gap: 8px;
+      font-family: 'Space Mono', monospace; font-size: 0.68rem; white-space: nowrap; z-index: 2;
+    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 4px #22c55e} 50%{box-shadow:0 0 14px #22c55e} }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ═══════════════════ Tool marquee ═══════════════════ */
+    .marquee-band { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; padding: 20px 0; background: var(--surface); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 26s linear infinite; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 14px; }
+    .marquee-item .sep { color: var(--accent); }
+
+    /* ═══════════════════ Section heading ═══════════════════ */
+    .section { padding: 100px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 52px; flex-wrap: wrap; }
+    .section-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.2rem); letter-spacing: 0.01em; max-width: 620px; }
+    .section-sub { font-size: 0.95rem; color: var(--muted); max-width: 340px; line-height: 1.65; }
+
+    /* ═══════════════════ Work / Projects ═══════════════════ */
+    .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .work-card {
+      position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3;
+      border: 1px solid var(--border); cursor: pointer; text-decoration: none;
+    }
+    .work-thumb { position: absolute; inset: 0; }
+    .work-thumb.t1 { background: linear-gradient(135deg, #0f3b45, #00e5ff33); }
+    .work-thumb.t2 { background: linear-gradient(135deg, #3a1f12, #ff6b3540); }
+    .work-thumb.t3 { background: linear-gradient(135deg, #3d3010, #ffc85740); }
+    .work-thumb.t4 { background: linear-gradient(135deg, #1a1030, #7a5cff40); }
+    .work-overlay {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 26px; background: linear-gradient(to top, rgba(4,6,10,0.92) 0%, rgba(4,6,10,0.15) 60%, transparent 100%);
+    }
+    .work-cat { font-family: 'Space Mono', monospace; font-size: 0.66rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 8px; }
+    .work-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: #fff; letter-spacing: 0.02em; }
+    .work-arrow {
+      position: absolute; top: 18px; right: 18px; width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1rem; transition: transform 0.25s, background 0.25s;
+    }
+    .work-card:hover .work-arrow { background: var(--accent); color: #080b10; transform: rotate(45deg); }
+    .work-card:hover .work-thumb { transform: scale(1.04); }
+    .work-thumb { transition: transform 0.4s ease; }
+    .work-note { margin-top: 22px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
+
+    /* ═══════════════════ What I Do ═══════════════════ */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 30px; }
+    .service-icon { font-size: 1.9rem; margin-bottom: 18px; display: block; }
+    .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.03em; margin-bottom: 10px; }
+    .service-desc { font-size: 0.88rem; line-height: 1.7; color: var(--muted); margin-bottom: 16px; }
+    .service-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; padding: 5px 11px; border-radius: 20px; background: rgba(0,229,255,0.08); color: var(--accent); border: 1px solid rgba(0,229,255,0.18); }
+
+    /* ═══════════════════ About ═══════════════════ */
+    .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
+    .about-photo { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 3/4; background: var(--surface); }
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-text p { font-size: 1rem; line-height: 1.85; color: var(--muted); margin-bottom: 18px; max-width: 560px; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-stats { display: flex; gap: 40px; margin-top: 36px; flex-wrap: wrap; }
+    .about-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: var(--accent); line-height: 1; }
+    .about-stat-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 6px; }
+
+    /* ═══════════════════ Testimonials ═══════════════════ */
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+    .testi-quote { font-size: 0.92rem; line-height: 1.7; color: var(--text); margin-bottom: 20px; }
+    .testi-person { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--gold));
+      display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; color: #080b10; font-size: 1rem;
+    }
+    .testi-name { font-size: 0.85rem; font-weight: 600; }
+    .testi-role { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); }
+
+    /* ═══════════════════ Contact ═══════════════════ */
+    .contact-box {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
+      padding: clamp(36px, 6vw, 64px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
+    }
+    .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4.4vw, 3rem); letter-spacing: 0.01em; margin-bottom: 16px; }
+    .contact-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 420px; margin-bottom: 30px; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+    .contact-link { display: flex; align-items: center; gap: 12px; text-decoration: none; padding: 14px 18px; border: 1px solid var(--border); border-radius: 10px; transition: border-color 0.25s, background 0.25s; }
+    .contact-link:hover { border-color: var(--accent); background: rgba(0,229,255,0.05); }
+    .contact-link-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-link-icon svg { width: 16px; height: 16px; fill: #fff; }
+    .cl-wa { background: #25D366; }
+    .cl-mail { background: var(--accent); }
+    .cl-mail svg { fill: #080b10; }
+    .contact-link-text { font-size: 0.88rem; }
+    .contact-link-sub { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); }
+
+    /* ═══════════════════ Footer ═══════════════════ */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
+    .footer-brand { display: flex; align-items: center; gap: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
+    .footer-socials { display: flex; gap: 14px; }
+    .footer-socials a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: border-color 0.25s, transform 0.2s; }
+    .footer-socials a:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .footer-socials svg { width: 15px; height: 15px; fill: var(--muted); }
+    .footer-socials a:hover svg { fill: var(--accent); }
+    .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ═══════════════════ Responsive ═══════════════════ */
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .hero-text { order: 2; } .hero-visual { order: 1; }
+      .hero-greeting, .hero-cta, .hero-facts { justify-content: center; }
+      .hero-desc { margin-inline: auto; }
+      .work-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { max-width: 280px; margin: 0 auto; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; text-align: center; }
+      .contact-desc { margin-inline: auto; }
+      .contact-links { align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow-blob one"></div>
+  <div class="glow-blob two"></div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav>
+    <a href="#top" class="nav-logo"><span class="dot"></span>RABBI</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle color theme">☀️</button>
+      <a href="#contact" class="nav-cta">Let's Talk</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <ul class="mobile-nav" id="mobileNav">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="hero-greeting">Hi, I'm</p>
+        <h1 class="hero-name">RAKIBUL ISLAM<br><span class="accent-line">RABBI</span></h1>
+        <p class="hero-desc">
+          I design brand visuals and edit video for people who need their idea to
+          land in the first three seconds. <strong>Six years</strong> across posters,
+          motion and creative direction — turning a rough brief into something
+          worth stopping the scroll for.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">Start a Project</a>
+          <a href="#work" class="btn btn-outline">See the Work</a>
+        </div>
+        <div class="hero-facts">
+          <div><div class="hero-fact-num">45+</div><div class="hero-fact-label">PROJECTS SHIPPED</div></div>
+          <div><div class="hero-fact-num">20+</div><div class="hero-fact-label">CLIENTS</div></div>
+          <div><div class="hero-fact-num">6</div><div class="hero-fact-label">YEARS</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="profile-ring">
+          <div class="profile-img-wrap">
+            <img src="profile.png" alt="Portrait of Rakibul Islam Rabbi" />
+          </div>
+          <div class="floating-badge"><span class="badge-dot"></span>Available for Work</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <!-- duplicated once for seamless loop -->
+      <span class="marquee-item">Photoshop <span class="sep">·</span></span>
+      <span class="marquee-item">Illustrator <span class="sep">·</span></span>
+      <span class="marquee-item">Premiere Pro <span class="sep">·</span></span>
+      <span class="marquee-item">After Effects <span class="sep">·</span></span>
+      <span class="marquee-item">Filmora <span class="sep">·</span></span>
+      <span class="marquee-item">Brand Identity <span class="sep">·</span></span>
+      <span class="marquee-item">Motion Design <span class="sep">·</span></span>
+      <span class="marquee-item">Photoshop <span class="sep">·</span></span>
+      <span class="marquee-item">Illustrator <span class="sep">·</span></span>
+      <span class="marquee-item">Premiere Pro <span class="sep">·</span></span>
+      <span class="marquee-item">After Effects <span class="sep">·</span></span>
+      <span class="marquee-item">Filmora <span class="sep">·</span></span>
+      <span class="marquee-item">Brand Identity <span class="sep">·</span></span>
+      <span class="marquee-item">Motion Design <span class="sep">·</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ WORK ═══ -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow">Selected Work</p>
+          <h2 class="section-title">A few projects worth a second look</h2>
+        </div>
+        <p class="section-sub">A mix of brand visuals, motion edits and full creative-direction pieces from the last couple of years.</p>
+      </div>
+      <div class="work-grid">
+        <a href="#" class="work-card">
+          <div class="work-thumb t1"></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-overlay">
+            <p class="work-cat">Brand Identity</p>
+            <h3 class="work-name">Northlight Rebrand</h3>
+          </div>
+        </a>
+        <a href="#" class="work-card">
+          <div class="work-thumb t2"></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-overlay">
+            <p class="work-cat">Video Editing</p>
+            <h3 class="work-name">Cinematic Reel Vol. 3</h3>
+          </div>
+        </a>
+        <a href="#" class="work-card">
+          <div class="work-thumb t3"></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-overlay">
+            <p class="work-cat">Poster Series</p>
+            <h3 class="work-name">Monsoon Festival</h3>
+          </div>
+        </a>
+        <a href="#" class="work-card">
+          <div class="work-thumb t4"></div>
+          <div class="work-arrow">↗</div>
+          <div class="work-overlay">
+            <p class="work-cat">Creative Direction</p>
+            <h3 class="work-name">Aurel Product Launch</h3>
+          </div>
+        </a>
+      </div>
+      <p class="work-note">Placeholder thumbnails — swap the .work-thumb backgrounds for real project images or video stills.</p>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══ -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow">Services</p>
+          <h2 class="section-title">What I do</h2>
+        </div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon">🎨</span>
+          <h3 class="service-title">Graphic Design</h3>
+          <p class="service-desc">Posters, branding and layout work built to hold attention on a feed and on a wall.</p>
+          <span class="service-tag">Photoshop · Illustrator</span>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">🎬</span>
+          <h3 class="service-title">Video Editing</h3>
+          <p class="service-desc">Cuts, color and pacing that turn raw footage into something people actually watch to the end.</p>
+          <span class="service-tag">Premiere Pro · Filmora</span>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">💡</span>
+          <h3 class="service-title">Creative Direction</h3>
+          <p class="service-desc">Tying the visuals together so every asset feels like it came from the same idea.</p>
+          <span class="service-tag">Strategy · Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo">
+        <img src="profile.png" alt="Rakibul Islam Rabbi at work" />
+      </div>
+      <div class="about-text">
+        <p class="section-eyebrow">About Me</p>
+        <h2 class="section-title" style="margin-bottom:24px;">Design that earns the second glance</h2>
+        <p>I got into this through posters and late nights in Premiere Pro, and six years later that's still the part I care about most — the moment a rough idea turns into something someone actually stops for.</p>
+        <p><strong>Based in Bangladesh</strong>, working with clients wherever the project takes me. Most days split between brand visuals, video edits and the odd late-night render.</p>
+        <div class="about-stats">
+          <div><div class="about-stat-num">45+</div><div class="about-stat-label">PROJECTS DONE</div></div>
+          <div><div class="about-stat-num">20+</div><div class="about-stat-label">HAPPY CLIENTS</div></div>
+          <div><div class="about-stat-num">6</div><div class="about-stat-label">YEARS EXPERIENCE</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section" id="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="section-eyebrow">Kind Words</p>
+          <h2 class="section-title">What clients say</h2>
+        </div>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="testi-quote">"Sent over a messy brief and got back exactly the poster we needed — first draft, barely any notes."</p>
+          <div class="testi-person"><div class="testi-avatar">A</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Marketing Lead</div></div></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"The edit turned three hours of raw footage into something we were proud to put our name on."</p>
+          <div class="testi-person"><div class="testi-avatar">B</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Founder</div></div></div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Fast turnaround, clear communication, and the final files were exactly on-brand."</p>
+          <div class="testi-person"><div class="testi-avatar">C</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Creative Manager</div></div></div>
+        </div>
+      </div>
+      <p class="work-note">Placeholder quotes — swap in real client feedback before publishing.</p>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <div>
+          <p class="section-eyebrow">Get in Touch</p>
+          <h2 class="contact-title">Got a project in mind?</h2>
+          <p class="contact-desc">Tell me what you're trying to make and I'll get back within a day — usually faster over WhatsApp.</p>
+        </div>
+        <div class="contact-links">
+          <a href="https://wa.me/8801889665881" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-icon cl-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg></span>
+            <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">+880 1889-665881</div></span>
+          </a>
+          <a href="mailto:hello@rakibulrabbi.com" class="contact-link">
+            <span class="contact-link-icon cl-mail"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.01L12 12l8-5.99V6H4zm16 12V8.24l-8 6-8-6V18h16z"/></svg></span>
+            <span><div class="contact-link-text">Email</div><div class="contact-link-sub">hello@rakibulrabbi.com</div></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;"></span>Rakibul Islam Rabbi</div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/share/1K1ftH2RY5/" target="_blank" rel="noopener" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.272h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+        <a href="https://www.instagram.com/rakibulislamrabbi24?igsh=Y2hlbG4xdGJjNWZ4" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="https://x.com/RakibulRabbi24" target="_blank" rel="noopener" title="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://wa.me/8801889665881" target="_blank" rel="noopener" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      </div>
+      <p class="footer-copy">© 2026 Rakibul Islam Rabbi — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+    const themeBtn = document.getElementById('themeBtn');
+    const root = document.documentElement;
+    themeBtn.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+      themeBtn.textContent = isLight ? '☀️' : '🌙';
+    });
+
+    const ham = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    ham.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      ham.classList.remove('open');
+    }));
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navA = document.querySelectorAll('.nav-links a');
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    sections.forEach(s => navObserver.observe(s));
+  </script>
+</body>
+</html>
