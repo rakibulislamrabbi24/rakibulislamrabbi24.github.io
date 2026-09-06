@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* ═══════════════════ Tokens ═══════════════════ */
+    /* Tokens */
     :root {
       --bg:        #080b10;
       --surface:   #0e1420;
@@ -74,7 +74,7 @@
     .glow-blob.one { width: 520px; height: 520px; background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%); top: -120px; left: -120px; }
     .glow-blob.two { width: 420px; height: 420px; background: radial-gradient(circle, rgba(255,107,53,0.10) 0%, transparent 70%); top: 60vh; right: -80px; }
 
-    /* ═══════════════════ Nav ═══════════════════ */
+    /* Nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
       display: flex; align-items: center; justify-content: space-between;
@@ -86,7 +86,7 @@
     }
     [data-theme="light"] nav { background: rgba(242,243,248,0.75); }
     .nav-logo { display: flex; align-items: center; gap: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.03em; text-decoration: none; }
-    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+    .nav-logo img { height: 32px; width: auto; object-fit: contain; }
     .nav-links { display: flex; gap: 36px; list-style: none; }
     .nav-links a {
       font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em;
@@ -128,7 +128,7 @@
     }
     .mobile-nav a:hover { color: var(--accent); }
 
-    /* ═══════════════════ Hero ═══════════════════ */
+    /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; padding: calc(var(--nav-h) + 40px) 0 60px; }
     .hero-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
     .hero-greeting {
@@ -185,34 +185,36 @@
     @keyframes pulse { 0%,100%{box-shadow:0 0 4px #22c55e} 50%{box-shadow:0 0 14px #22c55e} }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ═══════════════════ Tool marquee ═══════════════════ */
+    /* Tool marquee */
     .marquee-band { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; padding: 20px 0; background: var(--surface); }
     .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 26s linear infinite; }
     @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-item { font-family: 'Space Mono', monospace; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 14px; }
     .marquee-item .sep { color: var(--accent); }
 
-    /* ═══════════════════ Section heading ═══════════════════ */
+    /* Section heading */
     .section { padding: 100px 0; }
     .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 52px; flex-wrap: wrap; }
     .section-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 12px; }
     .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.1rem, 4.6vw, 3.2rem); letter-spacing: 0.01em; max-width: 620px; }
     .section-sub { font-size: 0.95rem; color: var(--muted); max-width: 340px; line-height: 1.65; }
 
-    /* ═══════════════════ Work / Projects ═══════════════════ */
+    /* Work / Projects */
     .work-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .work-card {
       position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3;
       border: 1px solid var(--border); cursor: pointer; text-decoration: none;
     }
-    .work-thumb { position: absolute; inset: 0; }
-.work-thumb video { width: 100%; height: 100%; object-fit: cover; }
+    .work-thumb { position: absolute; inset: 0; transition: transform 0.4s ease; }
+    .work-thumb video { width: 100%; height: 100%; object-fit: cover; }
+    .work-thumb.t1 { background: linear-gradient(135deg, #0f3b45, #00e5ff33); }
     .work-thumb.t2 { background: linear-gradient(135deg, #3a1f12, #ff6b3540); }
     .work-thumb.t3 { background: linear-gradient(135deg, #3d3010, #ffc85740); }
     .work-thumb.t4 { background: linear-gradient(135deg, #1a1030, #7a5cff40); }
     .work-overlay {
       position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
       padding: 26px; background: linear-gradient(to top, rgba(4,6,10,0.92) 0%, rgba(4,6,10,0.15) 60%, transparent 100%);
+      pointer-events: none;
     }
     .work-cat { font-family: 'Space Mono', monospace; font-size: 0.66rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 8px; }
     .work-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: #fff; letter-spacing: 0.02em; }
@@ -223,10 +225,9 @@
     }
     .work-card:hover .work-arrow { background: var(--accent); color: #080b10; transform: rotate(45deg); }
     .work-card:hover .work-thumb { transform: scale(1.04); }
-    .work-thumb { transition: transform 0.4s ease; }
     .work-note { margin-top: 22px; font-size: 0.82rem; color: var(--muted); font-style: italic; }
 
-    /* ═══════════════════ What I Do ═══════════════════ */
+    /* What I Do */
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
     .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 30px; }
     .service-icon { font-size: 1.9rem; margin-bottom: 18px; display: block; }
@@ -234,7 +235,7 @@
     .service-desc { font-size: 0.88rem; line-height: 1.7; color: var(--muted); margin-bottom: 16px; }
     .service-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; padding: 5px 11px; border-radius: 20px; background: rgba(0,229,255,0.08); color: var(--accent); border: 1px solid rgba(0,229,255,0.18); }
 
-    /* ═══════════════════ About ═══════════════════ */
+    /* About */
     .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
     .about-photo { border-radius: 16px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 3/4; background: var(--surface); }
     .about-photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -244,7 +245,7 @@
     .about-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; color: var(--accent); line-height: 1; }
     .about-stat-label { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); margin-top: 6px; }
 
-    /* ═══════════════════ Testimonials ═══════════════════ */
+    /* Testimonials */
     .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .testi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
     .testi-quote { font-size: 0.92rem; line-height: 1.7; color: var(--text); margin-bottom: 20px; }
@@ -256,7 +257,7 @@
     .testi-name { font-size: 0.85rem; font-weight: 600; }
     .testi-role { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); }
 
-    /* ═══════════════════ Contact ═══════════════════ */
+    /* Contact */
     .contact-box {
       background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
       padding: clamp(36px, 6vw, 64px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
@@ -274,7 +275,7 @@
     .contact-link-text { font-size: 0.88rem; }
     .contact-link-sub { font-family: 'Space Mono', monospace; font-size: 0.66rem; color: var(--muted); }
 
-    /* ═══════════════════ Footer ═══════════════════ */
+    /* Footer */
     footer { border-top: 1px solid var(--border); padding: 40px 0; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
     .footer-brand { display: flex; align-items: center; gap: 10px; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
@@ -289,7 +290,7 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
-    /* ═══════════════════ Responsive ═══════════════════ */
+    /* Responsive */
     @media (max-width: 860px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
@@ -313,9 +314,9 @@
   <div class="glow-blob one"></div>
   <div class="glow-blob two"></div>
 
-  <!-- ═══ NAV ═══ -->
+  <!-- NAV -->
   <nav>
-    <a href="#top" class="nav-logo"><img src="Logo.png" alt="Logo" /></span>RABBI</a>
+    <a href="#top" class="nav-logo"><img src="Logo.png" alt="Logo" />RABBI</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
@@ -337,7 +338,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 
-  <!-- ═══ HERO ═══ -->
+  <!-- HERO -->
   <section class="hero" id="top">
     <div class="wrap hero-inner">
       <div class="hero-text">
@@ -370,10 +371,9 @@
     </div>
   </section>
 
-  <!-- ═══ MARQUEE ═══ -->
+  <!-- MARQUEE -->
   <div class="marquee-band">
     <div class="marquee-track">
-      <!-- duplicated once for seamless loop -->
       <span class="marquee-item">Photoshop <span class="sep">·</span></span>
       <span class="marquee-item">Illustrator <span class="sep">·</span></span>
       <span class="marquee-item">Premiere Pro <span class="sep">·</span></span>
@@ -391,7 +391,7 @@
     </div>
   </div>
 
-  <!-- ═══ WORK ═══ -->
+  <!-- WORK -->
   <section class="section" id="work">
     <div class="wrap">
       <div class="section-head">
@@ -402,16 +402,16 @@
         <p class="section-sub">A mix of brand visuals, motion edits and full creative-direction pieces from the last couple of years.</p>
       </div>
       <div class="work-grid">
-<a href="#" class="work-card">
-  <div class="work-thumb t1">
-    <video src="videos/rj-network.mp4" muted loop playsinline poster="thumbs/rj-network.jpg"></video>
-  </div>
-  <div class="work-arrow">↗</div>
-  <div class="work-overlay">
-    <p class="work-cat">Brand Identity</p>
-    <h3 class="work-name">RJ Network - Rebranding</h3>
-  </div>
-</a>
+        <a href="#" class="work-card">
+          <div class="work-thumb t1">
+            <video src="videos/rj-network.mp4" muted loop playsinline poster="thumbs/rj-network.jpg"></video>
+          </div>
+          <div class="work-arrow">↗</div>
+          <div class="work-overlay">
+            <p class="work-cat">Brand Identity</p>
+            <h3 class="work-name">RJ Network - Rebranding</h3>
+          </div>
+        </a>
         <a href="#" class="work-card">
           <div class="work-thumb t2"></div>
           <div class="work-arrow">↗</div>
@@ -437,11 +437,11 @@
           </div>
         </a>
       </div>
-      <p class="work-note">Placeholder thumbnails — swap the .work-thumb backgrounds for real project images or video stills.</p>
+      <p class="work-note">Placeholder thumbnails — swap the remaining .work-thumb backgrounds for real project images or video clips the same way the first card was done.</p>
     </div>
   </section>
 
-  <!-- ═══ SERVICES ═══ -->
+  <!-- SERVICES -->
   <section class="section" id="services">
     <div class="wrap">
       <div class="section-head">
@@ -473,7 +473,7 @@
     </div>
   </section>
 
-  <!-- ═══ ABOUT ═══ -->
+  <!-- ABOUT -->
   <section class="section" id="about">
     <div class="wrap about-grid">
       <div class="about-photo">
@@ -493,7 +493,7 @@
     </div>
   </section>
 
-  <!-- ═══ TESTIMONIALS ═══ -->
+  <!-- TESTIMONIALS -->
   <section class="section" id="testimonials">
     <div class="wrap">
       <div class="section-head">
@@ -520,7 +520,7 @@
     </div>
   </section>
 
-  <!-- ═══ CONTACT ═══ -->
+  <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="wrap">
       <div class="contact-box">
@@ -530,9 +530,9 @@
           <p class="contact-desc">Tell me what you're trying to make and I'll get back within a day — usually faster over WhatsApp.</p>
         </div>
         <div class="contact-links">
-          <a href="https://wa.me/@Rabbi_881" target="_blank" rel="noopener" class="contact-link">
+          <a href="#" class="contact-link" id="waLink">
             <span class="contact-link-icon cl-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg></span>
-            <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">Send a message to WhatsApp</div></span>
+            <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">Send a message on WhatsApp</div></span>
           </a>
           <a href="mailto:rirabbi.2433@gmail.com" class="contact-link">
             <span class="contact-link-icon cl-mail"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.01L12 12l8-5.99V6H4zm16 12V8.24l-8 6-8-6V18h16z"/></svg></span>
@@ -543,7 +543,7 @@
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- FOOTER -->
   <footer>
     <div class="wrap footer-inner">
       <div class="footer-brand"><span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;"></span>Rakibul Islam Rabbi</div>
@@ -557,7 +557,7 @@
     </div>
   </footer>
 
-  <!-- ═══ SCRIPTS ═══ -->
+  <!-- SCRIPTS -->
   <script>
     const themeBtn = document.getElementById('themeBtn');
     const root = document.documentElement;
@@ -590,6 +590,21 @@
       });
     }, { rootMargin: '-40% 0px -50% 0px' });
     sections.forEach(s => navObserver.observe(s));
+
+    // Work-card video: hover-to-play on desktop, always-on loop on touch devices
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    document.querySelectorAll('.work-card').forEach(card => {
+      const video = card.querySelector('video');
+      if (!video) return;
+
+      if (canHover) {
+        card.addEventListener('mouseenter', () => video.play());
+        card.addEventListener('mouseleave', () => video.pause());
+      } else {
+        video.autoplay = true;
+        video.play().catch(() => {});
+      }
+    });
   </script>
 </body>
 </html>
