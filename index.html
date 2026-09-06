@@ -206,7 +206,7 @@
       border: 1px solid var(--border); cursor: pointer; text-decoration: none;
     }
     .work-thumb { position: absolute; inset: 0; }
-    .work-thumb.t1 { background: linear-gradient(135deg, #0f3b45, #00e5ff33); }
+.work-thumb video { width: 100%; height: 100%; object-fit: cover; }
     .work-thumb.t2 { background: linear-gradient(135deg, #3a1f12, #ff6b3540); }
     .work-thumb.t3 { background: linear-gradient(135deg, #3d3010, #ffc85740); }
     .work-thumb.t4 { background: linear-gradient(135deg, #1a1030, #7a5cff40); }
@@ -315,7 +315,7 @@
 
   <!-- ═══ NAV ═══ -->
   <nav>
-    <a href="#top" class="nav-logo"><span class="dot"></span>RABBI</a>
+    <a href="#top" class="nav-logo"><img src="Logo.png" alt="Logo" /></span>RABBI</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
@@ -402,14 +402,16 @@
         <p class="section-sub">A mix of brand visuals, motion edits and full creative-direction pieces from the last couple of years.</p>
       </div>
       <div class="work-grid">
-        <a href="#" class="work-card">
-          <div class="work-thumb t1"></div>
-          <div class="work-arrow">↗</div>
-          <div class="work-overlay">
-            <p class="work-cat">Brand Identity</p>
-            <h3 class="work-name">Northlight Rebrand</h3>
-          </div>
-        </a>
+<a href="#" class="work-card">
+  <div class="work-thumb t1">
+    <video src="videos/rj-network.mp4" muted loop playsinline poster="thumbs/rj-network.jpg"></video>
+  </div>
+  <div class="work-arrow">↗</div>
+  <div class="work-overlay">
+    <p class="work-cat">Brand Identity</p>
+    <h3 class="work-name">RJ Network - Rebranding</h3>
+  </div>
+</a>
         <a href="#" class="work-card">
           <div class="work-thumb t2"></div>
           <div class="work-arrow">↗</div>
@@ -528,13 +530,13 @@
           <p class="contact-desc">Tell me what you're trying to make and I'll get back within a day — usually faster over WhatsApp.</p>
         </div>
         <div class="contact-links">
-          <a href="https://wa.me/8801889665881" target="_blank" rel="noopener" class="contact-link">
+          <a href="https://wa.me/@Rabbi_881" target="_blank" rel="noopener" class="contact-link">
             <span class="contact-link-icon cl-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg></span>
-            <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">+880 1889-665881</div></span>
+            <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">Send a message to WhatsApp</div></span>
           </a>
-          <a href="mailto:hello@rakibulrabbi.com" class="contact-link">
+          <a href="mailto:rirabbi.2433@gmail.com" class="contact-link">
             <span class="contact-link-icon cl-mail"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.01L12 12l8-5.99V6H4zm16 12V8.24l-8 6-8-6V18h16z"/></svg></span>
-            <span><div class="contact-link-text">Email</div><div class="contact-link-sub">hello@rakibulrabbi.com</div></span>
+            <span><div class="contact-link-text">Email</div><div class="contact-link-sub">rirabbi.2433@gmail.com</div></span>
           </a>
         </div>
       </div>
