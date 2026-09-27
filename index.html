@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rakibul Islam Rabbi — Graphic Designer & Video Editor</title>
-  <meta name="description" content="Portfolio of Rakibul Islam Rabbi — graphic design, video editing and creative direction." />
+  <title>Rakibul Islam Rabbi — Creative Designer & Digital Experience Creator</title>
+  <meta name="description" content="Rakibul Islam Rabbi — Creative Designer & Digital Experience Creator. Brand identity, graphic design, video editing, motion and web experiences." />
+  <meta name="theme-color" content="#080b10" />
+  <meta name="robots" content="index, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -307,6 +309,314 @@
       .contact-desc { margin-inline: auto; }
       .contact-links { align-items: stretch; }
     }
+  
+    /* =========================================================
+       V2.0 FOUNDATION LAYER
+       Cinematic × Editorial × Minimal
+       ========================================================= */
+
+    :root {
+      --maxw: 1240px;
+      --nav-h: 76px;
+      --radius: 18px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+    }
+
+    body {
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { width: min(100% - 40px, var(--maxw)); padding-inline: 0; }
+
+    nav {
+      height: var(--nav-h);
+      padding-inline: max(20px, calc((100vw - var(--maxw)) / 2));
+      transition: background .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease);
+    }
+
+    nav.scrolled {
+      background: rgba(8,11,16,.86);
+      border-bottom-color: rgba(255,255,255,.10);
+    }
+    [data-theme="light"] nav.scrolled {
+      background: rgba(242,243,248,.92);
+      border-bottom-color: rgba(10,15,25,.10);
+    }
+
+    .nav-logo { letter-spacing: .06em; }
+    .nav-logo img { height: 34px; }
+    .nav-logo span { opacity: .42; font-size: .72em; margin-left: -4px; }
+
+    .nav-cta {
+      box-shadow: 0 0 0 rgba(0,229,255,0);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,229,255,.16); }
+
+    .hero {
+      min-height: min(900px, 100vh);
+      padding-top: calc(var(--nav-h) + 56px);
+      padding-bottom: 84px;
+    }
+
+    .hero-inner {
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, .88fr);
+      gap: clamp(40px, 7vw, 100px);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .hero-kicker .status {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e; box-shadow: 0 0 12px rgba(34,197,94,.7);
+    }
+
+    .hero-name {
+      font-size: clamp(3.6rem, 8vw, 7.2rem);
+      line-height: .88;
+      letter-spacing: -.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero-role {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(.78rem, 1.2vw, .95rem);
+      line-height: 1.6;
+      letter-spacing: .055em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 1.5vw, 1.14rem);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 34px;
+    }
+
+    .hero-facts {
+      gap: clamp(24px, 4vw, 44px);
+      padding-top: 4px;
+    }
+
+    .hero-fact {
+      position: relative;
+    }
+    .hero-fact + .hero-fact::before {
+      content: "";
+      position: absolute;
+      left: -22px; top: 4px; bottom: 4px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .hero-visual { position: relative; }
+    .hero-visual::before {
+      content: "CREATIVE / DIGITAL / VISUAL";
+      position: absolute;
+      top: -28px;
+      right: 4px;
+      font-family: 'Space Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      color: var(--muted);
+      opacity: .7;
+    }
+
+    .profile-ring {
+      width: clamp(260px, 31vw, 390px);
+      height: clamp(260px, 31vw, 390px);
+      filter: drop-shadow(0 30px 70px rgba(0,0,0,.28));
+    }
+
+    .profile-ring::after {
+      content: "RIR";
+      position: absolute;
+      left: -36px;
+      bottom: 30px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--border);
+      z-index: -1;
+    }
+
+    .floating-badge {
+      bottom: 16px;
+      right: -28px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.22);
+    }
+
+    .marquee-band {
+      padding: 17px 0;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+    }
+
+    .marquee-item {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .section { padding: clamp(78px, 10vw, 132px) 0; }
+    .section-head { margin-bottom: 42px; }
+    .section-eyebrow {
+      text-transform: uppercase;
+      font-size: .64rem;
+      letter-spacing: .18em;
+    }
+    .section-title { font-size: clamp(2.5rem, 5vw, 4rem); line-height: .95; }
+
+    .work-grid { gap: 22px; }
+    .work-card {
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius);
+      background: var(--surface);
+      transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    .work-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,229,255,.24);
+      box-shadow: 0 24px 60px rgba(0,0,0,.20);
+    }
+
+    .work-overlay {
+      padding: 30px;
+      background: linear-gradient(to top, rgba(4,6,10,.96) 0%, rgba(4,6,10,.28) 65%, transparent 100%);
+    }
+
+    .work-index {
+      position: absolute;
+      top: 22px; left: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: .62rem;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .12em;
+    }
+
+    .work-name { font-size: clamp(1.6rem, 3vw, 2.15rem); }
+    .work-cat { font-size: .58rem; }
+
+    .work-card.coming-soon {
+      cursor: default;
+      opacity: .78;
+    }
+    .work-card.coming-soon:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .work-card.coming-soon .work-thumb {
+      filter: saturate(.55);
+    }
+
+    .coming-soon-mark {
+      position: absolute;
+      top: 20px; right: 20px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      font-family: 'Space Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.7);
+      background: rgba(0,0,0,.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .service-card {
+      min-height: 250px;
+      border-radius: var(--radius);
+      transition: transform .3s var(--ease), border-color .3s var(--ease), background .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,229,255,.22);
+    }
+
+    .about-photo { border-radius: var(--radius); }
+    .testimonials-section-hidden { display: none; }
+
+    .contact-box {
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-box::before {
+      content: "";
+      position: absolute;
+      width: 300px; height: 300px;
+      right: -130px; top: -160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    footer { padding: 34px 0; }
+    .footer-inner { gap: 24px; }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px; bottom: 22px;
+      width: 42px; height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .25s, transform .25s, border-color .25s;
+      z-index: 90;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 860px) {
+      .wrap { width: min(100% - 32px, var(--maxw)); }
+      .hero { min-height: auto; padding-top: calc(var(--nav-h) + 42px); }
+      .hero-inner { gap: 52px; }
+      .hero-visual::before { right: 50%; transform: translateX(50%); top: -24px; white-space: nowrap; }
+      .profile-ring::after { display: none; }
+      .floating-badge { right: -4px; }
+      .work-card { aspect-ratio: 4 / 3; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 24px, var(--maxw)); }
+      .hero { padding-bottom: 64px; }
+      .hero-name { font-size: clamp(3.25rem, 16vw, 5rem); }
+      .hero-facts { gap: 18px; }
+      .hero-fact + .hero-fact::before { left: -10px; }
+      .hero-fact-num { font-size: 1.8rem; }
+      .hero-fact-label { font-size: .52rem; }
+      .floating-badge { font-size: .58rem; padding: 7px 11px; }
+      .section { padding: 74px 0; }
+      .section-title { font-size: 2.65rem; }
+      .work-overlay { padding: 22px; }
+      .work-name { font-size: 1.55rem; }
+      .contact-box { padding: 30px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .profile-ring::before, .marquee-track { animation: none !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -316,7 +626,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#top" class="nav-logo"><img src="Logo.png" alt="Logo" />RABBI</a>
+    <a href="#top" class="nav-logo" aria-label="Rakibul Islam Rabbi home"><img src="Logo.png" alt="Rakibul Islam Rabbi logo" />RABBI<span>PORTFOLIO</span></a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
@@ -343,21 +653,21 @@
     <div class="wrap hero-inner">
       <div class="hero-text">
         <p class="hero-greeting">Hi, I'm</p>
+        <div class="hero-kicker"><span class="status"></span> Independent Creative · Bangladesh</div>
         <h1 class="hero-name">RAKIBUL ISLAM<br><span class="accent-line">RABBI</span></h1>
+        <p class="hero-role">Creative Designer &amp; Digital Experience Creator</p>
         <p class="hero-desc">
-          I design brand visuals and edit video for people who need their idea to
-          land in the first three seconds. <strong>Six years</strong> across posters,
-          motion and creative direction — turning a rough brief into something
-          worth stopping the scroll for.
+          I turn ideas into <strong>visual identities, digital experiences and content</strong>
+          people remember — from the first concept to the final deliverable.
         </p>
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Start a Project</a>
-          <a href="#work" class="btn btn-outline">See the Work</a>
+          <a href="#work" class="btn btn-primary">View My Work <span aria-hidden="true">↗</span></a>
+          <a href="#contact" class="btn btn-outline">Start a Project</a>
         </div>
-        <div class="hero-facts">
-          <div><div class="hero-fact-num">45+</div><div class="hero-fact-label">PROJECTS SHIPPED</div></div>
-          <div><div class="hero-fact-num">20+</div><div class="hero-fact-label">CLIENTS</div></div>
-          <div><div class="hero-fact-num">6</div><div class="hero-fact-label">YEARS</div></div>
+        <div class="hero-facts" aria-label="Experience highlights">
+          <div class="hero-fact"><div class="hero-fact-num">45+</div><div class="hero-fact-label">PROJECTS SHIPPED</div></div>
+          <div class="hero-fact"><div class="hero-fact-num">20+</div><div class="hero-fact-label">CLIENTS</div></div>
+          <div class="hero-fact"><div class="hero-fact-num">6</div><div class="hero-fact-label">YEARS</div></div>
         </div>
       </div>
       <div class="hero-visual">
@@ -396,48 +706,55 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="section-eyebrow">Selected Work</p>
-          <h2 class="section-title">A few projects worth a second look</h2>
+          <p class="section-eyebrow">01 / Selected Work</p>
+          <h2 class="section-title">Projects built to be remembered.</h2>
         </div>
-        <p class="section-sub">A mix of brand visuals, motion edits and full creative-direction pieces from the last couple of years.</p>
+        <p class="section-sub">A curated foundation for brand visuals, motion, digital experiences and creative direction.</p>
       </div>
-      <div class="work-grid">
-        <a href="#" class="work-card">
+
+      <div class="work-grid" id="projectGrid">
+        <a href="#" class="work-card" aria-label="RJ Network rebranding project">
           <div class="work-thumb t1">
             <video src="videos/rj-network.mp4" muted loop playsinline poster="thumbs/rj-network.jpg"></video>
           </div>
-          <div class="work-arrow">↗</div>
+          <span class="work-index">01</span>
+          <div class="work-arrow" aria-hidden="true">↗</div>
           <div class="work-overlay">
-            <p class="work-cat">Brand Identity</p>
-            <h3 class="work-name">RJ Network - Rebranding</h3>
+            <p class="work-cat">Brand Identity · Digital · ISP</p>
+            <h3 class="work-name">RJ NETWORK — Rebranding</h3>
           </div>
         </a>
-        <a href="#" class="work-card">
+
+        <article class="work-card coming-soon" aria-label="Portfolio project slot">
           <div class="work-thumb t2"></div>
-          <div class="work-arrow">↗</div>
+          <span class="work-index">02</span>
+          <span class="coming-soon-mark">CASE STUDY SOON</span>
           <div class="work-overlay">
             <p class="work-cat">Video Editing</p>
-            <h3 class="work-name">Cinematic Reel Vol. 3</h3>
+            <h3 class="work-name">Cinematic Reel</h3>
           </div>
-        </a>
-        <a href="#" class="work-card">
+        </article>
+
+        <article class="work-card coming-soon" aria-label="Portfolio project slot">
           <div class="work-thumb t3"></div>
-          <div class="work-arrow">↗</div>
+          <span class="work-index">03</span>
+          <span class="coming-soon-mark">CASE STUDY SOON</span>
           <div class="work-overlay">
-            <p class="work-cat">Poster Series</p>
-            <h3 class="work-name">Monsoon Festival</h3>
+            <p class="work-cat">Poster &amp; Campaign Design</p>
+            <h3 class="work-name">Sports / Event Visuals</h3>
           </div>
-        </a>
-        <a href="#" class="work-card">
+        </article>
+
+        <article class="work-card coming-soon" aria-label="Portfolio project slot">
           <div class="work-thumb t4"></div>
-          <div class="work-arrow">↗</div>
+          <span class="work-index">04</span>
+          <span class="coming-soon-mark">CASE STUDY SOON</span>
           <div class="work-overlay">
-            <p class="work-cat">Creative Direction</p>
-            <h3 class="work-name">Aurel Product Launch</h3>
+            <p class="work-cat">Web · UI · Creative Direction</p>
+            <h3 class="work-name">Digital Experience</h3>
           </div>
-        </a>
+        </article>
       </div>
-      <p class="work-note">Placeholder thumbnails — swap the remaining .work-thumb backgrounds for real project images or video clips the same way the first card was done.</p>
     </div>
   </section>
 
@@ -446,28 +763,47 @@
     <div class="wrap">
       <div class="section-head">
         <div>
-          <p class="section-eyebrow">Services</p>
-          <h2 class="section-title">What I do</h2>
+          <p class="section-eyebrow">02 / Services</p>
+          <h2 class="section-title">From first idea to final output.</h2>
         </div>
+        <p class="section-sub">Flexible creative support for brands, businesses, campaigns and digital products.</p>
       </div>
       <div class="services-grid">
         <div class="service-card">
           <span class="service-icon">🎨</span>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-desc">Visual systems, logos, brand assets and guidelines that make a business feel consistent and recognizable.</p>
+          <span class="service-tag">Identity · Visual System</span>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">✦</span>
           <h3 class="service-title">Graphic Design</h3>
-          <p class="service-desc">Posters, branding and layout work built to hold attention on a feed and on a wall.</p>
+          <p class="service-desc">Posters, social creatives, promotional graphics and campaign visuals designed to earn attention.</p>
           <span class="service-tag">Photoshop · Illustrator</span>
         </div>
         <div class="service-card">
           <span class="service-icon">🎬</span>
-          <h3 class="service-title">Video Editing</h3>
-          <p class="service-desc">Cuts, color and pacing that turn raw footage into something people actually watch to the end.</p>
-          <span class="service-tag">Premiere Pro · Filmora</span>
+          <h3 class="service-title">Video &amp; Motion</h3>
+          <p class="service-desc">Editing, pacing, motion graphics and visual polish for content that holds attention beyond the first frame.</p>
+          <span class="service-tag">Premiere Pro · After Effects</span>
         </div>
         <div class="service-card">
-          <span class="service-icon">💡</span>
+          <span class="service-icon">⌘</span>
+          <h3 class="service-title">UI / UX Design</h3>
+          <p class="service-desc">Clean interfaces and practical user flows for websites, dashboards and digital products.</p>
+          <span class="service-tag">UI · UX · Prototyping</span>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⌘</span>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-desc">Responsive, lightweight websites that connect strong visual design with a usable digital experience.</p>
+          <span class="service-tag">HTML · CSS · JavaScript</span>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">↗</span>
           <h3 class="service-title">Creative Direction</h3>
-          <p class="service-desc">Tying the visuals together so every asset feels like it came from the same idea.</p>
-          <span class="service-tag">Strategy · Storytelling</span>
+          <p class="service-desc">A unified visual direction across campaigns, platforms and content so every piece belongs to the same story.</p>
+          <span class="service-tag">Concept · Strategy · Storytelling</span>
         </div>
       </div>
     </div>
@@ -480,7 +816,7 @@
         <img src="profile.png" alt="Rakibul Islam Rabbi at work" />
       </div>
       <div class="about-text">
-        <p class="section-eyebrow">About Me</p>
+        <p class="section-eyebrow">03 / About Me</p>
         <h2 class="section-title" style="margin-bottom:24px;">Design that earns the second glance</h2>
         <p>I got into this through posters and late nights in Premiere Pro, and six years later that's still the part I care about most — the moment a rough idea turns into something someone actually stops for.</p>
         <p><strong>Based in Bangladesh</strong>, working with clients wherever the project takes me. Most days split between brand visuals, video edits and the odd late-night render.</p>
@@ -493,44 +829,21 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="section" id="testimonials">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="section-eyebrow">Kind Words</p>
-          <h2 class="section-title">What clients say</h2>
-        </div>
-      </div>
-      <div class="testi-grid">
-        <div class="testi-card">
-          <p class="testi-quote">"Sent over a messy brief and got back exactly the poster we needed — first draft, barely any notes."</p>
-          <div class="testi-person"><div class="testi-avatar">A</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Marketing Lead</div></div></div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"The edit turned three hours of raw footage into something we were proud to put our name on."</p>
-          <div class="testi-person"><div class="testi-avatar">B</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Founder</div></div></div>
-        </div>
-        <div class="testi-card">
-          <p class="testi-quote">"Fast turnaround, clear communication, and the final files were exactly on-brand."</p>
-          <div class="testi-person"><div class="testi-avatar">C</div><div><div class="testi-name">Placeholder Client</div><div class="testi-role">Creative Manager</div></div></div>
-        </div>
-      </div>
-      <p class="work-note">Placeholder quotes — swap in real client feedback before publishing.</p>
-    </div>
-  </section>
+  <!-- TESTIMONIALS
+       Reserved for verified client feedback in V2.1.
+       Placeholder testimonials are intentionally not published. -->
 
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="wrap">
       <div class="contact-box">
         <div>
-          <p class="section-eyebrow">Get in Touch</p>
+          <p class="section-eyebrow">04 / Get in Touch</p>
           <h2 class="contact-title">Got a project in mind?</h2>
           <p class="contact-desc">Tell me what you're trying to make and I'll get back within a day — usually faster over WhatsApp.</p>
         </div>
         <div class="contact-links">
-          <a href="#" class="https://wa.me/@Rabbi_881" id="waLink">
+          <a href="#" class="contact-link" id="waLink" aria-label="Contact Rakibul Islam Rabbi on WhatsApp">
             <span class="contact-link-icon cl-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg></span>
             <span><div class="contact-link-text">WhatsApp</div><div class="contact-link-sub">Send a message on WhatsApp</div></span>
           </a>
@@ -551,60 +864,112 @@
         <a href="https://www.facebook.com/share/1K1ftH2RY5/" target="_blank" rel="noopener" title="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.883v2.272h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
         <a href="https://www.instagram.com/rakibulislamrabbi24?igsh=Y2hlbG4xdGJjNWZ4" target="_blank" rel="noopener" title="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
         <a href="https://x.com/RakibulRabbi24" target="_blank" rel="noopener" title="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://wa.me/@Rabbi_881" target="_blank" rel="noopener" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="#contact" title="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       </div>
       <p class="footer-copy">© 2026 Rakibul Islam Rabbi — All rights reserved.</p>
     </div>
   </footer>
 
+  <a class="back-to-top" id="backToTop" href="#top" aria-label="Back to top">↑</a>
+
   <!-- SCRIPTS -->
   <script>
-    const themeBtn = document.getElementById('themeBtn');
-    const root = document.documentElement;
-    themeBtn.addEventListener('click', () => {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      root.setAttribute('data-theme', isLight ? 'dark' : 'light');
-      themeBtn.textContent = isLight ? '☀️' : '🌙';
-    });
+    (() => {
+      'use strict';
 
-    const ham = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    ham.addEventListener('click', () => {
-      const open = mobileNav.classList.toggle('open');
-      ham.classList.toggle('open', open);
-      ham.setAttribute('aria-expanded', open);
-    });
-    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      ham.classList.remove('open');
-    }));
+      const root = document.documentElement;
+      const themeBtn = document.getElementById('themeBtn');
+      const ham = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobileNav');
+      const backToTop = document.getElementById('backToTop');
+      const waLink = document.getElementById('waLink');
 
-    // Active nav link on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navA = document.querySelectorAll('.nav-links a');
-    const navObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+      /* Theme: persist preference, fall back to system theme */
+      const savedTheme = localStorage.getItem('rir-theme');
+      const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      root.setAttribute('data-theme', savedTheme || (systemLight ? 'light' : 'dark'));
+
+      const syncThemeButton = () => {
+        const light = root.getAttribute('data-theme') === 'light';
+        themeBtn.textContent = light ? '🌙' : '☀️';
+        themeBtn.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+        themeBtn.title = light ? 'Dark theme' : 'Light theme';
+      };
+      syncThemeButton();
+
+      themeBtn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('rir-theme', next);
+        syncThemeButton();
+      });
+
+      /* Mobile navigation */
+      const closeMobileNav = () => {
+        mobileNav.classList.remove('open');
+        ham.classList.remove('open');
+        ham.setAttribute('aria-expanded', 'false');
+      };
+
+      ham.addEventListener('click', () => {
+        const open = mobileNav.classList.toggle('open');
+        ham.classList.toggle('open', open);
+        ham.setAttribute('aria-expanded', String(open));
+      });
+
+      mobileNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeMobileNav);
+      });
+
+      /* Nav / scroll state */
+      const nav = document.querySelector('nav');
+      const onScroll = () => {
+        const y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 12);
+        backToTop.classList.toggle('visible', y > 650);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* Active section */
+      const sections = document.querySelectorAll('section[id]');
+      const navA = document.querySelectorAll('.nav-links a');
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          navA.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+          });
+        });
+      }, { rootMargin: '-42% 0px -48% 0px' });
+      sections.forEach(section => navObserver.observe(section));
+
+      /* Work video: desktop hover, touch autoplay */
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      document.querySelectorAll('.work-card').forEach(card => {
+        const video = card.querySelector('video');
+        if (!video) return;
+
+        if (canHover) {
+          card.addEventListener('mouseenter', () => video.play().catch(() => {}));
+          card.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+          });
+        } else {
+          video.autoplay = true;
+          video.play().catch(() => {});
         }
       });
-    }, { rootMargin: '-40% 0px -50% 0px' });
-    sections.forEach(s => navObserver.observe(s));
 
-    // Work-card video: hover-to-play on desktop, always-on loop on touch devices
-    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    document.querySelectorAll('.work-card').forEach(card => {
-      const video = card.querySelector('video');
-      if (!video) return;
-
-      if (canHover) {
-        card.addEventListener('mouseenter', () => video.play());
-        card.addEventListener('mouseleave', () => video.pause());
-      } else {
-        video.autoplay = true;
-        video.play().catch(() => {});
-      }
-    });
+      /* WhatsApp URL is intentionally configured here once the real number is confirmed. */
+      waLink.addEventListener('click', event => {
+        event.preventDefault();
+        const phone = ''; // Add verified international-format WhatsApp number in V2.1.
+        if (phone) window.open(`https://wa.me/${phone}`, '_blank', 'noopener');
+        else document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
   </script>
 </body>
 </html>
