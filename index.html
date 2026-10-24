@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Rakibul Islam Rabbi | Web Developer & IT Specialist</title>
+    <meta name="description" content="Personal Portfolio of MD Rakibul Islam Rabbi - Web Developer, IT & Networking Specialist, and Tech Solutions Provider based in Kushtia, Bangladesh.">
+    
+    <!-- Google Fonts: Plus Jakarta Sans (English) & Hind Siliguri (Bengali) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'sans-serif'],
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#131c31',
+                            900: '#0f172a',
+                            950: '#080d1a',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Glassmorphism, Scrollbar & Print CV -->
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+
+        /* Glassmorphism Utilities */
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Subtle Glow Background Effect */
+        .bg-grid-pattern {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+        }
+
+        /* Print Styles for CV Modal */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #cv-printable-area, #cv-printable-area * {
+                visibility: visible;
+            }
+            #cv-printable-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-cyan-500 selection:text-white transition-colors duration-300 relative overflow-x-hidden bg-grid-pattern">
+
+    <!-- Ambient Background Glows -->
+    <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-cyan-500/15 dark:bg-cyan-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-96 h-96 bg-emerald-500/15 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+    <!-- ==================== STICKY GLASSMORPHIC NAVBAR ==================== -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-2.5 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    R
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white">Rabbi<span class="text-cyan-500">.</span></span>
+                    <span class="hidden sm:inline-block text-xs px-2 py-0.5 ml-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">Kushtia, BD</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium">
+                <a href="#home" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition" data-en="Overview" data-bn="ওভারভিউ">Overview</a>
+                <a href="#skills" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition" data-en="Skills" data-bn="দক্ষতা">Skills</a>
+                <a href="#projects" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition" data-en="Projects" data-bn="প্রজেক্টসমূহ">Projects</a>
+                <a href="#experience" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition" data-en="Experience" data-bn="অভিজ্ঞতা ও শিক্ষা">Experience</a>
+                <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition" data-en="Contact" data-bn="যোগাযোগ">Contact</a>
+            </nav>
+
+            <!-- Action Controls (Language, Theme, Mobile Menu) -->
+            <div class="flex items-center gap-2">
+                <!-- Language Switcher (EN / BN) -->
+                <button id="lang-toggle" onclick="toggleLanguage()" class="px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 transition flex items-center gap-1.5" title="Switch Language">
+                    <i class="fa-solid fa-language text-cyan-500 text-sm"></i>
+                    <span id="lang-label">বাং</span>
+                </button>
+
+                <!-- Dark / Light Mode Toggle -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 flex items-center justify-center text-slate-700 dark:text-amber-400 transition" title="Toggle Dark/Light Theme">
+                    <i id="theme-icon" class="fa-solid fa-sun text-sm"></i>
+                </button>
+
+                <!-- Hire Me Button (Desktop) -->
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-emerald-500 text-white shadow-md shadow-cyan-500/20 hover:opacity-95 transition">
+                    <i class="fa-regular fa-paper-plane"></i>
+                    <span data-en="Hire Me" data-bn="যোগাযোগ করুন">Hire Me</span>
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-200">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800" data-en="Overview" data-bn="ওভারভিউ">Overview</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800" data-en="Skills" data-bn="দক্ষতা">Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800" data-en="Projects" data-bn="প্রজেক্টসমূহ">Projects</a>
+            <a href="#experience" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800" data-en="Experience" data-bn="অভিজ্ঞতা ও শিক্ষা">Experience</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-sm font-medium text-cyan-500 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800" data-en="Contact Me" data-bn="যোগাযোগ করুন">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTAINER ==================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-20 relative z-10">
+
+        <!-- ==================== 1. HERO & BENTO GRID OVERVIEW ==================== -->
+        <section id="home" class="scroll-mt-24">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+                
+                <!-- Card 1: Main Hero Profile Card (Spans 8 cols on desktop) -->
+                <div class="bento-card md:col-span-8 rounded-3xl p-6 sm:p-8 lg:p-10 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between relative overflow-hidden">
+                    <!-- Decorative Corner Gradient -->
+                    <div class="absolute -right-12 -top-12 w-48 h-48 bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <div class="space-y-5 relative z-10">
+                        <!-- Status Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span data-en="Currently IT Officer @ Grameenphone Distribution House (Jonaky Traders)" data-bn="বর্তমানে গ্রামীণফোন ডিস্ট্রিবিউশন হাউস (জোনাকী ট্রেডার্স)-এ আইটি অফিসার হিসেবে কর্মরত">Currently IT Officer @ Grameenphone Distribution House (Jonaky Traders)</span>
+                        </div>
+
+                        <!-- Main Title & Role -->
+                        <div class="space-y-2">
+                            <p class="text-sm font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400" data-en="Hello, I am" data-bn="হ্যালো, আমি">Hello, I am</p>
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                                MD RAKIBUL ISLAM <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-emerald-500">RABBI</span>
+                            </h1>
+                            <p class="text-base sm:text-lg font-semibold text-slate-700 dark:text-slate-300 pt-1" data-en="IT Officer | Web Developer | Operations & Data Systems Specialist" data-bn="আইটি অফিসার | ওয়েব ডেভেলপার | অপারেশনস ও ডেটা সিস্টেম স্পেশালিস্ট">
+                                IT Officer | Web Developer | Operations & Data Systems Specialist
+                            </p>
+                        </div>
+
+                        <!-- Bio Description -->
+                        <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl" data-en="Results-driven IT Officer & professional with a diverse background in distribution house IT systems, retail operations management, and international data systems. Proven capability in optimizing business workflows, managing teams, and leveraging technical competencies in networking, graphic design, and web technology to drive efficiency." data-bn="ডিস্ট্রিবিউশন হাউসের আইটি সিস্টেম, রিটেইল অপারেশনস ম্যানেজমেন্ট এবং আন্তর্জাতিক ডেটা সিস্টেমে কাজের অভিজ্ঞতাসম্পন্ন একজন দক্ষ আইটি প্রফেশনাল ও ওয়েব ডেভেলপার। বিজনেস ওয়ার্কফ্লো অপটিমাইজেশন, টিম ম্যানেজমেন্ট, নেটওয়ার্কিং এবং আধুনিক ওয়েব প্রযুক্তির মাধ্যমে প্রতিষ্ঠানের কাজের গতি ও দক্ষতা বৃদ্ধিতে আমি নিবেদিত।">
+                            Results-driven IT Officer & professional with a diverse background in distribution house IT systems, retail operations management, and international data systems. Proven capability in optimizing business workflows, managing teams, and leveraging technical competencies in networking, graphic design, and web technology to drive efficiency.
+                        </p>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="pt-7 mt-6 border-t border-slate-200/70 dark:border-slate-700/60 flex flex-wrap items-center gap-3.5 relative z-10">
+                        <a href="#projects" class="px-5 py-3 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 text-white shadow-lg shadow-cyan-500/25 hover:opacity-95 transition flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span data-en="Explore Work" data-bn="প্রজেক্টগুলো দেখুন">Explore Work</span>
+                        </a>
+                        <button onclick="openCVModal()" class="px-5 py-3 rounded-xl font-bold text-sm bg-slate-100 dark:bg-slate-700/70 text-slate-800 dark:text-white border border-slate-300 dark:border-slate-600 hover:border-cyan-500 dark:hover:border-cyan-400 transition flex items-center gap-2">
+                            <i class="fa-solid fa-file-lines text-cyan-500"></i>
+                            <span data-en="Preview / Download CV" data-bn="সিভি দেখুন / ডাউনলোড">Preview / Download CV</span>
+                        </button>
+                        <a href="https://github.com/rakibulislamrabbi24" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-700/70 border border-slate-300 dark:border-slate-600 hover:border-cyan-500 flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-cyan-500 transition" title="GitHub Profile">
+                            <i class="fa-brands fa-github text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Location, Live Clock & Quick Copy Card (Spans 4 cols on desktop) -->
+                <div class="bento-card md:col-span-4 rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-5">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-500">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-bold text-sm text-slate-900 dark:text-white" data-en="West Abdalpur, Kushtia Sadar" data-bn="পশ্চিম আবদালপুর, কুষ্টিয়া সদর">West Abdalpur, Kushtia Sadar</h2>
+                                <p class="text-xs text-slate-500 dark:text-slate-400" data-en="Hatia Abdalpur - 7002, Kushtia" data-bn="হাতিয়া আবদালপুর - ৭০০২, কুষ্টিয়া">Hatia Abdalpur - 7002, Kushtia</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-100 dark:bg-slate-900 text-cyan-600 dark:text-cyan-400 border border-slate-200 dark:border-slate-700" id="bd-clock">GMT+6</span>
+                    </div>
+
+                    <!-- Quick Copy Contact Rows -->
+                    <div class="space-y-2.5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500" data-en="One-Click Quick Copy" data-bn="এক ক্লিকে কপি করুন">One-Click Quick Copy</p>
+                        
+                        <!-- Email Copy Box -->
+                        <div class="p-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-700/70 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <i class="fa-solid fa-envelope text-cyan-500 text-sm shrink-0"></i>
+                                <span class="text-xs font-medium truncate text-slate-700 dark:text-slate-300">rirabbi.2433@gmail.com</span>
+                            </div>
+                            <button onclick="copyToClipboard('rirabbi.2433@gmail.com', 'Email address')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-cyan-500 hover:text-white text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition shrink-0">
+                                <i class="fa-regular fa-copy mr-1"></i><span data-en="Copy" data-bn="কপি">Copy</span>
+                            </button>
+                        </div>
+
+                        <!-- Phone Copy Box 1 -->
+                        <div class="p-3 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-700/70 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <i class="fa-solid fa-phone text-emerald-500 text-sm shrink-0"></i>
+                                <span class="text-xs font-medium truncate text-slate-700 dark:text-slate-300">+88 01886-394088 / 01571-394088</span>
+                            </div>
+                            <button onclick="copyToClipboard('+8801886394088', 'Phone number')" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 hover:bg-emerald-500 hover:text-white text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition shrink-0">
+                                <i class="fa-regular fa-copy mr-1"></i><span data-en="Copy" data-bn="কপি">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Direct Links -->
+                    <div class="pt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200/60 dark:border-slate-700/60">
+                        <span data-en="Web Portfolio:" data-bn="ওয়েব পোর্টফোলিও:">Web Portfolio:</span>
+                        <a href="https://rakibulislamrabbi24.github.io" target="_blank" class="font-semibold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1">
+                            rakibulislamrabbi24.github.io <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Core Tech Stack Bento Card (Spans 7 cols on desktop) -->
+                <div class="bento-card md:col-span-7 rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-microchip text-cyan-500"></i>
+                                <span data-en="Core Technology & Tool Stack" data-bn="মূল টেকনোলজি ও টুলস">Core Technology & Tool Stack</span>
+                            </h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400" data-en="Tools I use daily for web apps, automation, and networking" data-bn="ওয়েব ডেভেলপমেন্ট, অটোমেশন এবং নেটওয়ার্কিংয়ের নিয়মিত টুলস">Tools I use daily for web apps, automation, and networking</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20 flex items-center gap-1.5">
+                            <i class="fa-brands fa-html5"></i> HTML5 & CSS3
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center gap-1.5">
+                            <i class="fa-brands fa-js"></i> JavaScript (ES6+)
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 flex items-center gap-1.5">
+                            <i class="fa-solid fa-wind"></i> Tailwind CSS
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
+                            <i class="fa-solid fa-database"></i> Supabase & Firebase
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 flex items-center gap-1.5">
+                            <i class="fa-brands fa-chrome"></i> Chrome Extensions (MV3)
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 flex items-center gap-1.5">
+                            <i class="fa-solid fa-network-wired"></i> MikroTik RouterOS
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 flex items-center gap-1.5">
+                            <i class="fa-brands fa-windows"></i> OS Deployment (Ventoy/GPT)
+                        </span>
+                        <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-word"></i> MS Office & Bangla Typography
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Focus Pillars / Service Highlights (Spans 5 cols on desktop) -->
+                <div class="bento-card md:col-span-5 rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 grid grid-cols-3 gap-3 items-center">
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-700/60 text-center space-y-1">
+                        <div class="w-9 h-9 mx-auto rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white" data-en="Web & Apps" data-bn="ওয়েব অ্যাপস">Web & Apps</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400" data-en="UI & Extensions" data-bn="ইউআই ও এক্সটেনশন">UI & Extensions</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-700/60 text-center space-y-1">
+                        <div class="w-9 h-9 mx-auto rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white" data-en="ISP & Network" data-bn="আইএসপি ও নেটওয়ার্ক">ISP & Network</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400" data-en="MikroTik & Fiber" data-bn="মাইক্রোটিক ও রাউটার">MikroTik & Fiber</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-700/60 text-center space-y-1">
+                        <div class="w-9 h-9 mx-auto rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white" data-en="IT Support" data-bn="আইটি সাপোর্ট">IT Support</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400" data-en="OS & Hardware" data-bn="পিসি ও হার্ডওয়্যার">OS & Hardware</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 2. CATEGORIZED SKILLS BENTO SECTION ==================== -->
+        <section id="skills" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-cyan-500" data-en="Capabilities & Expertise" data-bn="দক্ষতা ও কাজের ক্ষেত্র">Capabilities & Expertise</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1" data-en="Technical Skills & Operations" data-bn="টেকনিক্যাল স্কিলস এবং অপারেশনস">Technical Skills & Operations</h2>
+                </div>
+                <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md" data-en="Organized into three core domains reflecting my daily development and technical workflow." data-bn="ওয়েব ডেভেলপমেন্ট, নেটওয়ার্কিং এবং অফিস ম্যানেজমেন্টের বাস্তব দক্ষতার সমন্বয়।">
+                    Organized into three core domains reflecting my daily development and technical workflow.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Skill Category 1: Web Development & Automation -->
+                <div class="bento-card rounded-3xl p-6 sm:p-7 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-500 text-xl">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-en="1. Web Development & Automation" data-bn="১. ওয়েব ডেভেলপমেন্ট ও অটোমেশন">1. Web Development & Automation</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-en="Building responsive frontends, cloud-connected web apps, and browser automation tools." data-bn="রেসপন্সিভ ওয়েবসাইট, ডাটাবেজ অ্যাপ্লিকেশন এবং ব্রাউজার অটোমেশন এক্সটেনশন তৈরি।">Building responsive frontends, cloud-connected web apps, and browser automation tools.</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 pt-2">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                                <span data-en="HTML5, Modern CSS3, Tailwind CSS & Responsive Bento Layouts" data-bn="HTML5, Modern CSS3, Tailwind CSS ও রেসপন্সিভ ডিজাইন">HTML5, Modern CSS3, Tailwind CSS & Responsive Bento Layouts</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                                <span data-en="JavaScript (ES6+), DOM Manipulation & LocalStorage State" data-bn="JavaScript (ES6+), DOM ম্যানিপুলেশন ও ডায়নামিক লজিক">JavaScript (ES6+), DOM Manipulation & LocalStorage State</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                                <span data-en="Custom Chrome Extensions (Manifest V3) for Form Auto-Fill" data-bn="কাস্টম ক্রোম এক্সটেনশন (Manifest V3) ও অটো-ফিল টুলস">Custom Chrome Extensions (Manifest V3) for Form Auto-Fill</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                                <span data-en="Supabase & Firebase Realtime Database / Auth Integration" data-bn="Supabase এবং Firebase ডাটাবেজ ও অথেনটিকেশন সেটআপ">Supabase & Firebase Realtime Database / Auth Integration</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                                <span data-en="Git Version Control & GitHub Pages Deployment" data-bn="Git ভার্সন কন্ট্রোল ও GitHub Pages ওয়েব হোস্টিং">Git Version Control & GitHub Pages Deployment</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap gap-1.5">
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">HTML/CSS/JS</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Supabase</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Firebase</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Manifest V3</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2: IT, Networking & Systems -->
+                <div class="bento-card rounded-3xl p-6 sm:p-7 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 text-xl">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-en="2. IT, Networking & Systems" data-bn="২. আইটি, নেটওয়ার্কিং ও সিস্টেম">2. IT, Networking & Systems</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-en="RouterOS administration, ISP network setups, multi-boot OS deployment, and hardware care." data-bn="মাইক্রোটিক রাউটার কনফিগারেশন, আইএসপি নেটওয়ার্ক, উইন্ডোজ সেটআপ ও হার্ডওয়্যার ট্রাবলশুটিং।">RouterOS administration, ISP network setups, multi-boot OS deployment, and hardware care.</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 pt-2">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 text-xs"></i>
+                                <span data-en="MikroTik RouterOS (MTCNA concepts, WinBox, VirtualBox CHR Labs)" data-bn="MikroTik RouterOS (MTCNA, WinBox, VirtualBox CHR ল্যাব)">MikroTik RouterOS (MTCNA concepts, WinBox, VirtualBox CHR Labs)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 text-xs"></i>
+                                <span data-en="ISP Client Setup, Optical Fiber & Dual-Band Wi-Fi Routers (Cudy/TP-Link)" data-bn="আইএসপি সংযোগ, অপটিক্যাল ফাইবার ও ডুয়াল-ব্যান্ড রাউটার কনফিগারেশন">ISP Client Setup, Optical Fiber & Dual-Band Wi-Fi Routers (Cudy/TP-Link)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 text-xs"></i>
+                                <span data-en="Windows 10/11 Deployment, MBR/GPT Partitioning & Custom Ventoy USB" data-bn="Windows 10/11 সেটআপ, MBR/GPT পার্টিশন ও কাস্টম Ventoy মাল্টিবুট">Windows 10/11 Deployment, MBR/GPT Partitioning & Custom Ventoy USB</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 text-xs"></i>
+                                <span data-en="PC Hardware Diagnostics, RAM/BIOS Tuning & Driver Management" data-bn="পিসি হার্ডওয়্যার ট্রাবলশুটিং, র‍্যাম/বায়োস টিউনিং ও ড্রাইভার সেটআপ">PC Hardware Diagnostics, RAM/BIOS Tuning & Driver Management</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 text-xs"></i>
+                                <span data-en="Toshiba e-Studio Commercial Photocopier Operation & Maintenance" data-bn="Toshiba e-Studio ফটোকপিয়ার মেশিন অপারেশন ও মেইনটেন্যান্স">Toshiba e-Studio Commercial Photocopier Operation & Maintenance</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap gap-1.5">
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">MikroTik CHR</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Dual-Band Wi-Fi</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Ventoy / GRUB</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Hardware Care</span>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3: Office Operations & Digital Media -->
+                <div class="bento-card rounded-3xl p-6 sm:p-7 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 text-xl">
+                            <i class="fa-solid fa-pen-ruler"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-en="3. Office & Digital Media" data-bn="৩. অফিস অপারেশন ও ডিজিটাল মিডিয়া">3. Office & Digital Media</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" data-en="High-speed bilingual document formatting, print-ready stationery, and promotional assets." data-bn="দ্রুত বাংলা ও ইংরেজি টাইপিং, প্রশ্নপত্র ফরম্যাটিং, প্রিন্ট ডিজাইন এবং প্রমোশনাল গ্রাফিক্স।">High-speed bilingual document formatting, print-ready stationery, and promotional assets.</p>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 pt-2">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 text-xs"></i>
+                                <span data-en="MS Word & Excel Mastery (Academic Exam Papers, Complex Tables)" data-bn="MS Word ও Excel (স্কুলের প্রশ্নপত্র তৈরি, জটিল টেবিল ও ফরম্যাটিং)">MS Word & Excel Mastery (Academic Exam Papers, Complex Tables)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 text-xs"></i>
+                                <span data-en="Fast & Accurate Bengali (Bijoy/Avro) and English Typing" data-bn="দ্রুত ও নির্ভুল বাংলা (বিজয়/অভ্র) এবং ইংরেজি টাইপিং">Fast & Accurate Bengali (Bijoy/Avro) and English Typing</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 text-xs"></i>
+                                <span data-en="Print Stationery Design (ISP Money Receipts, Business Cards, ID Cards)" data-bn="প্রিন্ট ডিজাইন (মানি রিসিপ্ট, বিজনেস কার্ড, টুর্নামেন্ট ফিক্সচার)">Print Stationery Design (ISP Money Receipts, Business Cards, ID Cards)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 text-xs"></i>
+                                <span data-en="Online Government Portal Applications (Teletalk, Admission, Passport)" data-bn="অনলাইন সরকারি চাকরির আবেদন (Teletalk), ভর্তি ও ডকুমেন্ট প্রসেসিং">Online Government Portal Applications (Teletalk, Admission, Passport)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-amber-500 mt-1 text-xs"></i>
+                                <span data-en="Social Media Promo Graphics & AI-Assisted Video Reels Creation" data-bn="সোশ্যাল মিডিয়া প্রমোশনাল ব্যানার এবং এআই ভিডিও রিলস তৈরি">Social Media Promo Graphics & AI-Assisted Video Reels Creation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap gap-1.5">
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">MS Word/Excel</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Bangla Typing</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">Print Design</span>
+                        <span class="px-2.5 py-1 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400">AI Media</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 3. INTERACTIVE PROJECTS SHOWCASE ==================== -->
+        <section id="projects" class="scroll-mt-24 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-cyan-500" data-en="Portfolio Showcase" data-bn="আমার কাজের নমুনা">Portfolio Showcase</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1" data-en="Featured Projects & Solutions" data-bn="নির্বাচিত প্রজেক্ট এবং সলিউশনসমূহ">Featured Projects & Solutions</h2>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-2" id="project-filters">
+                    <button onclick="filterProjects('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-white shadow-md shadow-cyan-500/20 transition" data-en="All Work" data-bn="সব প্রজেক্ট">All Work</button>
+                    <button onclick="filterProjects('web')" data-filter="web" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-cyan-500 transition" data-en="Web & Extensions" data-bn="ওয়েব ও এক্সটেনশন">Web & Extensions</button>
+                    <button onclick="filterProjects('network')" data-filter="network" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-cyan-500 transition" data-en="Networking & IT" data-bn="নেটওয়ার্কিং ও আইটি">Networking & IT</button>
+                    <button onclick="filterProjects('branding')" data-filter="branding" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-cyan-500 transition" data-en="Branding & Print" data-bn="ব্র্যান্ডিং ও প্রিন্ট">Branding & Print</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid (Populated via JS for clean filtering & modal support) -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ==================== 4. EXPERIENCE & EDUCATION TIMELINE ==================== -->
+        <section id="experience" class="scroll-mt-24 space-y-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-500" data-en="Career & Academic Path" data-bn="অভিজ্ঞতা ও শিক্ষাগত যোগ্যতা">Career & Academic Path</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1" data-en="Professional Experience & Education" data-bn="পেশাগত অভিজ্ঞতা এবং শিক্ষাগত যোগ্যতা">Professional Experience & Education</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Work Experience Column (7 Cols) -->
+                <div class="lg:col-span-7 space-y-5">
+                    <h3 class="text-base font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase text-cyan-500"></i>
+                        <span data-en="Professional Experience" data-bn="পেশাগত অভিজ্ঞতা">Professional Experience</span>
+                    </h3>
+
+                    <!-- Experience Item 1: IT Officer @ Grameenphone Distribution House -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border-2 border-cyan-500/40 dark:border-cyan-500/30 shadow-xl shadow-cyan-500/5 space-y-3 relative overflow-hidden">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                                <span data-en="Oct 2026 – Present" data-bn="অক্টোবর ২০২৬ – বর্তমান">Oct 2026 – Present</span>
+                            </span>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400"><i class="fa-solid fa-location-dot mr-1 text-cyan-500"></i> <span data-en="Kushtia, Bangladesh" data-bn="কুষ্টিয়া, বাংলাদেশ">Kushtia, Bangladesh</span></span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-extrabold text-slate-900 dark:text-white" data-en="IT Officer" data-bn="আইটি অফিসার (IT Officer)">IT Officer</h4>
+                            <p class="text-xs sm:text-sm font-bold text-cyan-600 dark:text-cyan-400 mt-0.5" data-en="Grameenphone Distribution House (Jonaky Traders)" data-bn="গ্রামীণফোন ডিস্ট্রিবিউশন হাউস (জোনাকী ট্রেডার্স)">Grameenphone Distribution House (Jonaky Traders)</p>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-en="Managing distribution house IT operations, DMS software & data reporting systems, network & hardware troubleshooting, and ensuring seamless daily technical workflows across the organization." data-bn="গ্রামীণফোন ডিস্ট্রিবিউশন হাউসের সার্বিক আইটি অপারেশন, ডিস্ট্রিবিউশন ম্যানেজমেন্ট সফটওয়্যার ও ডেটা রিপোর্টিং সিস্টেম পরিচালনা, নেটওয়ার্ক ও হার্ডওয়্যার ট্রাবলশুটিং এবং প্রতিদিনের টেকনিক্যাল সাপোর্ট নিশ্চিত করা।">
+                            Managing distribution house IT operations, DMS software & data reporting systems, network & hardware troubleshooting, and ensuring seamless daily technical workflows across the organization.
+                        </p>
+                    </div>
+
+                    <!-- Experience Item 2: Computer Operator @ Grand Lisboa Group - Cambodia -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20" data-en="Sept 2025 – May 2026" data-bn="সেপ্টেম্বর ২০২৫ – মে ২০২৬">Sept 2025 – May 2026</span>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400"><i class="fa-solid fa-earth-asia mr-1 text-cyan-500"></i> <span data-en="Cambodia (International)" data-bn="কম্বোডিয়া (আন্তর্জাতিক)">Cambodia (International)</span></span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Computer Operator" data-bn="কম্পিউটার অপারেটর">Computer Operator</h4>
+                            <p class="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5" data-en="Grand Lisboa Group - Cambodia" data-bn="গ্র্যান্ড লিসবোয়া গ্রুপ - কম্বোডিয়া">Grand Lisboa Group - Cambodia</p>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-en="Managed high-speed data entry and secure digital record keeping while maintaining data accuracy and minimizing system downtime via troubleshooting." data-bn="দ্রুতগতির ডেটা এন্ট্রি এবং নিরাপদ ডিজিটাল রেকর্ড সংরক্ষণ পরিচালনা করা, পাশাপাশি ডেটার সর্বোচ্চ নির্ভুলতা বজায় রাখা এবং ট্রাবলশুটিংয়ের মাধ্যমে সিস্টেম ডাউনটাইম কমিয়ে আনা।">
+                            Managed high-speed data entry and secure digital record keeping while maintaining data accuracy and minimizing system downtime via troubleshooting.
+                        </p>
+                    </div>
+
+                    <!-- Experience Item 3: Store Manager @ Book Village -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20" data-en="Feb 2024 – Apr 2025" data-bn="ফেব্রুয়ারি ২০২৪ – এপ্রিল ২০২৫">Feb 2024 – Apr 2025</span>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400"><i class="fa-solid fa-location-dot mr-1"></i> <span data-en="Kushtia, Bangladesh" data-bn="কুষ্টিয়া, বাংলাদেশ">Kushtia, Bangladesh</span></span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Store Manager" data-bn="স্টোর ম্যানেজার">Store Manager</h4>
+                            <p class="text-xs sm:text-sm font-semibold text-cyan-600 dark:text-cyan-400 mt-0.5" data-en="Book Village - Kushtia, Bangladesh" data-bn="বুক ভিলেজ - কুষ্টিয়া, বাংলাদেশ">Book Village - Kushtia, Bangladesh</p>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-en="Managed daily bookstore operations, inventory tracking, and storefront staff while ensuring high-quality customer service." data-bn="প্রতিদিনের বুকস্টোর অপারেশন, ইনভেন্টরি ট্র্যাকিং এবং স্টোরফ্রন্ট স্টাফ পরিচালনা করার পাশাপাশি উন্নত গ্রাহক সেবা নিশ্চিত করা।">
+                            Managed daily bookstore operations, inventory tracking, and storefront staff while ensuring high-quality customer service.
+                        </p>
+                    </div>
+
+                    <!-- Experience Item 4: Store Manager @ Gadget Point -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20" data-en="Mar 2021 – Jan 2024" data-bn="মার্চ ২০২১ – জানুয়ারি ২০২৪">Mar 2021 – Jan 2024</span>
+                            <span class="text-xs font-medium text-slate-500 dark:text-slate-400"><i class="fa-solid fa-location-dot mr-1"></i> <span data-en="Kushtia, Bangladesh" data-bn="কুষ্টিয়া, বাংলাদেশ">Kushtia, Bangladesh</span></span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Store Manager" data-bn="স্টোর ম্যানেজার">Store Manager</h4>
+                            <p class="text-xs sm:text-sm font-semibold text-amber-600 dark:text-amber-400 mt-0.5" data-en="Gadget Point - Kushtia, Bangladesh" data-bn="গ্যাজেট পয়েন্ট - কুষ্টিয়া, বাংলাদেশ">Gadget Point - Kushtia, Bangladesh</p>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-en="Directed storefront operations, product procurement, and vendor partnerships while leading the sales team to meet revenue goals." data-bn="স্টোরফ্রন্ট অপারেশন, পণ্য সংগ্রহ ও ভেন্ডর পার্টনারশিপ পরিচালনা করা এবং বিক্রয় লক্ষ্যমাত্রা অর্জনে সেলস টিমকে নেতৃত্ব দেওয়া।">
+                            Directed storefront operations, product procurement, and vendor partnerships while leading the sales team to meet revenue goals.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Education & Personal Info Column (5 Cols) -->
+                <div class="lg:col-span-5 space-y-5">
+                    <h3 class="text-base font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-emerald-500"></i>
+                        <span data-en="Academic Qualification" data-bn="শিক্ষাগত যোগ্যতা">Academic Qualification</span>
+                    </h3>
+
+                    <!-- Education Card 1: B.B.A -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20" data-en="2nd Year Running" data-bn="২য় বর্ষ চলমান">2nd Year Running</span>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400" data-en="Undergraduate" data-bn="স্নাতক (সম্মান)">Undergraduate</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Bachelor of Business Administration (B.B.A)" data-bn="ব্যাচেলর অব বিজনেস অ্যাডমিনিস্ট্রেশন (বি.বি.এ)">Bachelor of Business Administration (B.B.A)</h4>
+                        <p class="text-xs sm:text-sm font-semibold text-cyan-600 dark:text-cyan-400" data-en="National University, Bangladesh" data-bn="জাতীয় বিশ্ববিদ্যালয়, বাংলাদেশ">National University, Bangladesh</p>
+                        <div class="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 grid grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-300">
+                            <div><span class="text-slate-400" data-en="Subject:" data-bn="বিষয়:">Subject:</span> <strong data-en="Accounting" data-bn="হিসাববিজ্ঞান (Accounting)">Accounting</strong></div>
+                            <div><span class="text-slate-400" data-en="Status:" data-bn="অবস্থা:">Status:</span> <strong data-en="2nd Year Running" data-bn="২য় বর্ষ চলমান">2nd Year Running</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Education Card 2: HSC -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20" data-en="Passing Year: 2021" data-bn="পাসের সাল: ২০২১">Passing Year: 2021</span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">GPA: 4.33 / 5.00</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Higher Secondary Certificate (HSC)" data-bn="উচ্চ মাধ্যমিক সার্টিফিকেট (এইচএসসি)">Higher Secondary Certificate (HSC)</h4>
+                        <p class="text-xs sm:text-sm font-semibold text-cyan-600 dark:text-cyan-400" data-en="Jhaudia Mahabiddyalaya" data-bn="ঝাউদিয়া মহাবিদ্যালয়">Jhaudia Mahabiddyalaya</p>
+                        <div class="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 grid grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-300">
+                            <div><span class="text-slate-400" data-en="Group:" data-bn="বিভাগ:">Group:</span> <strong data-en="Business Studies" data-bn="ব্যবসায় শিক্ষা">Business Studies</strong></div>
+                            <div><span class="text-slate-400" data-en="Board:" data-bn="বোর্ড:">Board:</span> <strong data-en="Jashore" data-bn="যশোর">Jashore</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Education Card 3: SSC -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20" data-en="Passing Year: 2019" data-bn="পাসের সাল: ২০১৯">Passing Year: 2019</span>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400">GPA: 3.71 / 5.00</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Secondary School Certificate (SSC)" data-bn="মাধ্যমিক স্কুল সার্টিফিকেট (এসএসসি)">Secondary School Certificate (SSC)</h4>
+                        <p class="text-xs sm:text-sm font-semibold text-cyan-600 dark:text-cyan-400" data-en="Jhaudia Bazar Secondary School" data-bn="ঝাউদিয়া বাজার মাধ্যমিক বিদ্যালয়">Jhaudia Bazar Secondary School</p>
+                        <div class="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 grid grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-300">
+                            <div><span class="text-slate-400" data-en="Group:" data-bn="বিভাগ:">Group:</span> <strong data-en="Business Studies" data-bn="ব্যবসায় শিক্ষা">Business Studies</strong></div>
+                            <div><span class="text-slate-400" data-en="Board:" data-bn="বোর্ড:">Board:</span> <strong data-en="Jashore" data-bn="যশোর">Jashore</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Languages & Personal Quick Card -->
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-3">
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-language text-cyan-500"></i>
+                            <span data-en="Languages & Personal Details" data-bn="ভাষা ও ব্যক্তিগত তথ্য">Languages & Personal Details</span>
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2.5 text-xs text-slate-600 dark:text-slate-300 pt-1">
+                            <div class="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/60">
+                                <span class="text-slate-400 block" data-en="Bangla" data-bn="বাংলা">Bangla</span>
+                                <strong data-en="Native / Fluent" data-bn="মাতৃভাষা / সাবলীল">Native / Fluent</strong>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/60">
+                                <span class="text-slate-400 block" data-en="English" data-bn="ইংরেজি">English</span>
+                                <strong data-en="Working Proficiency" data-bn="পেশাগত দক্ষতা">Working Proficiency</strong>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/60">
+                                <span class="text-slate-400 block" data-en="Blood Group" data-bn="রক্তের গ্রুপ">Blood Group</span>
+                                <strong class="text-rose-500">A+ (ve)</strong>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-100/80 dark:bg-slate-900/60">
+                                <span class="text-slate-400 block" data-en="Date of Birth" data-bn="জন্ম তারিখ">Date of Birth</span>
+                                <strong>24-03-2003</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== 5. FUNCTIONAL CONTACT SECTION ==================== -->
+        <section id="contact" class="scroll-mt-24 space-y-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-500" data-en="Get In Touch" data-bn="যোগাযোগ করুন">Get In Touch</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1" data-en="Let's Work Together" data-bn="আপনার প্রজেক্ট বা কাজের জন্য মেসেজ দিন">Let's Work Together</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Left Column: Direct Contact Cards (5 Cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 space-y-5">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-en="Direct Contact Information" data-bn="সরাসরি যোগাযোগের মাধ্যম">Direct Contact Information</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300" data-en="Feel free to reach out for web development projects, custom browser tools, ISP/network consultation, or IT support roles." data-bn="ওয়েব ডেভেলপমেন্ট, কাস্টম ব্রাউজার এক্সটেনশন, নেটওয়ার্ক কনফিগারেশন বা আইটি কাজের জন্য সরাসরি যোগাযোগ করতে পারেন।">
+                            Feel free to reach out for web development projects, custom browser tools, ISP/network consultation, or IT support roles.
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            <!-- Email Card -->
+                            <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-700/70 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-500 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-[11px] uppercase tracking-wider text-slate-400" data-en="Email Address" data-bn="ইমেইল অ্যাড্রেস">Email Address</p>
+                                        <a href="mailto:rirabbi.2433@gmail.com" class="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-cyan-500 truncate block">rirabbi.2433@gmail.com</a>
+                                    </div>
+                                </div>
+                                <button onclick="copyToClipboard('rirabbi.2433@gmail.com', 'Email')" class="p-2 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 border border-slate-200 dark:border-slate-700 transition" title="Copy Email">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <!-- Phone / WhatsApp Card -->
+                            <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-700/70 flex items-center justify-between gap-3">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-[11px] uppercase tracking-wider text-slate-400" data-en="Phone / WhatsApp" data-bn="ফোন / হোয়াটসঅ্যাপ">Phone / WhatsApp</p>
+                                        <a href="tel:+8801886394088" class="text-sm font-bold text-slate-800 dark:text-slate-200 hover:text-emerald-500 truncate block">+88 01886-394088 / 01571-394088</a>
+                                    </div>
+                                </div>
+                                <button onclick="copyToClipboard('+8801886394088', 'Phone number')" class="p-2 rounded-lg bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-500 border border-slate-200 dark:border-slate-700 transition" title="Copy Phone">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+
+                            <!-- Location Card -->
+                            <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-700/70 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] uppercase tracking-wider text-slate-400" data-en="Present & Permanent Address" data-bn="বর্তমান ও স্থায়ী ঠিকানা">Present & Permanent Address</p>
+                                    <p class="text-sm font-bold text-slate-800 dark:text-slate-200" data-en="West Abdalpur, Hatia Abdalpur - 7002, Kushtia Sadar, Kushtia" data-bn="পশ্চিম আবদালপুর, হাতিয়া আবদালপুর - ৭০০২, কুষ্টিয়া সদর, কুষ্টিয়া">West Abdalpur, Hatia Abdalpur - 7002, Kushtia Sadar, Kushtia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Contact Form (7 Cols) -->
+                <div class="lg:col-span-7">
+                    <div class="bento-card rounded-3xl p-6 sm:p-8 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1" data-en="Send a Direct Message" data-bn="সরাসরি মেসেজ পাঠান">Send a Direct Message</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-6" data-en="Fill out the form below. Ready to connect with Supabase/Firebase backend." data-bn="নিচের ফর্মটি পূরণ করে পাঠান। এটি আপনার ডাটাবেজের সাথে যুক্ত করার জন্য প্রস্তুত।">Fill out the form below. Ready to connect with Supabase/Firebase backend.</p>
+
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="sender-name" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5" data-en="Your Name *" data-bn="আপনার নাম *">Your Name *</label>
+                                    <input type="text" id="sender-name" required placeholder="e.g. Tanvir Ahmed" class="w-full px-4 py-3 rounded-xl text-sm bg-slate-100/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-cyan-500 text-slate-900 dark:text-white transition">
+                                </div>
+                                <div>
+                                    <label for="sender-email" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5" data-en="Email or Phone *" data-bn="ইমেইল অথবা ফোন নম্বর *">Email or Phone *</label>
+                                    <input type="text" id="sender-email" required placeholder="name@example.com / 017XXXXXXXX" class="w-full px-4 py-3 rounded-xl text-sm bg-slate-100/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-cyan-500 text-slate-900 dark:text-white transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="sender-subject" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5" data-en="Subject *" data-bn="বিষয় *">Subject *</label>
+                                <input type="text" id="sender-subject" required placeholder="Web App / Chrome Extension / IT Support Inquiry" class="w-full px-4 py-3 rounded-xl text-sm bg-slate-100/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-cyan-500 text-slate-900 dark:text-white transition">
+                            </div>
+
+                            <div>
+                                <label for="sender-message" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5" data-en="Message *" data-bn="আপনার বার্তা *">Message *</label>
+                                <textarea id="sender-message" rows="4" required placeholder="Write your project details or message here..." class="w-full px-4 py-3 rounded-xl text-sm bg-slate-100/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-cyan-500 text-slate-900 dark:text-white transition resize-none"></textarea>
+                            </div>
+
+                            <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
+                                <button type="submit" id="submit-btn" class="px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-emerald-500 text-white shadow-lg shadow-cyan-500/25 hover:opacity-95 transition flex items-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span data-en="Send Message" data-bn="মেসেজ পাঠান">Send Message</span>
+                                </button>
+                                <span class="text-xs text-slate-400" data-en="Or email directly at rirabbi.2433@gmail.com" data-bn="অথবা সরাসরি ইমেইল করুন: rirabbi.2433@gmail.com">Or email directly at rirabbi.2433@gmail.com</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-slate-200/80 dark:border-slate-800/80 bg-white/60 dark:bg-slate-950/60 backdrop-blur-xl py-8 mt-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center text-white font-bold">R</span>
+                <span class="font-semibold text-slate-800 dark:text-slate-200">MD RAKIBUL ISLAM RABBI</span>
+                <span>— Kushtia, Bangladesh</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/rakibulislamrabbi24" target="_blank" class="hover:text-cyan-500 transition flex items-center gap-1">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="mailto:rirabbi.2433@gmail.com" class="hover:text-cyan-500 transition flex items-center gap-1">
+                    <i class="fa-solid fa-envelope"></i> Email
+                </a>
+                <a href="tel:+8801571394088" class="hover:text-emerald-500 transition flex items-center gap-1">
+                    <i class="fa-solid fa-phone"></i> Call
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== PROJECT DETAILS MODAL ==================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProjectModal()" class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-rose-500 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div id="modal-category-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+                Category
+            </div>
+
+            <h3 id="modal-title" class="text-2xl font-extrabold text-slate-900 dark:text-white pr-8">Project Title</h3>
+            <p id="modal-description" class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Project full description...</p>
+
+            <div class="space-y-2 pt-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400" data-en="Key Features & Highlights" data-bn="মূল ফিচার ও বৈশিষ্ট্যসমূহ">Key Features & Highlights</h4>
+                <ul id="modal-features" class="space-y-2 text-sm text-slate-700 dark:text-slate-300">
+                    <!-- Populated via JS -->
+                </ul>
+            </div>
+
+            <div class="space-y-2 pt-2">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400" data-en="Technologies & Tools Used" data-bn="ব্যবহৃত টেকনোলজি ও টুলস">Technologies & Tools Used</h4>
+                <div id="modal-tech" class="flex flex-wrap gap-2">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <div class="pt-5 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-end gap-3">
+                <button onclick="closeProjectModal()" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition" data-en="Close" data-bn="বন্ধ করুন">Close</button>
+                <a id="modal-link" href="#contact" onclick="closeProjectModal()" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-emerald-500 text-white shadow-md shadow-cyan-500/20 hover:opacity-95 transition flex items-center gap-2">
+                    <span data-en="Inquire / Request Demo" data-bn="ডেমো বা বিস্তারিত জানতে যোগাযোগ করুন">Inquire / Request Demo</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PRINTABLE CV PREVIEW MODAL ==================== -->
+    <div id="cv-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[92vh] overflow-y-auto">
+            
+            <!-- Modal Header Controls (Hidden when printing) -->
+            <div class="no-print flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-cyan-500 text-lg"></i>
+                    <span class="font-bold text-sm text-slate-900 dark:text-white" data-en="Curriculum Vitae Preview" data-bn="সিভি প্রিভিউ (প্রিন্ট ও পিডিএফ)">Curriculum Vitae Preview</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 hover:bg-cyan-600 text-white flex items-center gap-1.5 transition shadow-md shadow-cyan-500/20">
+                        <i class="fa-solid fa-print"></i>
+                        <span data-en="Print / Save as PDF" data-bn="প্রিন্ট / PDF সেভ করুন">Print / Save as PDF</span>
+                    </button>
+                    <button onclick="closeCVModal()" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-rose-500 flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Resume Content -->
+            <div id="cv-printable-area" class="space-y-5 text-slate-800 dark:text-slate-200 text-sm">
+                <!-- Header -->
+                <div class="border-b-2 border-slate-300 dark:border-slate-700 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">MD RAKIBUL ISLAM RABBI</h2>
+                        <p class="text-cyan-600 dark:text-cyan-400 font-semibold text-sm">IT Officer | Web Developer | Operations & Data Systems Specialist</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Address: West Abdalpur, Hatia Abdalpur - 7002, Kushtia Sadar, Kushtia</p>
+                    </div>
+                    <div class="text-xs space-y-1 sm:text-right text-slate-600 dark:text-slate-400">
+                        <p><i class="fa-solid fa-phone mr-1"></i> +88 01886-394088, +88 01571-394088</p>
+                        <p><i class="fa-solid fa-envelope mr-1"></i> rirabbi.2433@gmail.com</p>
+                        <p><i class="fa-solid fa-globe mr-1"></i> https://rakibulislamrabbi24.github.io/</p>
+                    </div>
+                </div>
+
+                <!-- Professional Summary -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1">Professional Summary</h3>
+                    <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+                        Results-driven IT Officer and professional with a diverse background in distribution house IT systems, retail operations management, and international data systems. Proven capability in optimizing business workflows, managing teams, and leveraging technical competencies in networking, graphic design, and web technology to drive efficiency and support organizational goals.
+                    </p>
+                </div>
+
+                <!-- Professional Experience -->
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-2">Professional Experience</h3>
+                    <div class="space-y-2.5 text-xs">
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                <span>IT Officer | Grameenphone Distribution House (Jonaky Traders) - Kushtia</span>
+                                <span>Oct 2026 – Present</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400">Managing distribution house IT operations, DMS software support, data reporting, network & hardware troubleshooting, and daily technical workflows.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                <span>Computer Operator | Grand Lisboa Group - Cambodia</span>
+                                <span>Sept 2025 – May 2026</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400">Managed high-speed data entry and secure digital record keeping while maintaining data accuracy and minimizing system downtime via troubleshooting.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                <span>Store Manager | Book Village - Kushtia, Bangladesh</span>
+                                <span>Feb 2024 – Apr 2025</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400">Managed daily bookstore operations, inventory tracking, and storefront staff while ensuring high-quality customer service.</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between font-bold text-slate-900 dark:text-white">
+                                <span>Store Manager | Gadget Point - Kushtia, Bangladesh</span>
+                                <span>Mar 2021 – Jan 2024</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400">Directed storefront operations, product procurement, and vendor partnerships while leading the sales team to meet revenue goals.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Core Skills -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1.5">Education</h3>
+                        <ul class="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
+                            <li><strong>1. B.B.A (Honours) in Accounting:</strong> National University — 2nd Year Running</li>
+                            <li><strong>2. HSC (Business Studies):</strong> Jhaudia Mahabiddyalaya (Jashore Board, 2021) — GPA: 4.33 / 5.00</li>
+                            <li><strong>3. SSC (Business Studies):</strong> Jhaudia Bazar Secondary School (Jashore Board, 2019) — GPA: 3.71 / 5.00</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1.5">Core Skills & Languages</h3>
+                        <ul class="list-disc list-inside text-xs space-y-1 text-slate-700 dark:text-slate-300">
+                            <li><strong>Technical & Web:</strong> Web Technology (HTML/CSS/JS), Chrome Extensions, Graphics & Multimedia</li>
+                            <li><strong>Software & Systems:</strong> MS Word, Excel, PowerPoint, MikroTik/Network & Hardware Troubleshooting</li>
+                            <li><strong>Operations:</strong> Team Collaboration, Retail & Distribution Management</li>
+                            <li><strong>Languages:</strong> Bangla (Native), English (Professional Working Proficiency)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1.5">Personal Information</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <div><strong>Father's Name:</strong> Md. Motiur Rahman</div>
+                        <div><strong>Mother's Name:</strong> Mst. Laki Khatun</div>
+                        <div><strong>Date of Birth:</strong> 24-03-2003</div>
+                        <div><strong>Blood Group:</strong> A+ (ve)</div>
+                        <div><strong>Marital Status:</strong> Single</div>
+                        <div><strong>Religion:</strong> Islam (Sunni)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION ==================== -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 rounded-2xl shadow-xl border border-slate-700 dark:border-slate-200 flex items-center gap-2.5 text-xs font-bold">
+        <i class="fa-solid fa-circle-check text-emerald-400 dark:text-emerald-600 text-sm"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // --- 1. PROJECT DATA STORE ---
+        const projectsData = [
+            {
+                id: 1,
+                category: 'web',
+                categoryLabelEn: 'Web & Extensions',
+                categoryLabelBn: 'ওয়েব ও এক্সটেনশন',
+                icon: 'fa-solid fa-wallet',
+                accent: 'cyan',
+                titleEn: 'Bilingual Income, Expense & Debt Tracker',
+                titleBn: 'আয়, ব্যয় ও লেনদেন ট্র্যাকার ওয়েব অ্যাপ',
+                shortDescEn: 'Responsive personal finance web app featuring English/Bengali interface, real-time balance tracking, and debt records.',
+                shortDescBn: 'বাংলা ও ইংরেজি ইন্টারফেস সমৃদ্ধ ব্যক্তিগত আয়-ব্যয় এবং দেনা-পাওনা হিসাব রাখার আধুনিক ওয়েব অ্যাপ্লিকেশন।',
+                fullDescEn: 'A comprehensive personal finance management web application engineered for everyday usability in both Bengali and English. Designed to track daily income, categorize expenses, and maintain clear records of borrowed or lent money with instant summary metrics.',
+                fullDescBn: 'দৈনন্দিন জীবনের আয়, ব্যয় এবং ধার বা পাওনা টাকার নিখুঁত হিসাব রাখার জন্য তৈরি একটি দ্বিভাষিক (বাংলা ও ইংরেজি) ওয়েব অ্যাপ। এতে তাৎক্ষণিক ব্যালেন্স ক্যালকুলেশন এবং ক্লাউড/লোকাল ডাটা স্টোরেজ সুবিধা রয়েছে।',
+                featuresEn: [
+                    'Bilingual UI toggle (Bengali & English) with clean typography',
+                    'Separate modules for Income, Daily Expense, and Debt/Loan tracking',
+                    'Real-time balance calculation and transaction filtering',
+                    'Structured for local storage persistence and Supabase/Firebase sync'
+                ],
+                featuresBn: [
+                    'বাংলা এবং ইংরেজি ভাষায় সহজ ব্যবহারযোগ্য ইন্টারফেস',
+                    'আয়, ব্যয় এবং দেনা-পাওনার আলাদা ও গোছানো হিসাব',
+                    'রিয়েল-টাইম ব্যালেন্স ক্যালকুলেশন ও সার্চ/ফিল্টার সুবিধা',
+                    'লোকাল স্টোরেজ এবং Supabase/Firebase ডাটাবেজ সাপোর্ট'
+                ],
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Supabase / Firebase', 'Responsive UI']
+            },
+            {
+                id: 2,
+                idTag: 'teletalk-ext',
+                category: 'web',
+                categoryLabelEn: 'Web & Extensions',
+                categoryLabelBn: 'ওয়েব ও এক্সটেনশন',
+                icon: 'fa-brands fa-chrome',
+                accent: 'emerald',
+                titleEn: 'Teletalk Job Portal Auto-Fill Extension',
+                titleBn: 'টেলিটক জব পোর্টাল অটো-ফিল ক্রোম এক্সটেনশন',
+                shortDescEn: 'Custom Chrome Browser Extension that automates applicant data entry on *.teletalk.com.bd government job portals.',
+                shortDescBn: 'সরকারি চাকরির আবেদনের সময় *.teletalk.com.bd সাইটে এক ক্লিকে দ্রুত ফর্ম পূরণের কাস্টম ক্রোম এক্সটেনশন।',
+                fullDescEn: 'Built to solve repetitive typing bottlenecks in computer shop operations. This Manifest V3 Chrome Extension parses applicant profiles and automatically maps names, addresses, educational qualifications, and dropdown selections across Teletalk recruitment forms.',
+                fullDescBn: 'কম্পিউটার দোকানে সরকারি চাকরির আবেদনের কাজ দ্রুত ও নির্ভুল করার জন্য এই কাস্টম ক্রোম এক্সটেনশনটি তৈরি করা হয়েছে। এটি প্রার্থীর তথ্য সংরক্ষণ করে এবং এক ক্লিকে টেলিটক ফর্মের সকল ইনপুট ও ড্রপডাউন পূরণ করে দেয়।',
+                featuresEn: [
+                    'Automated DOM field detection for *.teletalk.com.bd recruitment forms',
+                    'Instant auto-selection of SSC/HSC/Honours examination dropdowns',
+                    'Drastically reduces form completion time and human typing errors',
+                    'Lightweight Manifest V3 architecture with local profile storage'
+                ],
+                featuresBn: [
+                    '*.teletalk.com.bd ওয়েবসাইটের ফর্মের ফিল্ডগুলো স্বয়ংক্রিয়ভাবে শনাক্তকরণ',
+                    'শিক্ষাগত যোগ্যতা, জেলা ও অন্যান্য ড্রপডাউন অটো-সিলেকশন',
+                    'টাইপিংয়ের ভুল কমায় এবং আবেদনের সময় বহুগুণ বাঁচায়',
+                    'আধুনিক Chrome Extension Manifest V3 স্ট্রাকচারে তৈরি'
+                ],
+                tech: ['JavaScript', 'Chrome Extension MV3', 'DOM Manipulation', 'Automation']
+            },
+            {
+                id: 3,
+                category: 'network',
+                categoryLabelEn: 'Networking & IT',
+                categoryLabelBn: 'নেটওয়ার্কিং ও আইটি',
+                icon: 'fa-solid fa-tower-broadcast',
+                accent: 'cyan',
+                titleEn: 'RJ Network – ISP Branding & Lead System',
+                titleBn: 'RJ Network – আইএসপি ব্র্যান্ডিং ও কাস্টমার সিস্টেম',
+                shortDescEn: 'Complete ISP operational suite in Jhautia including digital lead capture, A5 money receipts, and dual-band router promos.',
+                shortDescBn: 'ঝাউটিয়ার আরজে নেটওয়ার্ক (ISP)-এর জন্য ডিজিটাল কাস্টমার ফর্ম, মানি রিসিপ্ট, বিজনেস কার্ড ও প্রমোশনাল ডিজাইন।',
+                fullDescEn: 'End-to-end technical and branding support for RJ Network, a local Internet Service Provider in Jhautia, Kushtia. Delivered print-ready A5 billing receipts, bilingual business cards, Cudy dual-band router educational graphics, and online package inquiry workflows.',
+                fullDescBn: 'কুষ্টিয়ার ঝাউটিয়ায় অবস্থিত ইন্টারনেট সার্ভিস প্রোভাইডার "RJ Network"-এর জন্য পূর্ণাঙ্গ ব্র্যান্ডিং ও কারিগরি সলিউশন। এতে রয়েছে A5 মানি রিসিপ্ট, বিজনেস কার্ড, ডুয়াল-ব্যান্ড রাউটার ইনফোগ্রাফিক এবং নতুন সংযোগের লিড জেনারেশন ফর্ম।',
+                featuresEn: [
+                    'Print-ready A5 Money Receipts & Dual-sided Bengali Business Cards',
+                    'Educational infographics comparing Single-Band vs Dual-Band Wi-Fi',
+                    'Customer connection request & package showcase web workflow',
+                    'Field assistance with fiber ONU & Cudy router configuration'
+                ],
+                featuresBn: [
+                    'প্রিন্ট-রেডি A5 মানি রিসিপ্ট এবং দ্বিমুখী বাংলা বিজনেস কার্ড',
+                    'সিঙ্গেল ব্যান্ড বনাম ডুয়াল ব্যান্ড রাউটারের তুলনামূলক প্রমোশনাল পোস্টার',
+                    'নতুন সংযোগের আবেদন ও প্যাকেজ প্রদর্শনের ওয়েব ফর্ম',
+                    'অপটিক্যাল ফাইবার ও ডুয়াল-ব্যান্ড রাউটার কনফিগারেশন সাপোর্ট'
+                ],
+                tech: ['ISP Workflow', 'Router Setup', 'Print Design', 'Lead Forms']
+            },
+            {
+                id: 4,
+                category: 'network',
+                categoryLabelEn: 'Networking & IT',
+                categoryLabelBn: 'নেটওয়ার্কিং ও আইটি',
+                icon: 'fa-solid fa-server',
+                accent: 'emerald',
+                titleEn: 'MikroTik CHR & Home Lab Network Architecture',
+                titleBn: 'মাইক্রোটিক CHR ও নেটওয়ার্ক ল্যাব আর্কিটেকচার',
+                shortDescEn: 'Virtualized MikroTik RouterOS (CHR) environment on VirtualBox practicing MTCNA routing, NAT, DHCP, and bandwidth queues.',
+                shortDescBn: 'VirtualBox-এ MikroTik RouterOS (CHR) ল্যাব তৈরি করে ব্যান্ডউইথ কন্ট্রোল, DHCP, NAT এবং হটস্পট কনফিগারেশন অনুশীলন।',
+                fullDescEn: 'A dedicated virtual networking laboratory running MikroTik Cloud Hosted Router (CHR) inside Oracle VirtualBox alongside Windows systems. Built to test ISP-grade configurations including IP addressing, NAT masquerading, Simple Queues, and Wi-Fi roaming.',
+                fullDescBn: 'বাস্তব আইএসপি ও লোকাল এরিয়া নেটওয়ার্ক পরিচালনার দক্ষতা বৃদ্ধির জন্য VirtualBox-এ তৈরি মাইক্রোটিক রাউটারওএস (CHR) ল্যাব। এখানে ব্যান্ডউইথ ম্যানেজমেন্ট, আইপি রাউটিং, ফায়ারওয়াল এবং ওয়াইফাই অপটিমাইজেশন টেস্ট করা হয়।',
+                featuresEn: [
+                    'MikroTik CHR deployment on VirtualBox with bridged/internal adapters',
+                    'WinBox administration: DHCP Server, NAT, DNS & IP Pool setup',
+                    'Bandwidth management using Simple Queues & client isolation testing',
+                    'Multi-boot Ventoy USB toolkit for rapid bare-metal OS recovery'
+                ],
+                featuresBn: [
+                    'VirtualBox-এ MikroTik CHR ইনস্টলেশন ও নেটওয়ার্ক অ্যাডাপ্টার সেটআপ',
+                    'WinBox দিয়ে DHCP, NAT, DNS এবং আইপি পুল কনফিগারেশন',
+                    'Simple Queues ব্যবহার করে ইউজারদের ইন্টারনেট স্পিড লিমিটেশন',
+                    'কাস্টম Ventoy মাল্টিবুট টুলকিট দিয়ে দ্রুত পিসি ট্রাবলশুটিং'
+                ],
+                tech: ['MikroTik RouterOS', 'WinBox', 'VirtualBox CHR', 'MTCNA Concepts']
+            },
+            {
+                id: 5,
+                category: 'branding',
+                categoryLabelEn: 'Branding & Print',
+                categoryLabelBn: 'ব্র্যান্ডিং ও প্রিন্ট',
+                icon: 'fa-solid fa-futbol',
+                accent: 'amber',
+                titleEn: 'Taikun Football Tournament 2026 Management Suite',
+                titleBn: 'তাইকুন ফুটবল টুর্নামেন্ট ২০২৬ ম্যানেজমেন্ট স্যুট',
+                shortDescEn: '16-team knockout tournament bracket architecture, official bylaws document, registration forms, and promo posters.',
+                shortDescBn: '১৬ দলের নকআউট ফুটবল টুর্নামেন্টের ফিক্সচার, অফিসিয়াল গঠনতন্ত্র, রেজিস্ট্রেশন ফর্ম এবং প্রমোশনাল পোস্টার।',
+                fullDescEn: 'Complete organizational documentation and visual identity package created for the Taikun Football Tournament 2026 at Jhautia Ballfield. Engineered structured 16-team knockout fixtures, official rulebooks, and team entry sheets.',
+                fullDescBn: 'ঝাউটিয়া বলফিল্ডে আয়োজিত ১৬ দলের তাইকুন ফুটবল টুর্নামেন্ট ২০২৬-এর জন্য তৈরি পূর্ণাঙ্গ ডকুমেন্টেশন ও গ্রাফিক্স প্যাকেজ। এতে রয়েছে নকআউট ফিক্সচার চার্ট, টুর্নামেন্টের নিয়মাবলি এবং দল নিবন্ধনের অফিসিয়াল ফর্ম।',
+                featuresEn: [
+                    'Symmetrical 16-Team Knockout Fixture Chart (Round of 16 to Final)',
+                    'Official Bengali tournament constitution, discipline rules & match laws',
+                    'Printable Team & Player Registration Form with manager undertakings',
+                    'High-impact social media promotional banners and reels assets'
+                ],
+                featuresBn: [
+                    '১৬ দলের নকআউট ফিক্সচার চার্ট (প্রথম রাউন্ড থেকে ফাইনাল)',
+                    'টুর্নামেন্টের অফিসিয়াল বাংলা নীতিমালা ও শৃঙ্খলাবিধি ডকুমেন্ট',
+                    'খেলোয়াড় ও টিম ম্যানেজারদের স্বাক্ষরসহ প্রিন্টেবল রেজিস্ট্রেশন ফর্ম',
+                    'সোশ্যাল মিডিয়া প্রচারণার জন্য আকর্ষণীয় ব্যানার ও পোস্টার'
+                ],
+                tech: ['MS Word Layout', 'Bengali Typography', 'Fixture Design', 'Print Media']
+            },
+            {
+                id: 6,
+                category: 'branding',
+                categoryLabelEn: 'Branding & Print',
+                categoryLabelBn: 'ব্র্যান্ডিং ও প্রিন্ট',
+                icon: 'fa-solid fa-file-word',
+                accent: 'purple',
+                titleEn: 'Academic Exam Paper Formatting System',
+                titleBn: 'একাডেমিক প্রশ্নপত্র ও ডকুমেন্ট ফরম্যাটিং সিস্টেম',
+                shortDescEn: 'Standardized printable MS Word examination paper templates across multiple grade levels and subjects.',
+                shortDescBn: 'স্কুল ও শিক্ষাপ্রতিষ্ঠানের বিভিন্ন শ্রেণির পরীক্ষার প্রশ্নপত্র দ্রুত ও নির্ভুলভাবে তৈরির স্ট্যান্ডার্ড MS Word টেমপ্লেট।',
+                fullDescEn: 'Developed a structured document production workflow in Microsoft Word for local schools and coaching centers. Features multi-column layouts, mathematical equations, poem alignments, and print-optimized margins.',
+                fullDescBn: 'স্থানীয় শিক্ষাপ্রতিষ্ঠান ও স্কুলের ১ম থেকে ৫ম শ্রেণি ও তদূর্ধ্ব ক্লাসের বাংলা, ইংরেজি, গণিত, বিজ্ঞান ও ধর্ম বিষয়ের প্রশ্নপত্র দ্রুত কম্পোজ ও নিখুঁত প্রিন্ট লেআউটে সাজানোর প্রফেশনাল সিস্টেম।',
+                featuresEn: [
+                    'Clean multi-column exam templates for Bengali, English, Math & Science',
+                    'Flawless Bijoy/Avro Bengali typography and equation formatting',
+                    'Print-ready A4/Legal page setups optimized for commercial photocopiers',
+                    'Rapid turnaround for institutional exam schedules'
+                ],
+                featuresBn: [
+                    'বাংলা, ইংরেজি, গণিত ও বিজ্ঞানের জন্য আদর্শ প্রশ্নপত্র লেআউট',
+                    'নির্ভুল বাংলা বানান, কবিতার লাইন বিন্যাস ও গণিতের সমীকরণ টাইপিং',
+                    'ফটোকপিয়ার ও প্রিন্টারে সরাসরি প্রিন্টের উপযোগী মার্জিন সেটআপ',
+                    'কম সময়ে অধিক সংখ্যক প্রশ্নপত্র প্রস্তুত করার কার্যকর ওয়ার্কফ্লো'
+                ],
+                tech: ['MS Word', 'Bijoy / Avro', 'Academic Layout', 'Print Production']
+            }
+        ];
+
+        let currentLang = 'en';
+        let currentFilter = 'all';
+
+        // --- 2. RENDER PROJECTS GRID ---
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            const filtered = currentFilter === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.category === currentFilter);
+
+            grid.innerHTML = filtered.map(project => {
+                const title = currentLang === 'en' ? project.titleEn : project.titleBn;
+                const desc = currentLang === 'en' ? project.shortDescEn : project.shortDescBn;
+                const catLabel = currentLang === 'en' ? project.categoryLabelEn : project.categoryLabelBn;
+                const btnText = currentLang === 'en' ? 'View Details' : 'বিস্তারিত দেখুন';
+
+                return `
+                    <div class="bento-card rounded-3xl p-6 bg-white/90 dark:bg-slate-800/60 backdrop-blur-xl border border-slate-200/80 dark:border-slate-700/60 shadow-xl shadow-slate-900/5 flex flex-col justify-between space-y-5 group">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="w-11 h-11 rounded-2xl bg-${project.accent}-500/10 border border-${project.accent}-500/20 flex items-center justify-center text-${project.accent}-500 text-lg">
+                                    <i class="${project.icon}"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                    ${catLabel}
+                                </span>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-cyan-500 transition">${title}</h3>
+                                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">${desc}</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-3 border-t border-slate-200/60 dark:border-slate-700/60">
+                            <div class="flex flex-wrap gap-1.5">
+                                ${project.tech.map(t => `<span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400">${t}</span>`).join('')}
+                            </div>
+
+                            <button onclick="openProjectModal(${project.id})" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-700/60 hover:bg-cyan-500 dark:hover:bg-cyan-500 text-slate-800 dark:text-white hover:text-white transition flex items-center justify-center gap-2">
+                                <span>${btnText}</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- 3. FILTER PROJECTS ---
+        function filterProjects(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.className = 'filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-white shadow-md shadow-cyan-500/20 transition';
+                } else {
+                    btn.className = 'filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-cyan-500 transition';
+                }
+            });
+            renderProjects();
+        }
+
+        // --- 4. PROJECT MODAL HANDLERS ---
+        function openProjectModal(id) {
+            const project = projectsData.find(p => p.id === id);
+            if (!project) return;
+
+            document.getElementById('modal-category-badge').textContent = currentLang === 'en' ? project.categoryLabelEn : project.categoryLabelBn;
+            document.getElementById('modal-title').textContent = currentLang === 'en' ? project.titleEn : project.titleBn;
+            document.getElementById('modal-description').textContent = currentLang === 'en' ? project.fullDescEn : project.fullDescBn;
+
+            const features = currentLang === 'en' ? project.featuresEn : project.featuresBn;
+            document.getElementById('modal-features').innerHTML = features.map(f => `
+                <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-circle-check text-cyan-500 mt-1 text-xs"></i>
+                    <span>${f}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('modal-tech').innerHTML = project.tech.map(t => `
+                <span class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 border border-slate-200 dark:border-slate-700">${t}</span>
+            `).join('');
+
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- 5. CV MODAL HANDLERS ---
+        function openCVModal() {
+            const modal = document.getElementById('cv-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCVModal() {
+            const modal = document.getElementById('cv-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // --- 6. LANGUAGE SWITCHER (EN / BN) ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'bn' : 'en';
+            document.getElementById('lang-label').textContent = currentLang === 'en' ? 'বাং' : 'EN';
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-bn');
+            });
+
+            renderProjects();
+            showToast(currentLang === 'en' ? 'Switched to English' : 'বাংলা ভাষা চালু করা হয়েছে');
+        }
+
+        // --- 7. DARK / LIGHT THEME TOGGLE ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fa-solid fa-moon text-slate-700 text-sm';
+                localStorage.setItem('rabbi-theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fa-solid fa-sun text-amber-400 text-sm';
+                localStorage.setItem('rabbi-theme', 'dark');
+            }
+        }
+
+        // --- 8. MOBILE MENU TOGGLE ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? 'fa-solid fa-bars' : 'fa-solid fa-xmark';
+        }
+
+        // --- 9. CLIPBOARD COPY & TOAST NOTIFICATION ---
+        function copyToClipboard(text, label) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const msg = currentLang === 'en' 
+                ? `${label} copied: ${text}` 
+                : `${text} কপি করা হয়েছে!`;
+            showToast(msg);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // --- 10. LIVE BANGLADESH CLOCK (GMT+6) ---
+        function updateBDClock() {
+            try {
+                const options = { timeZone: 'Asia/Dhaka', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeString = new Intl.DateTimeFormat('en-US', options).format(new Date());
+                document.getElementById('bd-clock').textContent = `BD ${timeString}`;
+            } catch (e) {
+                document.getElementById('bd-clock').textContent = 'GMT+6';
+            }
+        }
+
+        // --- 11. CONTACT FORM SUBMISSION (READY FOR SUPABASE / FIREBASE) ---
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalHTML = btn.innerHTML;
+
+            const payload = {
+                name: document.getElementById('sender-name').value.trim(),
+                contact: document.getElementById('sender-email').value.trim(),
+                subject: document.getElementById('sender-subject').value.trim(),
+                message: document.getElementById('sender-message').value.trim(),
+                submitted_at: new Date().toISOString()
+            };
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Sending...</span>`;
+
+            /* =========================================================================
+               SUPABASE / FIREBASE INTEGRATION HOOK:
+               To save messages directly to your Supabase table (`messages`), uncomment
+               and add your SUPABASE_URL and SUPABASE_ANON_KEY below:
+               
+               const res = await fetch('https://YOUR_PROJECT.supabase.co/rest/v1/messages', {
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json',
+                       'apikey': 'YOUR_SUPABASE_ANON_KEY',
+                       'Authorization': 'Bearer YOUR_SUPABASE_ANON_KEY'
+                   },
+                   body: JSON.stringify(payload)
+               });
+            ========================================================================= */
+
+            setTimeout(() => {
+                // Save a local backup copy in browser storage
+                const existing = JSON.parse(localStorage.getItem('rabbi_contact_messages') || '[]');
+                existing.push(payload);
+                localStorage.setItem('rabbi_contact_messages', JSON.stringify(existing));
+
+                document.getElementById('contact-form').reset();
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+
+                const successMsg = currentLang === 'en'
+                    ? 'Thank you! Your message has been recorded.'
+                    : 'ধন্যবাদ! আপনার মেসেজটি সফলভাবে পাঠানো হয়েছে।';
+                showToast(successMsg);
+            }, 700);
+        }
+
+        // Close modals on Escape key or backdrop click
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+                closeCVModal();
+            }
+        });
+
+        // --- INITIALIZE ON LOAD ---
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('rabbi-theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon text-slate-700 text-sm';
+            }
+            renderProjects();
+            updateBDClock();
+            setInterval(updateBDClock, 1000);
+        };
+    </script>
+</body>
+</html>
