@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#09090b" />
+  <title>Under Maintenance — Rabbi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            // Latin glyphs come from Plus Jakarta Sans, Bengali glyphs fall through to Hind Siliguri
+            sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'system-ui', 'sans-serif'],
+            bn: ['"Hind Siliguri"', '"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html, body { height: 100%; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Hind Siliguri', system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+    }
+
+    /* ---------- Story shell ---------- */
+    #story {
+      -webkit-user-select: none; user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: manipulation;
+      isolation: isolate;
+    }
+    @media (min-width: 640px) {
+      #story {
+        width: min(420px, 100%);
+        height: min(840px, 94dvh);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(255, 255, 255, .09);
+        box-shadow:
+          0 0 0 6px rgba(255, 255, 255, .025),
+          0 30px 80px -20px rgba(0, 0, 0, .9),
+          0 0 90px -10px rgba(139, 92, 246, .28);
+      }
+    }
+
+    /* ---------- Progress segments ---------- */
+    .seg { flex: 1; height: 3px; border-radius: 99px; background: rgba(255,255,255,.22); overflow: hidden; }
+    .seg > i { display: block; width: 100%; height: 100%; background: #fff; transform-origin: left center; transform: scaleX(0); will-change: transform; }
+
+    /* ---------- Slides ---------- */
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity .35s ease, visibility 0s linear .35s;
+      padding: 104px 22px 28px;
+      display: flex; flex-direction: column;
+    }
+    .slide.active { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.8,.2,1); }
+    .slide.active .reveal { opacity: 1; transform: none; transition-delay: calc(var(--d, 0) * 90ms + 120ms); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .slide { transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- Background glows ---------- */
+    .glow { position: absolute; border-radius: 9999px; filter: blur(70px); opacity: .5; pointer-events: none; }
+
+    /* ---------- Fake progress bar (slide 1) ---------- */
+    @keyframes fill { 0% { width: 8%; } 60% { width: 72%; } 100% { width: 88%; } }
+    .slide.active .fakebar { animation: fill 5s ease-out forwards; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .caret { animation: blink 1s steps(1) infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .gear { animation: spin 6s linear infinite; transform-origin: center; }
+
+    /* ---------- Bubble wrap ---------- */
+    #bubbleGrid { touch-action: none; }
+    .bubble {
+      position: relative; aspect-ratio: 1 / 1; width: 100%;
+      border-radius: 9999px; border: 0; padding: 0; cursor: pointer;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,.85) 0 7%, rgba(255,255,255,0) 22%),
+        radial-gradient(circle at 50% 55%, rgba(167,139,250,.55), rgba(99,102,241,.35) 60%, rgba(56,189,248,.25) 100%);
+      box-shadow: inset 0 -4px 8px rgba(0,0,0,.35), inset 0 2px 4px rgba(255,255,255,.25), 0 2px 6px rgba(0,0,0,.45);
+      transition: transform .12s ease, filter .2s ease;
+      outline: none;
+    }
+    .bubble:active:not(.popped) { transform: scale(.92); }
+    .bubble.popped {
+      transform: scale(.62);
+      background: radial-gradient(circle, rgba(0,0,0,.55), rgba(39,39,42,.7));
+      box-shadow: inset 0 2px 5px rgba(0,0,0,.8);
+      cursor: default;
+      animation: collapse .22s ease-out;
+    }
+    @keyframes collapse { 0% { transform: scale(1.18); } 100% { transform: scale(.62); } }
+    .bubble:focus-visible { box-shadow: 0 0 0 2px #a78bfa; }
+
+    .card-link { transition: transform .15s ease, background-color .2s ease, border-color .2s ease; }
+    .card-link:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
+    .card-link:active { transform: scale(.98); }
+  </style>
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased">
+
+  <!-- Ambient page backdrop (desktop) -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="glow w-[480px] h-[480px] bg-violet-600/30 -top-40 -left-32"></div>
+    <div class="glow w-[420px] h-[420px] bg-fuchsia-600/20 -bottom-40 -right-24"></div>
+  </div>
+
+  <main class="min-h-[100dvh] w-full flex items-center justify-center sm:p-4">
+    <section id="story" aria-label="Maintenance story" class="relative w-full h-[100dvh] bg-zinc-950 overflow-hidden">
+
+      <!-- Card background -->
+      <div class="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950"></div>
+
+      <!-- ============ TOP: progress + header ============ -->
+      <div class="absolute top-0 inset-x-0 z-30 px-3 pt-3 pb-8 bg-gradient-to-b from-black/60 to-transparent pointer-events-none"
+           style="padding-top: max(12px, env(safe-area-inset-top));">
+        <div id="bars" class="flex gap-1.5 pointer-events-none"></div>
+
+        <div class="mt-3 flex items-center gap-2.5">
+          <div class="p-[2px] rounded-full bg-gradient-to-tr from-amber-400 via-fuchsia-500 to-violet-600 shrink-0">
+            <div class="w-9 h-9 rounded-full bg-zinc-900 border-2 border-zinc-950 grid place-items-center text-sm font-extrabold bg-gradient-to-br from-violet-300 to-fuchsia-300 bg-clip-text text-transparent">R</div>
+          </div>
+
+          <div class="min-w-0 leading-tight">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm font-bold">Rabbi</span>
+              <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5l2.6 1.9 3.2-.1 1 3 2.6 1.9-1 3 1 3-2.6 1.9-1 3-3.2-.1L12 22.5l-2.6-1.9-3.2.1-1-3-2.6-1.9 1-3-1-3 2.6-1.9 1-3 3.2.1L12 1.5z"/><path d="M8.5 12.2l2.4 2.4 4.6-4.8" fill="none" stroke="#09090b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="flex items-center gap-1.5 text-[11px] text-zinc-300 mt-0.5">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-70"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+              </span>
+              <span class="truncate">Maintenance Mode 🛠️</span>
+            </div>
+          </div>
+
+          <div class="ml-auto flex items-center gap-2 pointer-events-auto">
+            <span id="stateBadge" class="inline-flex items-center gap-1 rounded-full bg-white/10 backdrop-blur px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-zinc-200">
+              <span id="stateDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span id="stateText">Auto</span>
+            </span>
+
+            <button id="muteBtn" data-interactive type="button" aria-label="Mute sound" aria-pressed="false"
+                    class="w-8 h-8 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-zinc-100 transition">
+              <svg id="icoOn" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+              <svg id="icoOff" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SLIDES ============ -->
+      <div id="slides" class="absolute inset-0 z-10">
+
+        <!-- Slide 1 — The Notice -->
+        <article class="slide" aria-label="Notice">
+          <div class="glow w-72 h-72 bg-violet-600/40 -top-10 -right-24"></div>
+          <div class="glow w-64 h-64 bg-fuchsia-600/25 bottom-10 -left-24"></div>
+
+          <div class="relative flex-1 flex flex-col justify-center">
+            <div class="reveal" style="--d:0">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 grid place-items-center shadow-lg shadow-violet-900/50">
+                <svg class="gear w-9 h-9 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+            </div>
+
+            <p class="reveal mt-6 text-[11px] font-bold uppercase tracking-[.22em] text-violet-300" style="--d:1">Under Maintenance</p>
+
+            <h1 class="reveal font-bn mt-3 text-[28px] leading-[1.35] font-bold text-white" style="--d:2">
+              সাইটের ডিজাইন মনের মত করার জন্য একটু <span class="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-amber-200 bg-clip-text text-transparent">ঘষামাজা চলছে।</span>
+            </h1>
+
+            <p class="reveal mt-4 text-[15px] leading-relaxed text-zinc-400" style="--d:3">
+              My portfolio is getting a full refactor — fresh projects, cleaner code and serious speed optimizations. Nothing is broken, I'm just being a perfectionist. 😅
+            </p>
+
+            <div class="reveal mt-6 rounded-2xl border border-white/10 bg-black/40 p-4 font-mono text-[12px] leading-relaxed" style="--d:4">
+              <div class="flex gap-1.5 mb-3">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+              </div>
+              <div class="text-zinc-500">$ git commit -m "<span class="text-emerald-300">make it prettier (again)</span>"</div>
+              <div class="mt-1 text-zinc-400">refactoring portfolio… <span id="pctText" class="text-violet-300">88%</span><span class="caret text-violet-300">▍</span></div>
+              <div class="mt-2 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                <div class="fakebar h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-400" style="width:8%"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 — What's Coming -->
+        <article class="slide" aria-label="What's coming">
+          <div class="glow w-72 h-72 bg-sky-600/30 -top-16 -left-24"></div>
+          <div class="glow w-64 h-64 bg-violet-600/30 bottom-0 -right-24"></div>
+
+          <div class="relative flex-1 flex flex-col justify-center">
+            <p class="reveal text-[11px] font-bold uppercase tracking-[.22em] text-sky-300" style="--d:0">What's coming</p>
+            <h2 class="reveal mt-2 text-3xl font-extrabold leading-tight" style="--d:1">
+              Fresh things are <span class="bg-gradient-to-r from-sky-300 to-violet-300 bg-clip-text text-transparent">on the way</span>
+            </h2>
+            <p class="reveal font-bn mt-2 text-sm text-zinc-400" style="--d:2">নতুন কী কী আসছে — এক নজরে</p>
+
+            <div class="mt-6 space-y-3">
+              <div class="reveal rounded-2xl border border-white/10 bg-white/[.04] backdrop-blur p-4 flex gap-4 items-start" style="--d:3">
+                <div class="shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 grid place-items-center text-xl shadow-lg shadow-orange-900/40">⚡</div>
+                <div>
+                  <h3 class="font-bold text-[15px]">Minimal, ultra-fast UI</h3>
+                  <p class="font-bn text-[13px] text-zinc-400 mt-1 leading-relaxed">ঝকঝকে, হালকা আর চোখের পলকে লোড হওয়া ডিজাইন।</p>
+                </div>
+              </div>
+
+              <div class="reveal rounded-2xl border border-white/10 bg-white/[.04] backdrop-blur p-4 flex gap-4 items-start" style="--d:4">
+                <div class="shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 grid place-items-center text-xl shadow-lg shadow-violet-900/40">🚀</div>
+                <div>
+                  <h3 class="font-bold text-[15px]">Recent projects + live demos</h3>
+                  <p class="font-bn text-[13px] text-zinc-400 mt-1 leading-relaxed">সাম্প্রতিক কাজগুলো, সাথে চালিয়ে দেখার লাইভ ডেমো।</p>
+                </div>
+              </div>
+
+              <div class="reveal rounded-2xl border border-white/10 bg-white/[.04] backdrop-blur p-4 flex gap-4 items-start" style="--d:5">
+                <div class="shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-emerald-400 grid place-items-center text-xl shadow-lg shadow-sky-900/40">🧰</div>
+                <div>
+                  <h3 class="font-bold text-[15px]">Client-side web utility tools</h3>
+                  <p class="font-bn text-[13px] text-zinc-400 mt-1 leading-relaxed">সবকিছু ব্রাউজারেই চলে — কোনো সার্ভার বা ডাটা আপলোড ছাড়াই।</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 3 — Emergency Contact -->
+        <article class="slide" aria-label="Contact">
+          <div class="glow w-72 h-72 bg-emerald-600/25 -top-16 -right-24"></div>
+          <div class="glow w-64 h-64 bg-fuchsia-600/25 bottom-0 -left-24"></div>
+
+          <div class="relative flex-1 flex flex-col justify-center">
+            <p class="reveal text-[11px] font-bold uppercase tracking-[.22em] text-emerald-300" style="--d:0">Emergency contact</p>
+            <h2 class="reveal font-bn mt-2 text-[27px] leading-[1.35] font-bold" style="--d:1">
+              সাইট ডাউন হলেও <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">ইনবক্স ওপেন!</span>
+            </h2>
+            <p class="reveal mt-2 text-sm text-zinc-400" style="--d:2">Site's down, but my inbox is wide open. Pick your favourite way to reach me.</p>
+
+            <div id="contactList" class="mt-5 space-y-2.5"></div>
+          </div>
+        </article>
+
+        <!-- Slide 4 — Bubble Wrap -->
+        <article class="slide" aria-label="Bubble wrap game">
+          <div class="glow w-72 h-72 bg-indigo-600/35 -top-10 -left-24"></div>
+          <div class="glow w-64 h-64 bg-sky-600/25 bottom-0 -right-24"></div>
+
+          <div class="relative flex-1 flex flex-col justify-center items-center min-h-0">
+            <div class="reveal w-full text-center" style="--d:0">
+              <p class="text-[11px] font-bold uppercase tracking-[.22em] text-indigo-300">Stress relief</p>
+              <h2 class="font-bn mt-1.5 text-2xl font-extrabold leading-snug">অপেক্ষা করতে করতে বিরক্ত? <span class="bg-gradient-to-r from-indigo-300 to-sky-300 bg-clip-text text-transparent">বাবল ফাটান!</span></h2>
+            </div>
+
+            <div class="reveal mt-4" style="--d:1; width:min(100%, calc(100dvh - 355px), 360px);">
+              <div id="bubbleGrid" data-interactive class="grid grid-cols-8 gap-1.5 rounded-2xl border border-white/10 bg-black/30 p-2.5"></div>
+            </div>
+
+            <div class="reveal mt-4 flex items-center gap-3" style="--d:2">
+              <span class="rounded-full bg-white/10 px-3.5 py-2 text-xs font-semibold text-zinc-200 tabular-nums">
+                Popped <span id="popCount" class="text-white">0</span>/64
+              </span>
+              <button id="resetBtn" data-interactive type="button"
+                      class="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2 text-xs font-bold text-white shadow-lg shadow-violet-900/40 hover:brightness-110 active:scale-95 transition">
+                Reset Bubbles
+              </button>
+            </div>
+            <p id="winMsg" class="font-bn mt-3 h-5 text-sm font-semibold text-emerald-300 opacity-0 transition-opacity">🎉 সব বাবল শেষ! দারুণ!</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* =====================================================
+       CONFIG — edit these links / numbers
+       ===================================================== */
+    const CONFIG = {
+      email:    'mailto:rakibulislamrabbi.kh@gmail.com',
+      facebook: 'https://facebook.com/rakibulislamrabbi24',   // TODO: replace with your real profile URL
+      whatsapp: 'https://wa.me/8801XXXXXXXXX',                // TODO: replace with your number (country code, no +)
+      github:   'https://github.com/rakibulislamrabbi24',
+      duration: 5000                                          // ms per slide
+    };
+
+    /* =====================================================
+       Brand logos (inline SVG)
+       ===================================================== */
+    const LOGOS = {
+      email: `<svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><rect x="1.5" y="4" width="21" height="16" rx="3" fill="#fff"/><path d="M1.5 7.2 12 14l10.5-6.8V7a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.2z" fill="#EA4335"/><path d="M1.5 7.2V17a3 3 0 0 0 3 3H6V9.6L1.5 7.2z" fill="#4285F4"/><path d="M22.5 7.2V17a3 3 0 0 1-3 3H18V9.6l4.5-2.4z" fill="#34A853"/><path d="M6 20V9.6L12 14l6-4.4V20" fill="none"/><path d="M1.5 7.2 6 9.6M22.5 7.2 18 9.6" stroke="#EA4335" stroke-width="0" /></svg>`,
+      facebook: `<svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M13.5 24v-8.5h2.9l.5-3.4h-3.4V9.9c0-1 .3-1.6 1.7-1.6H17V5.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.3 1.6-4.3 4.4v2.5H7.2v3.4h2.9V24z"/></svg>`,
+      whatsapp: `<svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="#25D366" d="M12 1.2a10.8 10.8 0 0 0-9.3 16.3L1.2 22.8l5.4-1.4A10.8 10.8 0 1 0 12 1.2z"/><path fill="#fff" transform="translate(5.1 5.1) scale(.58)" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`,
+      github: `<svg viewBox="0 0 16 16" class="w-6 h-6 text-white" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>`
+    };
+
+    const CONTACTS = [
+      { key: 'email',    name: 'Email',    sub: 'rakibulislamrabbi.kh@gmail.com', href: CONFIG.email,    bg: 'bg-white/10',  external: false },
+      { key: 'facebook', name: 'Facebook', sub: 'Message me on Facebook',         href: CONFIG.facebook, bg: 'bg-[#1877F2]/15', external: true },
+      { key: 'whatsapp', name: 'WhatsApp', sub: 'Chat instantly',                 href: CONFIG.whatsapp, bg: 'bg-[#25D366]/15', external: true },
+      { key: 'github',   name: 'GitHub',   sub: '@rakibulislamrabbi24',           href: CONFIG.github,   bg: 'bg-white/10',  external: true }
+    ];
+
+    /* =====================================================
+       DOM refs
+       ===================================================== */
+    const $ = (s, r = document) => r.querySelector(s);
+    const story   = $('#story');
+    const slides  = Array.from(document.querySelectorAll('.slide'));
+    const barsBox = $('#bars');
+    const stateText = $('#stateText');
+    const stateDot  = $('#stateDot');
+    const muteBtn = $('#muteBtn');
+    const icoOn   = $('#icoOn');
+    const icoOff  = $('#icoOff');
+
+    /* =====================================================
+       Contact cards
+       ===================================================== */
+    (function buildContacts() {
+      const list = $('#contactList');
+      list.innerHTML = CONTACTS.map((c, i) => `
+        <a data-interactive href="${c.href}" ${c.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+           class="reveal card-link flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[.04] backdrop-blur p-3.5"
+           style="--d:${i + 3}" aria-label="${c.name}">
+          <span class="shrink-0 w-11 h-11 rounded-xl grid place-items-center ${c.bg}">${LOGOS[c.key]}</span>
+          <span class="min-w-0 flex-1">
+            <span class="block text-[15px] font-bold leading-tight">${c.name}</span>
+            <span class="block text-xs text-zinc-400 truncate mt-0.5">${c.sub}</span>
+          </span>
+          <svg class="w-4 h-4 text-zinc-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </a>`).join('');
+    })();
+
+    /* =====================================================
+       Audio (Web Audio API — fully synthetic)
+       ===================================================== */
+    let actx = null;
+    let muted = false;
+    let noiseBuf = null;
+
+    function getCtx() {
+      try {
+        if (!actx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return null;
+          actx = new AC();
+        }
+        if (actx.state === 'suspended') actx.resume();
+        return actx;
+      } catch (e) { return null; }
+    }
+
+    function getNoise(c) {
+      if (noiseBuf) return noiseBuf;
+      const len = Math.floor(c.sampleRate * 0.04);
+      noiseBuf = c.createBuffer(1, len, c.sampleRate);
+      const d = noiseBuf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+      return noiseBuf;
+    }
+
+    function playPop() {
+      if (muted) return;
+      const c = getCtx(); if (!c) return;
+      const t = c.currentTime;
+
+      // body: fast downward pitch sweep
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.type = 'triangle';
+      const f0 = 620 + Math.random() * 280;
+      o.frequency.setValueAtTime(f0, t);
+      o.frequency.exponentialRampToValueAtTime(90, t + 0.09);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.45, t + 0.004);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11);
+      o.connect(g).connect(c.destination);
+      o.start(t); o.stop(t + 0.12);
+
+      // snap: tiny filtered noise burst
+      const n = c.createBufferSource();
+      n.buffer = getNoise(c);
+      const hp = c.createBiquadFilter();
+      hp.type = 'highpass'; hp.frequency.value = 1800;
+      const ng = c.createGain(); ng.gain.value = 0.25;
+      n.connect(hp).connect(ng).connect(c.destination);
+      n.start(t);
+    }
+
+    function playTick() {
+      if (muted) return;
+      const c = getCtx(); if (!c) return;
+      const t = c.currentTime;
+      const o = c.createOscillator(); const g = c.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(880, t);
+      o.frequency.exponentialRampToValueAtTime(1200, t + 0.04);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.08, t + 0.005);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+      o.connect(g).connect(c.destination);
+      o.start(t); o.stop(t + 0.07);
+    }
+
+    function playWin() {
+      if (muted) return;
+      const c = getCtx(); if (!c) return;
+      [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+        const t = c.currentTime + i * 0.09;
+        const o = c.createOscillator(); const g = c.createGain();
+        o.type = 'sine'; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.18, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+        o.connect(g).connect(c.destination);
+        o.start(t); o.stop(t + 0.3);
+      });
+    }
+
+    function setMuted(v) {
+      muted = v;
+      muteBtn.setAttribute('aria-pressed', String(v));
+      muteBtn.setAttribute('aria-label', v ? 'Unmute sound' : 'Mute sound');
+      icoOn.classList.toggle('hidden', v);
+      icoOff.classList.toggle('hidden', !v);
+    }
+    muteBtn.addEventListener('click', () => {
+      setMuted(!muted);
+      if (!muted) playTick();
+    });
+
+    /* =====================================================
+       Story engine
+       ===================================================== */
+    const N = slides.length;
+    let idx = 0;
+    let elapsed = 0;
+    let paused = false;       // user hold / hidden tab
+    let lastTs = performance.now();
+
+    // build segments
+    const fills = slides.map(() => {
+      const seg = document.createElement('div');
+      seg.className = 'seg';
+      const i = document.createElement('i');
+      seg.appendChild(i);
+      barsBox.appendChild(seg);
+      return i;
+    });
+
+    function renderBars() {
+      fills.forEach((f, i) => {
+        if (i < idx) f.style.transform = 'scaleX(1)';
+        else if (i > idx) f.style.transform = 'scaleX(0)';
+      });
+    }
+
+    function go(n, silent) {
+      idx = ((n % N) + N) % N;
+      elapsed = 0;
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      renderBars();
+      fills[idx].style.transform = 'scaleX(0)';
+      if (!silent) playTick();
+    }
+    const next = () => go(idx + 1);
+    const prev = () => go(idx === 0 ? 0 : idx - 1);
+
+    function setPaused(v) {
+      paused = v;
+      stateText.textContent = v ? 'Paused' : 'Auto';
+      stateDot.className = 'w-1.5 h-1.5 rounded-full ' + (v ? 'bg-amber-400' : 'bg-emerald-400');
+    }
+
+    function frame(ts) {
+      const dt = Math.min(ts - lastTs, 100);
+      lastTs = ts;
+      if (!paused && !document.hidden) {
+        elapsed += dt;
+        if (elapsed >= CONFIG.duration) { next(); }
+      }
+      fills[idx].style.transform = 'scaleX(' + Math.min(elapsed / CONFIG.duration, 1) + ')';
+      requestAnimationFrame(frame);
+    }
+
+    /* ---------- Pointer controls: tap / hold ---------- */
+    const HOLD_MS = 200;
+    let down = false, held = false, holdTimer = null;
+
+    const isInteractive = (el) => !!(el && el.closest && el.closest('[data-interactive], a, button'));
+
+    story.addEventListener('pointerdown', (e) => {
+      if (e.button !== undefined && e.button > 0) return;
+      if (isInteractive(e.target)) return;
+      down = true; held = false;
+      clearTimeout(holdTimer);
+      holdTimer = setTimeout(() => { held = true; setPaused(true); }, HOLD_MS);
+    });
+
+    story.addEventListener('pointerup', (e) => {
+      if (!down) return;
+      down = false;
+      clearTimeout(holdTimer);
+      if (held) { held = false; setPaused(false); return; }   // long-press: just resume
+      const rect = story.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x < rect.width * 0.3) prev(); else next();           // left 30% / right 70%
+    });
+
+    const cancelHold = () => {
+      if (!down) return;
+      down = false;
+      clearTimeout(holdTimer);
+      if (held) { held = false; setPaused(false); }
+    };
+    story.addEventListener('pointercancel', cancelHold);
+    story.addEventListener('pointerleave', cancelHold);
+    story.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      else if (e.key === 'ArrowLeft') prev();
+      else if (e.key === ' ' && !isInteractive(document.activeElement)) { e.preventDefault(); setPaused(!paused); }
+    });
+
+    document.addEventListener('visibilitychange', () => { lastTs = performance.now(); });
+
+    /* =====================================================
+       Bubble wrap game
+       ===================================================== */
+    const grid = $('#bubbleGrid');
+    const popCountEl = $('#popCount');
+    const winMsg = $('#winMsg');
+    const TOTAL = 64;
+    let popped = 0;
+
+    for (let i = 0; i < TOTAL; i++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bubble';
+      b.setAttribute('aria-label', 'Bubble ' + (i + 1));
+      grid.appendChild(b);
+    }
+
+    function popBubble(b) {
+      if (!b || !b.classList.contains('bubble') || b.classList.contains('popped')) return;
+      b.classList.add('popped');
+      popped++;
+      popCountEl.textContent = popped;
+      elapsed = 0;              // keep the slide alive while the user is playing
+      playPop();
+      if (navigator.vibrate) { try { navigator.vibrate(8); } catch (_) {} }
+      if (popped === TOTAL) {
+        winMsg.style.opacity = '1';
+        setTimeout(playWin, 140);
+      }
+    }
+
+    grid.addEventListener('pointerdown', (e) => {
+      const b = e.target.closest('.bubble');
+      if (b) popBubble(b);
+    });
+    // drag across bubbles to pop several (mouse + touch)
+    grid.addEventListener('pointermove', (e) => {
+      if (e.buttons !== 1 && e.pointerType === 'mouse') return;
+      if (e.pointerType !== 'mouse' && !e.isPrimary) return;
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      if (el && grid.contains(el)) popBubble(el.closest('.bubble'));
+    });
+    // keyboard activation
+    grid.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('bubble')) {
+        e.preventDefault(); popBubble(e.target);
+      }
+    });
+
+    $('#resetBtn').addEventListener('click', () => {
+      const all = Array.from(grid.children);
+      all.forEach((b, i) => setTimeout(() => b.classList.remove('popped'), i * 6));
+      popped = 0;
+      popCountEl.textContent = '0';
+      winMsg.style.opacity = '0';
+      elapsed = 0;
+      playTick();
+    });
+
+    /* =====================================================
+       Boot
+       ===================================================== */
+    setMuted(false);
+    go(0, true);
+    requestAnimationFrame((t) => { lastTs = t; requestAnimationFrame(frame); });
+  })();
+  </script>
+</body>
+</html>
